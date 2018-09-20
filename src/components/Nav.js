@@ -4,7 +4,9 @@ import { connect } from 'react-redux'
 import { Navbar, NavItem } from 'react-materialize'
 
 function mapStateToProps (state) {
-  return { user: state.auth.user }
+  console.log('Nav state:', state);
+  // return { user: state.auth.user }
+  return { user: state.user }
 }
 
 class Nav extends Component {
