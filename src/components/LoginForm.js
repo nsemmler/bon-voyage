@@ -16,17 +16,19 @@ class LoginForm extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      email: "",
-      password: ""
+      email: '',
+      password: ''
     }
   }
 
   loginUser = (e) => {
     e.preventDefault()
+
     this.props.userLogin(this.state)
+
     if (!this.props.showLoginError) {
       this.props.history.push("/profile")
-      this.setState({ email: "", password: "" })
+      this.setState({ email: '', password: '' })
     }
   }
 

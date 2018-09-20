@@ -4,7 +4,6 @@ import { connect } from 'react-redux'
 import { Navbar, NavItem } from 'react-materialize'
 
 function mapStateToProps (state) {
-  console.log('Nav state:', state);
   // return { user: state.auth.user }
   return { user: state.user }
 }
@@ -29,8 +28,9 @@ class Nav extends Component {
   render() {
     return (
       <Navbar brand="Bon Voyage" right>
-        <NavItem onClick={ this.props.redirectToLogin } href="/login">Login</NavItem>
-        <NavItem onClick={ this.props.redirectToSignup } href="/signup">Signup</NavItem>
+        { localStorage.getItem('token') && <NavItem onClick={ this.props.redirectToLogout } href="/logout">Logout</NavItem> }
+        { !localStorage.getItem('token') && !this.props.history && <div><NavItem onClick={ this.props.redirectToLogin } href="/login">Login</NavItem>
+        <NavItem onClick={ this.props.redirectToSignup } href="/signup">Signup</NavItem></div> }
       </Navbar>
     )
   }
