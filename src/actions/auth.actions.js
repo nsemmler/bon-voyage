@@ -25,19 +25,11 @@ export const userLogin = ({ email, password }) => {
 }
 
 export const userSignup = (newUser) => {
-  console.log('userSignup newUser: ', newUser)
   return async (dispatch) => {
     try {
       dispatch({ type: USER_LOGIN_PENDING })
-
-      let response = await fetch(`${BASE_URL}/signup`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(newUser)
-      })
-
+      let response = await axios.post(`${BASE_URL}/signup`, { 'user': { 'email': newUser.email, 'password': newUser.password } })
       console.log('userSignup response: ', response)
-
       dispatch({ type: USER_SIGNUP_SUCCESS, payload: response.data })
     } catch (err) {
       dispatch({ type: USER_SIGNUP_FAILED, payload: err })
@@ -47,6 +39,7 @@ export const userSignup = (newUser) => {
 
 export const userLogout = () => {
   return async (dispatch) => {
+    console.log('Inside userLogout Action');
     dispatch({ type: USER_LOGOUT })
   }
 }
