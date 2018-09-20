@@ -4,15 +4,15 @@ import {
   USER_LOGIN_FAILED,
   USER_SIGNUP_PENDING,
   USER_SIGNUP_SUCCESS,
-  USER_SIGNUP_FAILED
+  USER_SIGNUP_FAILED,
+  USER_LOGOUT
 } from "../actions/auth.actions"
 
 let initialState = {
   isLoading: false,
   showLoginError: false,
   showSignupError: false,
-  user: {},
-  token: ''
+  user: {}
 }
 
 export default (state = initialState, action) => {
@@ -20,7 +20,8 @@ export default (state = initialState, action) => {
     case USER_LOGIN_PENDING:
       return { ...state, isLoading: true }
     case USER_LOGIN_SUCCESS:
-      return { ...state, isLoading: false, user: action.payload.data, token: action.payload.headers.authorization }
+      localStorage.setItem('token', action.payload.headers.authorization)
+      return { ...state, isLoading: false, user: action.payload.data }
     case USER_LOGIN_FAILED:
       return { ...state, isLoading: false, showLoginError: true }
     case USER_SIGNUP_PENDING:
@@ -29,6 +30,9 @@ export default (state = initialState, action) => {
       return { ...state, isLoading: false }
     case USER_SIGNUP_FAILED:
       return { ...state, isLoading: false, showSignupError: true }
+    case USER_LOGOUT:
+      localStorage.removeItem('token')
+      return { ...state, isLoading: false }
     default:
       return state
   }
