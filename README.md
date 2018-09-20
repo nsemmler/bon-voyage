@@ -1,5 +1,7 @@
 # Bon Voyage
 
+[![Build Status](https://travis-ci.org/nsemmler/bon-voyage.svg?branch=master)](https://travis-ci.org/nsemmler/bon-voyage)
+
 ### Getting Started
 
 To get started:
