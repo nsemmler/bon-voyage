@@ -27,7 +27,7 @@ class LoginForm extends Component {
     this.props.userLogin(this.state)
 
     if (!this.props.showLoginError) {
-      this.props.history.push("/profile")
+      this.props.history.push("/quiz")
       this.setState({ email: '', password: '' })
     }
   }
