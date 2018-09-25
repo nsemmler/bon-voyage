@@ -5,6 +5,8 @@ import { checkSubregionById, submitUserQuiz } from '../actions/form.actions'
 import { Input, Button } from 'react-materialize'
 import Question from './Question'
 import QuestionCount from './QuestionCount'
+import { withRouter } from 'react-router-dom'
+import Nav from './Nav'
 
 function mapStateToProps (state) {
   return { form: state.form }
@@ -101,15 +103,18 @@ const Main = ({ form, checkSubregionById, submitUserQuiz }) => {
   }
 
   return (
-    <div>
-      {
-        form.recommendations && displayTravelRecommendations()
-      }
-      {
-        !form.recommendations && displayTravelQuiz()
-      }
+    <div className="main">
+      <Nav />
+      <div>
+        {
+          form.recommendations && displayTravelRecommendations()
+        }
+        {
+          !form.recommendations && displayTravelQuiz()
+        }
+      </div>
     </div>
   )
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Main)
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Main))
