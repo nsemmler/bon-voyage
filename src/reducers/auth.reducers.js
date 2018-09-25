@@ -10,6 +10,7 @@ import {
 
 let initialState = {
   isLoading: false,
+  isLoggedIn: false,
   showLoginError: false,
   showSignupError: false,
   user: {}
@@ -20,10 +21,9 @@ export default (state = initialState, action) => {
     case USER_LOGIN_PENDING:
       return { ...state, isLoading: true }
     case USER_LOGIN_SUCCESS:
-      localStorage.setItem('token', action.payload.headers.authorization)
-      return { ...state, isLoading: false, user: action.payload.data }
+      return { ...state, isLoading: false, isLoggedIn: true, showLoginError: false, user: action.payload.data }
     case USER_LOGIN_FAILED:
-      return { ...state, isLoading: false, showLoginError: true }
+      return { ...state, isLoading: false, isLoggedIn: false, showLoginError: true, user: {} }
     case USER_SIGNUP_PENDING:
       return { ...state, isLoading: true }
     case USER_SIGNUP_SUCCESS:
@@ -31,8 +31,7 @@ export default (state = initialState, action) => {
     case USER_SIGNUP_FAILED:
       return { ...state, isLoading: false, showSignupError: true }
     case USER_LOGOUT:
-      localStorage.removeItem('token')
-      return { ...state, isLoading: false }
+      return { ...state, isLoading: false, isLoggedIn: false, user: {} }
     default:
       return state
   }

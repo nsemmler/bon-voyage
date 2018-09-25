@@ -1,0 +1,123 @@
+[
+  {
+    "id": 1,
+    "question": "Select one or more subregions of the world you would be interested in traveling to:",
+    "answer_choices": [
+      {
+        "id": 1,
+        "content": "Australia and New Zealand",
+        "checked": false
+      },
+      {
+        "id": 2,
+        "content": "Caribbean",
+        "checked": false
+      },
+      {
+        "id": 3,
+        "content": "Central America",
+        "checked": false
+      },
+      {
+        "id": 4,
+        "content": "Central Asia",
+        "checked": false
+      },
+      {
+        "id": 5,
+        "content": "Eastern Africa",
+        "checked": false
+      },
+      {
+        "id": 6,
+        "content": "Eastern Asia",
+        "checked": false
+      },
+      {
+        "id": 7,
+        "content": "Eastern Europe",
+        "checked": false
+      },
+      {
+        "id": 8,
+        "content": "Melanesia",
+        "checked": false
+      },
+      {
+        "id": 9,
+        "content": "Micronesia",
+        "checked": false
+      },
+      {
+        "id": 10,
+        "content": "Middle Africa",
+        "checked": false
+      },
+      {
+        "id": 11,
+        "content": "Northern Africa",
+        "checked": false
+      },
+      {
+        "id": 12,
+        "content": "Northern America",
+        "checked": false
+      },
+      {
+        "id": 13,
+        "content": "Northern Europe",
+        "checked": false
+      },
+      {
+        "id": 14,
+        "content": "Polynesia",
+        "checked": false
+      },
+      {
+        "id": 15,
+        "content": "South America",
+        "checked": false
+      },
+      {
+        "id": 16,
+        "content": "South-Eastern Asia",
+        "checked": false
+      },
+      {
+        "id": 17,
+        "content": "Southern Africa",
+        "checked": false
+      },
+      {
+        "id": 18,
+        "content": "Southern Asia",
+        "checked": false
+      },
+      {
+        "id": 19,
+        "content": "Southern Europe",
+        "checked": false
+      },
+      {
+        "id": 20,
+        "content": "Western Africa",
+        "checked": false
+      },
+      {
+        "id": 21,
+        "content": "Western Asia",
+        "checked": false
+      },
+      {
+        "id": 22,
+        "content": "Western Europe",
+        "checked": false
+      },
+      {
+        "id": 23,
+        "content": "Other",
+        "checked": false
+      }
+    ]
+  }
+]

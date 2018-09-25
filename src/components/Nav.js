@@ -1,39 +1,61 @@
 import React, { Component } from 'react'
+import { bindActionCreators } from 'redux'
 import { userLogout } from '../actions/auth.actions'
 import { connect } from 'react-redux'
 import { Navbar, NavItem } from 'react-materialize'
+import { createHashHistory } from 'history'
+import { withRouter } from 'react-router-dom'
+
+export const history = createHashHistory()
 
 function mapStateToProps (state) {
-  // return { user: state.auth.user }
-  return { user: state.user }
+  return { user: state.user, isLoggedIn: state.auth.isLoggedIn }
+}
+
+function mapDispatchToProps (dispatch) {
+  return bindActionCreators({ userLogout }, dispatch)
 }
 
 class Nav extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      isOpen: false
+      isLoggedIn: false
     }
   }
 
-  toggle = () => {
-    this.setState({ isOpen: !this.state.isOpen })
+  logoutUser = async (e) => {
+    e.preventDefault()
+
+    await this.props.userLogout()
+    this.props.history.push("/login")
   }
 
-  logoutUser = async () => {
-    await userLogout()
-    this.props.history.push("/login")
+  displayLogoutOrLoginSignupBtns = () => {
+    return (
+      <Navbar brand="Bon Voyage" right>
+        {
+          this.props.isLoggedIn ?
+            <NavItem onClick={ this.logoutUser } href="/logout">Logout</NavItem>
+            :
+            <div>
+              <NavItem onClick={ this.props.redirectToLogin } href="/login">Login</NavItem>
+              <NavItem onClick={ this.props.redirectToSignup } href="/signup">Signup</NavItem>
+            </div>
+        }
+      </Navbar>
+    )
   }
 
   render() {
     return (
-      <Navbar brand="Bon Voyage" right>
-        { localStorage.getItem('token') && <NavItem onClick={ this.props.redirectToLogout } href="/logout">Logout</NavItem> }
-        { !localStorage.getItem('token') && !this.props.history && <div><NavItem onClick={ this.props.redirectToLogin } href="/login">Login</NavItem>
-        <NavItem onClick={ this.props.redirectToSignup } href="/signup">Signup</NavItem></div> }
-      </Navbar>
+      <div>
+        {
+          this.displayLogoutOrLoginSignupBtns()
+        }
+      </div>
     )
   }
 }
 
-export default connect(mapStateToProps, null)(Nav)
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Nav))
