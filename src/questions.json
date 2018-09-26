@@ -1,7 +1,43 @@
 [
   {
     "id": 1,
-    "question": "Select one or more subregions of the world you would be interested in traveling to:",
+    "question": "Select all regions of the world you are interested in traveling to:",
+    "answer_choices": [
+      {
+        "id": 1,
+        "content": "Africa",
+        "checked": false
+      },
+      {
+        "id": 2,
+        "content": "Americas",
+        "checked": false
+      },
+      {
+        "id": 3,
+        "content": "Asia",
+        "checked": false
+      },
+      {
+        "id": 4,
+        "content": "Europe",
+        "checked": false
+      },
+      {
+        "id": 5,
+        "content": "Oceania",
+        "checked": false
+      },
+      {
+        "id": 6,
+        "content": "Polar",
+        "checked": false
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "question": "Select all subregions of the world you are interested in traveling to:",
     "answer_choices": [
       {
         "id": 1,
@@ -116,6 +152,64 @@
       {
         "id": 23,
         "content": "Other",
+        "checked": false
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "question": "What size country would you like to visit?  Select all that apply.",
+    "answer_choices": [
+      {
+        "id": 1,
+        "content": "Small",
+        "checked": false
+      },
+      {
+        "id": 2,
+        "content": "Medium",
+        "checked": false
+      },
+      {
+        "id": 3,
+        "content": "Large",
+        "checked": false
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "question": "Would you prefer your vacation on an island?",
+    "answer_choices": [
+      {
+        "id": 1,
+        "content": "Yes",
+        "checked": false
+      },
+      {
+        "id": 2,
+        "content": "No",
+        "checked": false
+      },
+      {
+        "id": 3,
+        "content": "Not sure",
+        "checked": false
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "question": "Only travel to countries where English is one of the native languages?",
+    "answer_choices": [
+      {
+        "id": 1,
+        "content": "Yes",
+        "checked": false
+      },
+      {
+        "id": 2,
+        "content": "No",
         "checked": false
       }
     ]

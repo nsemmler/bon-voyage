@@ -1,13 +1,18 @@
 import axios from 'axios'
 
 export const SUBMIT_FORM = "SUBMIT_FORM"
-export const CHECK_SUBREGION = "CHECK_SUBREGION"
+export const CHECK_REGION = "CHECK_REGION"
 export const FAILED_SUBMISSION = "FAILED_SUBMISSION"
 
 const BASE_URL = "http://localhost:3000"
 
-export const checkSubregionById = (id) => {
-  return { type: CHECK_SUBREGION, payload: id }
+window.axios = axios
+
+export const checkRegionById = (id) => {
+  console.log('Inside Action when click Region');
+  return (dispatch) => {
+    dispatch({ type: CHECK_REGION, payload: id })
+  }
 }
 
 export const submitUserQuiz = (userResponses) => {
