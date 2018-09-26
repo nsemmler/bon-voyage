@@ -8,14 +8,6 @@ import { withRouter } from 'react-router-dom'
 
 export const history = createHashHistory()
 
-function mapStateToProps (state) {
-  return { user: state.user, isLoggedIn: state.auth.isLoggedIn }
-}
-
-function mapDispatchToProps (dispatch) {
-  return bindActionCreators({ userLogout }, dispatch)
-}
-
 class Nav extends Component {
   constructor (props) {
     super(props)
@@ -56,6 +48,14 @@ class Nav extends Component {
       </div>
     )
   }
+}
+
+function mapStateToProps (state) {
+  return { user: state.user, isLoggedIn: state.auth.isLoggedIn }
+}
+
+function mapDispatchToProps (dispatch) {
+  return bindActionCreators({ userLogout }, dispatch)
 }
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Nav))
