@@ -43,7 +43,7 @@ export class Signup extends Component {
             <Input s={12} placeholder="sample@email.com" label="Email" type="email"
               error={ this.props.showLoginError ? "Invalid email" : null }
               value={ this.state.email }
-              onChange={ (e) => this.setState({ email: e.target.value }) } />
+              onChange={ (e) => this.setState({ email: e.target.value }) } autoFocus />
             <Input s={12} placeholder="password" label="Password"
               error={ this.props.showLoginError ? "Invalid password" : null }
               value={ this.state.password }
