@@ -6,31 +6,37 @@
       {
         "id": 1,
         "content": "Africa",
+        "type": "region",
         "checked": false
       },
       {
         "id": 2,
         "content": "Americas",
+        "type": "region",
         "checked": false
       },
       {
         "id": 3,
         "content": "Asia",
+        "type": "region",
         "checked": false
       },
       {
         "id": 4,
         "content": "Europe",
+        "type": "region",
         "checked": false
       },
       {
         "id": 5,
         "content": "Oceania",
+        "type": "region",
         "checked": false
       },
       {
         "id": 6,
         "content": "Polar",
+        "type": "region",
         "checked": false
       }
     ]
@@ -42,116 +48,139 @@
       {
         "id": 1,
         "content": "Australia and New Zealand",
+        "type": "subregion",
         "checked": false
       },
       {
         "id": 2,
         "content": "Caribbean",
+        "type": "subregion",
         "checked": false
       },
       {
         "id": 3,
         "content": "Central America",
+        "type": "subregion",
         "checked": false
       },
       {
         "id": 4,
         "content": "Central Asia",
+        "type": "subregion",
         "checked": false
       },
       {
         "id": 5,
         "content": "Eastern Africa",
+        "type": "subregion",
         "checked": false
       },
       {
         "id": 6,
         "content": "Eastern Asia",
+        "type": "subregion",
         "checked": false
       },
       {
         "id": 7,
         "content": "Eastern Europe",
+        "type": "subregion",
         "checked": false
       },
       {
         "id": 8,
         "content": "Melanesia",
+        "type": "subregion",
         "checked": false
       },
       {
         "id": 9,
         "content": "Micronesia",
+        "type": "subregion",
         "checked": false
       },
       {
         "id": 10,
         "content": "Middle Africa",
+        "type": "subregion",
         "checked": false
       },
       {
         "id": 11,
         "content": "Northern Africa",
+        "type": "subregion",
         "checked": false
       },
       {
         "id": 12,
         "content": "Northern America",
+        "type": "subregion",
         "checked": false
       },
       {
         "id": 13,
         "content": "Northern Europe",
+        "type": "subregion",
         "checked": false
       },
       {
         "id": 14,
         "content": "Polynesia",
+        "type": "subregion",
         "checked": false
       },
       {
         "id": 15,
         "content": "South America",
+        "type": "subregion",
         "checked": false
       },
       {
         "id": 16,
         "content": "South-Eastern Asia",
+        "type": "subregion",
         "checked": false
       },
       {
         "id": 17,
         "content": "Southern Africa",
+        "type": "subregion",
         "checked": false
       },
       {
         "id": 18,
         "content": "Southern Asia",
+        "type": "subregion",
         "checked": false
       },
       {
         "id": 19,
         "content": "Southern Europe",
+        "type": "subregion",
         "checked": false
       },
       {
         "id": 20,
         "content": "Western Africa",
+        "type": "subregion",
         "checked": false
       },
       {
         "id": 21,
         "content": "Western Asia",
+        "type": "subregion",
         "checked": false
       },
       {
         "id": 22,
         "content": "Western Europe",
+        "type": "subregion",
         "checked": false
       },
       {
         "id": 23,
         "content": "Other",
+        "type": "subregion",
         "checked": false
       }
     ]
@@ -163,16 +192,19 @@
       {
         "id": 1,
         "content": "Small",
+        "type": "population",
         "checked": false
       },
       {
         "id": 2,
         "content": "Medium",
+        "type": "population",
         "checked": false
       },
       {
         "id": 3,
         "content": "Large",
+        "type": "population",
         "checked": false
       }
     ]
@@ -184,16 +216,19 @@
       {
         "id": 1,
         "content": "Yes",
+        "type": "island",
         "checked": false
       },
       {
         "id": 2,
         "content": "No",
+        "type": "island",
         "checked": false
       },
       {
         "id": 3,
         "content": "Not sure",
+        "type": "island",
         "checked": false
       }
     ]
@@ -205,11 +240,19 @@
       {
         "id": 1,
         "content": "Yes",
+        "type": "language",
         "checked": false
       },
       {
         "id": 2,
         "content": "No",
+        "type": "language",
+        "checked": false
+      },
+      {
+        "id": 3,
+        "content": "Not sure",
+        "type": "language",
         "checked": false
       }
     ]
