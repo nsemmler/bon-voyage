@@ -27,7 +27,7 @@ class Main extends Component {
 
   submitQuiz = (e) => {
     e.preventDefault()
-    console.log('Inside submitQuiz <Main>')
+
     var quiz = this.props.form
     this.props.submitUserQuiz(quiz)
   }
@@ -94,7 +94,6 @@ class Main extends Component {
         <div className="quiz-container">
           <div className="question-and-question-count-container">
             <div className="question-container">
-              { console.log('this.props.form[this.state.questionIndex]', this.props.form[this.state.questionIndex]) }
               <Question content={ this.props.form[this.state.questionIndex].question } />
             </div>
             <div className="question-counter-container">

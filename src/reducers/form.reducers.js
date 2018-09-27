@@ -29,7 +29,6 @@ export default (state = initialState, action) => {
 
       return updatedStateCopy
     case SUBMIT_FORM:
-      console.log('Inside SUBMIT_FORM Reducer')
       return { recommendations: action.payload }
     default:
       return state

@@ -15,9 +15,6 @@ export const selectAnswerChoice = (questionID, answerChoiceID) => {
 }
 
 export const submitUserQuiz = (quiz) => {
-  console.log('Inside submitUserQuiz Action')
-  console.log('quiz:', quiz)
-
   var quizPayload = {}
   quiz.map((question, i) => {
     switch (i) {
@@ -62,12 +59,9 @@ export const submitUserQuiz = (quiz) => {
     }
   })
 
-  console.log('quizPayload', quizPayload)
-
   return async (dispatch) => {
     try {
       let response = await axios.post(`${BASE_URL}/countries/quiz`, quizPayload)
-      console.log('Submit quiz response: ', response)
       dispatch({ type: SUBMIT_FORM, payload: response.data })
     } catch (err) {
       dispatch({ type: FAILED_SUBMISSION, payload: err })
