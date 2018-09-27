@@ -1,72 +1,51 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { checkRegionById, submitUserQuiz } from '../actions/form.actions'
+import { selectAnswerChoice, submitUserQuiz } from '../actions/form.actions'
 import { Input, Button } from 'react-materialize'
 import Question from './Question'
 import QuestionCount from './QuestionCount'
 import { withRouter } from 'react-router-dom'
 import Nav from './Nav'
-import questionsArr from '../questions.json'
 
-function mapStateToProps (state) {
-  return { form: state.form }
-}
-
-function mapDispatchToProps (dispatch) {
-  return bindActionCreators({
-    checkRegionById, submitUserQuiz
-  }, dispatch)
-}
-
-// const Main = ({ form, checkRegionById, submitUserQuiz }) => {
 class Main extends Component {
   constructor(props) {
     super(props)
     this.state = {
       questionIndex: 0,
-      questionNum: questionsArr[0].id,
-      numQuestions: questionsArr.length
+      questionNum: props.form[0].id,
+      numQuestions: props.form.length,
+      questionName: props.form[0].name
     }
   }
 
-  // const selectRegion = (e, id) => {
-  selectRegion = (e, id) => {
+  toggleAnswerChoice = (e, id) => {
     e.preventDefault()
-    console.log('Selected Region')
-    console.log('state:', this.state)
-    console.log('props:', this.props)
-    checkRegionById(id)
+
+    this.props.selectAnswerChoice(this.state.questionIndex, id)
   }
 
-  // const submitQuiz = (e) => {
   submitQuiz = (e) => {
     e.preventDefault()
-
-    let userResponses = []
-    this.props.form[0].answer_choices.forEach(subregion => {
-      if (subregion.checked) userResponses.push(subregion.content)
-    })
-
-    submitUserQuiz(userResponses)
+    console.log('Inside submitQuiz <Main>')
+    var quiz = this.props.form
+    this.props.submitUserQuiz(quiz)
   }
 
-  // const displayResults = () => {
   displayResults = () => {
     var recommendationsArr = this.props.form.recommendations
 
     return (
       <ul>
-      {
-        recommendationsArr.map(country => {
-          return <li>{ `${country.name} (${country.native_name})` }</li>
-        })
-      }
+        {
+          recommendationsArr.map(country => {
+            return <li key={ `country-${country.id}` }>{ `${country.name} (${country.native_name})` }</li>
+          })
+        }
       </ul>
     )
   }
 
-  // const displayTravelRecommendations = () => {
   displayTravelRecommendations = () => {
     return (
       <div className="Main">
@@ -76,34 +55,36 @@ class Main extends Component {
         <br/>
         <div className="response-container">
           <div className="recommendations">
-            {
-              this.displayResults()
-            }
+            { this.displayResults() }
           </div>
         </div>
       </div>
     )
   }
 
-  // const fetchPreviousQuestion = (e) => {
   fetchPreviousQuestion = (e) => {
     e.preventDefault()
-    console.log('Inside fetchPreviousQuestion')
+
+    if (this.state.questionIndex > 0) {
+      this.setState({
+        questionIndex: --this.state.questionIndex,
+        questionNum: --this.state.questionNum
+      })
+    }
   }
 
-  // const fetchNextQuestion = (e) => {
   fetchNextQuestion = (e) => {
     e.preventDefault()
-    console.log('Inside fetchNextQuestion')
+
+    if (this.state.questionNum < this.state.numQuestions) {
+      this.setState({
+        questionIndex: ++this.state.questionIndex,
+        questionNum: ++this.state.questionNum
+      })
+    }
   }
 
-  // const displayTravelQuiz = () => {
   displayTravelQuiz = () => {
-    // make state?????
-    // var questionIndex = 0
-    // var questionNum = questionIndex + 1
-    // var numQuestions = questionsArr.length
-
     return (
       <div className="Main">
         <div className="main-header">
@@ -113,7 +94,8 @@ class Main extends Component {
         <div className="quiz-container">
           <div className="question-and-question-count-container">
             <div className="question-container">
-              <Question content={ questionsArr[this.state.questionIndex].question } />
+              { console.log('this.props.form[this.state.questionIndex]', this.props.form[this.state.questionIndex]) }
+              <Question content={ this.props.form[this.state.questionIndex].question } />
             </div>
             <div className="question-counter-container">
               <QuestionCount counter={ this.state.questionNum } total={ this.state.numQuestions } />
@@ -123,20 +105,21 @@ class Main extends Component {
             <div className="quiz">
               <div className="inputs-container">
                 {
-                  this.props.form[0].answer_choices.map(ansr_choice => {
-                    return <Input className="form-input" key={ `${ansr_choice.id}-${ansr_choice.checked}` } onClick={ (e) => this.selectRegion(e, ansr_choice.id) } name='subregion[]' type='checkbox' checked={ ansr_choice.checked } label={ ansr_choice.content } />
+                  this.props.form[this.state.questionIndex].answer_choices.map(ansr_choice => {
+                    return <Input className="form-input" key={ `${ansr_choice.id}-${ansr_choice.checked}` } onClick={ (e) => this.toggleAnswerChoice(e, ansr_choice.id) } name={ `${ansr_choice.type}[]` } type='checkbox' checked={ ansr_choice.checked } label={ ansr_choice.content } />
                   })
                 }
               </div>
 
               {
                 this.state.questionNum !== this.state.numQuestions && <div className="prev-next-questions-btns">
-                  <Button className="prevbtn" onClick={ this.fetchPreviousQuestion } waves="light" type="button">Previous</Button>
+                  <Button className="prevbtn" onClick={ this.fetchPreviousQuestion } waves="light" type="button" disabled={ this.state.questionNum === 1 }>Previous</Button>
                   <Button className="nextbtn" onClick={ this.fetchNextQuestion } waves="light" type="button">Next</Button>
                 </div>
               }
               {
                 this.state.questionNum === this.state.numQuestions && <div className="submit-question-btn">
+                  <Button className="prevbtn" onClick={ this.fetchPreviousQuestion } waves="light" type="button">Previous</Button>
                   <Button waves="light" type="submit">Submit</Button>
                 </div>
               }
@@ -153,15 +136,22 @@ class Main extends Component {
         <Nav />
         <div>
           {
-            this.props.form.recommendations && this.displayTravelRecommendations()
-          }
-          {
-            !this.props.form.recommendations && this.displayTravelQuiz()
+            this.props.form.recommendations ? this.displayTravelRecommendations() : this.displayTravelQuiz()
           }
         </div>
       </div>
     )
   }
+}
+
+function mapStateToProps (state) {
+  return { form: state.form }
+}
+
+function mapDispatchToProps (dispatch) {
+  return bindActionCreators({
+    selectAnswerChoice, submitUserQuiz
+  }, dispatch)
 }
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Main))
