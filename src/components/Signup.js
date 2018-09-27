@@ -6,12 +6,6 @@ import { Row, Input, Button } from 'react-materialize'
 import { withRouter } from 'react-router-dom'
 import Nav from './Nav'
 
-const mapStateToProps = ({ user }) => ({ user })
-
-function mapDispatchToProps (dispatch) {
-  return bindActionCreators({ userSignup }, dispatch)
-}
-
 export class Signup extends Component {
   constructor (props) {
     super(props)
@@ -41,11 +35,11 @@ export class Signup extends Component {
           <form onSubmit={ this.userSignup }>
             <h5 className="form-header">Signup</h5>
             <Input s={12} placeholder="sample@email.com" label="Email" type="email"
-              error={ this.props.showLoginError ? "Invalid email" : null }
+              error={ this.props.showSignupError ? "Invalid email" : null }
               value={ this.state.email }
               onChange={ (e) => this.setState({ email: e.target.value }) } autoFocus />
             <Input s={12} placeholder="password" label="Password"
-              error={ this.props.showLoginError ? "Invalid password" : null }
+              error={ this.props.showSignupError ? "Invalid password" : null }
               value={ this.state.password }
               onChange={ (e) => this.setState({ password: e.target.value }) } />
             <div><Button waves="light" type="submit">Submit</Button></div>
@@ -55,6 +49,14 @@ export class Signup extends Component {
       </div>
     )
   }
+}
+
+const mapStateToProps = (state) => {
+  return { user: state.auth.user, showSignupError: state.auth.showSignupError }
+}
+
+function mapDispatchToProps (dispatch) {
+  return bindActionCreators({ userSignup }, dispatch)
 }
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Signup))

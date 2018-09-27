@@ -1,56 +1,52 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { checkSubregionById, submitUserQuiz } from '../actions/form.actions'
+import { selectAnswerChoice, submitUserQuiz } from '../actions/form.actions'
 import { Input, Button } from 'react-materialize'
 import Question from './Question'
 import QuestionCount from './QuestionCount'
 import { withRouter } from 'react-router-dom'
 import Nav from './Nav'
 
-function mapStateToProps (state) {
-  return { form: state.form }
-}
-
-function mapDispatchToProps (dispatch) {
-  return bindActionCreators({
-    checkSubregionById, submitUserQuiz
-  }, dispatch)
-}
-
-const Main = ({ form, checkSubregionById, submitUserQuiz }) => {
-  const selectSubregion = (e, id) => {
-    e.preventDefault()
-
-    checkSubregionById(id)
+class Main extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      questionIndex: 0,
+      questionNum: props.form[0].id,
+      numQuestions: props.form.length,
+      questionName: props.form[0].name
+    }
   }
 
-  const submitQuiz = (e) => {
+  toggleAnswerChoice = (e, id) => {
     e.preventDefault()
 
-    let userResponses = []
-    form[0].answer_choices.forEach(subregion => {
-      if (subregion.checked) userResponses.push(subregion.content)
-    })
-
-    submitUserQuiz(userResponses)
+    this.props.selectAnswerChoice(this.state.questionIndex, id)
   }
 
-  const displayResults = () => {
-    var recommendationsArr = form.recommendations
+  submitQuiz = (e) => {
+    e.preventDefault()
+
+    var quiz = this.props.form
+    this.props.submitUserQuiz(quiz)
+  }
+
+  displayResults = () => {
+    var recommendationsArr = this.props.form.recommendations
 
     return (
       <ul>
-      {
-        recommendationsArr.map(country => {
-          return <li>{ `${country.name} (${country.native_name})` }</li>
-        })
-      }
+        {
+          recommendationsArr.map(country => {
+            return <li key={ `country-${country.id}` }>{ `${country.name} (${country.native_name})` }</li>
+          })
+        }
       </ul>
     )
   }
 
-  const displayTravelRecommendations = () => {
+  displayTravelRecommendations = () => {
     return (
       <div className="Main">
         <div className="main-header">
@@ -59,16 +55,36 @@ const Main = ({ form, checkSubregionById, submitUserQuiz }) => {
         <br/>
         <div className="response-container">
           <div className="recommendations">
-            {
-              displayResults()
-            }
+            { this.displayResults() }
           </div>
         </div>
       </div>
     )
   }
 
-  const displayTravelQuiz = () => {
+  fetchPreviousQuestion = (e) => {
+    e.preventDefault()
+
+    if (this.state.questionIndex > 0) {
+      this.setState({
+        questionIndex: --this.state.questionIndex,
+        questionNum: --this.state.questionNum
+      })
+    }
+  }
+
+  fetchNextQuestion = (e) => {
+    e.preventDefault()
+
+    if (this.state.questionNum < this.state.numQuestions) {
+      this.setState({
+        questionIndex: ++this.state.questionIndex,
+        questionNum: ++this.state.questionNum
+      })
+    }
+  }
+
+  displayTravelQuiz = () => {
     return (
       <div className="Main">
         <div className="main-header">
@@ -78,23 +94,34 @@ const Main = ({ form, checkSubregionById, submitUserQuiz }) => {
         <div className="quiz-container">
           <div className="question-and-question-count-container">
             <div className="question-container">
-              <Question content="Select one or more subregions of the world you would be interested in traveling to:" />
+              <Question content={ this.props.form[this.state.questionIndex].question } />
             </div>
             <div className="question-counter-container">
-              <QuestionCount counter={ 1 } total={ 1 } />
+              <QuestionCount counter={ this.state.questionNum } total={ this.state.numQuestions } />
             </div>
           </div>
-          <form className="question-form" onSubmit={ submitQuiz }>
+          <form className="question-form" onSubmit={ this.submitQuiz }>
             <div className="quiz">
               <div className="inputs-container">
                 {
-                  form[0].answer_choices.map(ansr_choice => {
-                    return <Input className="form-input" key={ `${ansr_choice.id}-${ansr_choice.checked}` } onClick={ (e) => selectSubregion(e, ansr_choice.id) } name='subregion[]' type='checkbox' checked={ ansr_choice.checked } label={ ansr_choice.content } />
+                  this.props.form[this.state.questionIndex].answer_choices.map(ansr_choice => {
+                    return <Input className="form-input" key={ `${ansr_choice.id}-${ansr_choice.checked}` } onClick={ (e) => this.toggleAnswerChoice(e, ansr_choice.id) } name={ `${ansr_choice.type}[]` } type='checkbox' checked={ ansr_choice.checked } label={ ansr_choice.content } />
                   })
                 }
               </div>
 
-              <div className="submit-question-btn"><Button waves="light" type="submit">Submit</Button></div>
+              {
+                this.state.questionNum !== this.state.numQuestions && <div className="prev-next-questions-btns">
+                  <Button className="prevbtn" onClick={ this.fetchPreviousQuestion } waves="light" type="button" disabled={ this.state.questionNum === 1 }>Previous</Button>
+                  <Button className="nextbtn" onClick={ this.fetchNextQuestion } waves="light" type="button">Next</Button>
+                </div>
+              }
+              {
+                this.state.questionNum === this.state.numQuestions && <div className="submit-question-btn">
+                  <Button className="prevbtn" onClick={ this.fetchPreviousQuestion } waves="light" type="button">Previous</Button>
+                  <Button waves="light" type="submit">Submit</Button>
+                </div>
+              }
             </div>
           </form>
         </div>
@@ -102,19 +129,28 @@ const Main = ({ form, checkSubregionById, submitUserQuiz }) => {
     )
   }
 
-  return (
-    <div className="main">
-      <Nav />
-      <div>
-        {
-          form.recommendations && displayTravelRecommendations()
-        }
-        {
-          !form.recommendations && displayTravelQuiz()
-        }
+  render() {
+    return (
+      <div className="main">
+        <Nav />
+        <div>
+          {
+            this.props.form.recommendations ? this.displayTravelRecommendations() : this.displayTravelQuiz()
+          }
+        </div>
       </div>
-    </div>
-  )
+    )
+  }
+}
+
+function mapStateToProps (state) {
+  return { form: state.form }
+}
+
+function mapDispatchToProps (dispatch) {
+  return bindActionCreators({
+    selectAnswerChoice, submitUserQuiz
+  }, dispatch)
 }
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Main))

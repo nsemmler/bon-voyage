@@ -68,6 +68,15 @@
   grid-area: "answer-choices";
 }
 
+.prev-next-questions-btns {
+  margin-top: 10px;
+  float: right;
+}
+
+.prevbtn {
+  margin-right: 15px;
+}
+
 .submit-question-btn {
   margin-top: 10px;
   float: right;

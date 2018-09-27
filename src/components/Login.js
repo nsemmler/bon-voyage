@@ -6,14 +6,6 @@ import { Row, Input, Button } from 'react-materialize'
 import { withRouter } from 'react-router-dom'
 import Nav from './Nav'
 
-function mapStateToProps (state) {
-  return { showLoginError: state.auth.showLoginError, isLoggedIn: state.auth.isLoggedIn }
-}
-
-function mapDispatchToProps (dispatch) {
-  return bindActionCreators({ userLogin }, dispatch)
-}
-
 class Login extends Component {
   constructor (props) {
     super(props)
@@ -27,9 +19,7 @@ class Login extends Component {
     e.preventDefault()
 
     await this.props.userLogin(this.state)
-    // console.log('showLoginError', this.props.showLoginError)
-    console.log('state', this.state)
-    console.log('loginUser conditional', this.props.isLoggedIn, !this.props.showLoginError)
+
     if (this.props.isLoggedIn && !this.props.showLoginError) {
       this.props.history.push("/quiz")
     }
@@ -57,6 +47,14 @@ class Login extends Component {
       </div>
     )
   }
+}
+
+function mapStateToProps (state) {
+  return { showLoginError: state.auth.showLoginError, isLoggedIn: state.auth.isLoggedIn }
+}
+
+function mapDispatchToProps (dispatch) {
+  return bindActionCreators({ userLogin }, dispatch)
 }
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Login))
