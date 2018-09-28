@@ -13,7 +13,9 @@ let initialState = {
   isLoggedIn: false,
   showLoginError: false,
   showSignupError: false,
-  user: {}
+  user: {},
+  showModal: false,
+  modalCountry: {}
 }
 
 export default (state = initialState, action) => {
