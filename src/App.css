@@ -91,6 +91,27 @@
   padding: 5px;
 }
 
+.response-container {
+  /* display: flex;
+  flex-direction: column;
+  justify-content: center; */
+  width: 80%;
+  border: 1px solid black;
+  padding: 20px;
+}
+
+.recommendations {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.recommendedCountry {
+  max-width: 24%;
+  margin-top: 0;
+}
+
 /******************************************************************************/
 /* Login Form */
 /******************************************************************************/
