@@ -7,13 +7,15 @@ import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-d
 
 export default function App () {
   return (
-    <Router>
-      <Switch>
-        <Route exact path="/login" component={ Login } />
-        <Route exact path="/signup" component={ Signup } />
-        <Main />
-        <Redirect to="/login" />
-      </Switch>
-    </Router>
+    <div id="main">
+      <Router>
+        <Switch>
+          <Route exact path="/login" component={ Login } />
+          <Route exact path="/signup" component={ Signup } />
+          <Route exact path="/quiz" component={ Main } />
+          <Redirect to="/login" />
+        </Switch>
+      </Router>
+    </div>
   )
 }
