@@ -16,6 +16,7 @@ export const selectAnswerChoice = (questionID, answerChoiceID) => {
 
 export const submitUserQuiz = (quiz) => {
   var quizPayload = {}
+  
   quiz.map((question, i) => {
     switch (i) {
       case 0:

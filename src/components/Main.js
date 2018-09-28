@@ -2,10 +2,11 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { selectAnswerChoice, submitUserQuiz } from '../actions/form.actions'
-import { Input, Button } from 'react-materialize'
+import { Input, Button, Card, CardTitle } from 'react-materialize'
 import Question from './Question'
 import QuestionCount from './QuestionCount'
 import { withRouter } from 'react-router-dom'
+import Modal from 'react-modal'
 import Nav from './Nav'
 
 class Main extends Component {
@@ -15,8 +16,21 @@ class Main extends Component {
       questionIndex: 0,
       questionNum: props.form[0].id,
       numQuestions: props.form.length,
-      questionName: props.form[0].name
+      questionName: props.form[0].name,
+      showModal: false,
+      modalCountry: {}
     }
+  }
+
+  componentWillMount() {
+    Modal.setAppElement('body')
+  }
+
+  displayCountryInformationModal = (country={}) => {
+    this.setState({
+      showModal: !this.state.showModal,
+      modalCountry: country
+    })
   }
 
   toggleAnswerChoice = (e, id) => {
@@ -36,12 +50,41 @@ class Main extends Component {
     var recommendationsArr = this.props.form.recommendations
 
     return (
-      <ul>
+      <div className="recommendations">
+        <Modal isOpen={ this.state.showModal }
+          contentLabel="Recommended Country Information"
+          onRequestClose={ () => this.displayCountryInformationModal({}) }
+          shouldCloseOnOverlayClick={ true }>
+          <div className="modal-container">
+            { this.displayCountryInfo(this.state.modalCountry) }
+          </div>
+        </Modal>
         {
           recommendationsArr.map(country => {
-            return <li key={ `country-${country.id}` }>{ `${country.name} (${country.native_name})` }</li>
+            { console.log('country', country) }
+            return <Card className="recommendedCountry" key={ `recommendation-${country.id}` }
+              header={ <CardTitle image={ JSON.parse(country.images)[0] }/> }
+              // header={ <CardTitle image={ country.flag } /> }
+              title={ ((country.name === country.native_name) || (country.name === 'United States of America')) ? `${country.name}` : `${country.name} (${country.native_name})` }
+              onClick={ () => this.displayCountryInformationModal(country) }>
+              { country.capital }
+            </Card>
           })
         }
+      </div>
+    )
+  }
+
+  displayCountryInfo = (country) => {
+    return (
+      <ul>
+        <li className="countryInfoItem">Region: { country.region }</li>
+        <li className="countryInfoItem">Subregion: { country.subregion }</li>
+        <li className="countryInfoItem">Population: { country.population }</li>
+        <li className="countryInfoItem">Lon/Lat: { country.longitude }/{ country.latitude }</li>
+        <li className="countryInfoItem">Currency: { country.currency_name })({ country.currency_symbol })</li>
+        <li className="countryInfoItem">Languages: { country.languages }</li>
+        <li className="countryInfoItem">Flag: { <img src={ country.flag } alt={ `${country.name} Flag` } /> }</li>
       </ul>
     )
   }
@@ -53,10 +96,8 @@ class Main extends Component {
           <h5>Recommended Travel Destinations:</h5>
         </div>
         <br/>
-        <div className="response-container">
-          <div className="recommendations">
-            { this.displayResults() }
-          </div>
+        <div className="response-container" id="responses">
+          { this.displayResults() }
         </div>
       </div>
     )
