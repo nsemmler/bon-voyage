@@ -16,7 +16,7 @@ export const selectAnswerChoice = (questionID, answerChoiceID) => {
 
 export const submitUserQuiz = (quiz) => {
   var quizPayload = {}
-  
+
   quiz.map((question, i) => {
     switch (i) {
       case 0:
@@ -25,12 +25,14 @@ export const submitUserQuiz = (quiz) => {
         })
 
         quizPayload['regions'] = regions.filter(Boolean)
+        break
       case 1:
         var subregions = question.answer_choices.map(ansr_choice => {
           if (ansr_choice.checked) return ansr_choice.content
         })
 
         quizPayload['subregions'] = subregions.filter(Boolean)
+        break
       case 2:
         var population = question.answer_choices.map(ansr_choice => {
           if (ansr_choice.checked) return ansr_choice.content
@@ -43,18 +45,21 @@ export const submitUserQuiz = (quiz) => {
         })
 
         quizPayload['population'] = population.filter(Boolean)
+        break
       case 3:
         var island = question.answer_choices.map(ansr_choice => {
           if (ansr_choice.checked) return ansr_choice.content
         })
 
         quizPayload['island'] = island.filter(Boolean)[0]
+        break
       case 4:
         var english_only = question.answer_choices.map(ansr_choice => {
           if (ansr_choice.checked) return ansr_choice.content
         })
 
         quizPayload['english_only'] = english_only.filter(Boolean)[0]
+        break
       default:
         console.log('default case')
     }
