@@ -5,14 +5,14 @@ import {
 
 import initialState from '../questions.json'
 
-export default (state = initialState, action) => {
+export default (state = { questions: initialState, recommendations: [] }, action) => {
   switch (action.type) {
     case UPDATE_ANSWER_CHOICE:
-      var stateCopy = [ ...state ]
+      var questionsCopy = [ ...state.questions ]
       const answerChoiceID = action.payload.answerChoiceID
       const questionID = action.payload.questionID
 
-      const updatedStateCopy = stateCopy.map((question, i) => {
+      const updatedQuestionsCopy = questionsCopy.map((question, i) => {
         if (i === questionID) {
           var updatedAnswerChoices = question.answer_choices.map(ansr_choice => {
             if (ansr_choice.id === answerChoiceID) {
@@ -27,9 +27,9 @@ export default (state = initialState, action) => {
         }
       })
 
-      return updatedStateCopy
+      return { questions: updatedQuestionsCopy, recommendations: [] }
     case SUBMIT_FORM:
-      return { recommendations: action.payload }
+      return { questions: state, recommendations: action.payload }
     default:
       return state
   }

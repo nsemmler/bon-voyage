@@ -27,7 +27,7 @@ class Nav extends Component {
     return (
       <Navbar brand="Bon Voyage" right>
         {
-          this.props.isLoggedIn ?
+          (localStorage.getItem('token')) ?
             <NavItem onClick={ this.logoutUser } href="/logout">Logout</NavItem>
             :
             <div>
