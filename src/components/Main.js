@@ -8,7 +8,7 @@ import QuestionCount from './QuestionCount'
 import { withRouter } from 'react-router-dom'
 import Modal from 'react-modal'
 import Nav from './Nav'
-import CountryInfo from './CountryInfo'
+import CountryMap from './CountryMap'
 
 class Main extends Component {
   constructor(props) {
@@ -80,21 +80,23 @@ class Main extends Component {
   }
 
   displayCountryInfo = (country) => {
-    return (
-      <div>
-        <ul>
-          <li className="countryInfoItem">Region: { country.region }</li>
-          <li className="countryInfoItem">Subregion: { country.subregion }</li>
-          <li className="countryInfoItem">Population: { country.population }</li>
-          <li className="countryInfoItem">Lon/Lat: { country.longitude }/{ country.latitude }</li>
-          <li className="countryInfoItem">Currency: { country.currency_name })({ country.currency_symbol })</li>
-          <li className="countryInfoItem">Languages: { country.languages }</li>
-          <li className="countryInfoItem">Flag: { <img src={ country.flag } alt={ `${country.name} Flag` } /> }</li>
-        </ul>
-        <br/>
-        <CountryInfo latitude={ country.latitude } longitude={ country.longitude } />
-      </div>
-    )
+    if (Object.keys(country).length !== 0) {
+      return (
+        <div>
+          <ul>
+            <li className="countryInfoItem">Region: { country.region }</li>
+            <li className="countryInfoItem">Subregion: { country.subregion }</li>
+            <li className="countryInfoItem">Population: { country.population }</li>
+            <li className="countryInfoItem">Lon/Lat: { country.longitude }/{ country.latitude }</li>
+            <li className="countryInfoItem">Currency: { country.currency_name })({ country.currency_symbol })</li>
+            <li className="countryInfoItem">Languages: { country.languages }</li>
+            <li className="countryInfoItem">Flag: { <img src={ country.flag } alt={ `${country.name} Flag` } /> }</li>
+          </ul>
+          <br/>
+          <CountryMap latitude={ country.latitude } longitude={ country.longitude } />
+        </div>
+      )
+    }
   }
 
   displayTravelRecommendations = () => {
