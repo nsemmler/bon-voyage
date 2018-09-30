@@ -2,13 +2,14 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { selectAnswerChoice, submitUserQuiz } from '../actions/form.actions'
-import { Input, Button, Card, CardTitle } from 'react-materialize'
+import { Input, Button } from 'react-materialize'
 import Question from './Question'
 import QuestionCount from './QuestionCount'
 import { withRouter } from 'react-router-dom'
 import Modal from 'react-modal'
 import Nav from './Nav'
 import CountryInfo from './CountryInfo'
+import Recommendations from './Recommendations'
 
 class Main extends Component {
   constructor(props) {
@@ -52,9 +53,7 @@ class Main extends Component {
     console.log('Inside returnToQuiz')
   }
 
-  displayResults = () => {
-    var recommendationsArr = this.props.form.recommendations
-
+  displayRecommendations = () => {
     return (
       <div className="recommendations">
         <Modal isOpen={ this.state.showModal }
@@ -62,37 +61,12 @@ class Main extends Component {
           onRequestClose={ () => this.displayCountryInformationModal({}) }
           shouldCloseOnOverlayClick={ true }>
           <div className="modal-container">
-            { this.displayCountryInfo(this.state.modalCountry) }
+            { (Object.keys(this.state.modalCountry).length !== 0) && <CountryInfo country={ this.state.modalCountry }/> }
           </div>
         </Modal>
         {
-          recommendationsArr.map(country => {
-            return <Card className="recommendedCountry" key={ `recommendation-${country.id}` }
-              header={ <CardTitle image={ JSON.parse(country.images)[0] }/> }
-              title={ ((country.name === country.native_name) || (country.name === 'United States of America')) ? `${country.name}` : `${country.name} (${country.native_name})` }
-              onClick={ () => this.displayCountryInformationModal(country) }>
-              { country.capital }
-            </Card>
-          })
+          <Recommendations recommendationsArr={ this.props.form.recommendations } displayCountryInformationModal={ this.displayCountryInformationModal } />
         }
-      </div>
-    )
-  }
-
-  displayCountryInfo = (country) => {
-    return (
-      <div>
-        <ul>
-          <li className="countryInfoItem">Region: { country.region }</li>
-          <li className="countryInfoItem">Subregion: { country.subregion }</li>
-          <li className="countryInfoItem">Population: { country.population }</li>
-          <li className="countryInfoItem">Lon/Lat: { country.longitude }/{ country.latitude }</li>
-          <li className="countryInfoItem">Currency: { country.currency_name })({ country.currency_symbol })</li>
-          <li className="countryInfoItem">Languages: { country.languages }</li>
-          <li className="countryInfoItem">Flag: { <img src={ country.flag } alt={ `${country.name} Flag` } /> }</li>
-        </ul>
-        <br/>
-        <CountryInfo latitude={ country.latitude } longitude={ country.longitude } />
       </div>
     )
   }
@@ -106,7 +80,7 @@ class Main extends Component {
         </div>
         <br/>
         <div className="response-container" id="responses">
-          { this.displayResults() }
+          { this.displayRecommendations() }
         </div>
       </div>
     )
