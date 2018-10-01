@@ -12,7 +12,6 @@ export default (state = { questions: initialState, recommendations: [], isLoadin
   switch (action.type) {
     case FORM_SUBMISSION_PENDING:
       return { ...state, isLoading: true }
-      break
     case UPDATE_ANSWER_CHOICE:
       var questionsCopy = [ ...state.questions ]
       const answerChoiceID = action.payload.answerChoiceID
@@ -34,17 +33,12 @@ export default (state = { questions: initialState, recommendations: [], isLoadin
       })
 
       return { questions: updatedQuestionsCopy, recommendations: [] }
-      break
     case UPDATE_QUIZ_ANSWERS:
       return { questions: state.questions.questions, recommendations: [] }
-      break
     case RETAKE_QUIZ:
-      console.log('initialState', initialState)
       return { questions: initialState, recommendations: [] }
-      break
     case SUBMIT_FORM:
       return { questions: state, recommendations: action.payload }
-      break
     default:
       return state
   }
