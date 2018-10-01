@@ -1,12 +1,16 @@
 import {
   UPDATE_ANSWER_CHOICE,
+  FORM_SUBMISSION_PENDING,
   SUBMIT_FORM
 } from "../actions/form.actions"
 
 import initialState from '../questions.json'
 
-export default (state = { questions: initialState, recommendations: [] }, action) => {
+export default (state = { questions: initialState, recommendations: [], isLoading: false }, action) => {
   switch (action.type) {
+    case FORM_SUBMISSION_PENDING:
+      return { ...state, isLoading: true }
+      break
     case UPDATE_ANSWER_CHOICE:
       var questionsCopy = [ ...state.questions ]
       const answerChoiceID = action.payload.answerChoiceID
@@ -28,8 +32,10 @@ export default (state = { questions: initialState, recommendations: [] }, action
       })
 
       return { questions: updatedQuestionsCopy, recommendations: [] }
+      break
     case SUBMIT_FORM:
       return { questions: state, recommendations: action.payload }
+      break
     default:
       return state
   }
