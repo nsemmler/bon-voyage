@@ -45,8 +45,8 @@ function SelectedAnswersChips (props) {
   return (
     <div className="answerChoicesChips">
       {
-        updatedChipsArr.flat().map(chipText => {
-          return <Chip>{ chipText }</Chip>
+        updatedChipsArr.flat().map((chipText, i) => {
+          return <Chip key={ `Chip${i}` }>{ chipText }</Chip>
         })
       }
     </div>
