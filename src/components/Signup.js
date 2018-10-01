@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { userSignup } from '../actions/auth.actions'
-import { Row, Input, Button } from 'react-materialize'
+import { Row, Input, Button, Preloader } from 'react-materialize'
 import { withRouter } from 'react-router-dom'
 import Nav from './Nav'
 
@@ -31,28 +31,30 @@ export class Signup extends Component {
     return (
       <div className="main">
         <Nav />
-        <Row className="signup-form">
-          <form onSubmit={ this.userSignup }>
-            <h5 className="form-header">Signup</h5>
-            <Input s={12} placeholder="sample@email.com" label="Email" type="email"
-              error={ this.props.showSignupError ? "Invalid email" : null }
-              value={ this.state.email }
-              onChange={ (e) => this.setState({ email: e.target.value }) } autoFocus />
-            <Input s={12} placeholder="password" label="Password"
-              error={ this.props.showSignupError ? "Invalid password" : null }
-              value={ this.state.password }
-              onChange={ (e) => this.setState({ password: e.target.value }) } />
-            <div><Button waves="light" type="submit">Submit</Button></div>
-            <div><a onClick={ this.props.redirectToLogin } href="/login" className="form-redirect">Already registered? Login</a></div>
-          </form>
-        </Row>
+        {
+          this.props.isLoading ? <Preloader className="pending" /> : <Row className="signup-form">
+            <form onSubmit={ this.userSignup }>
+              <h5 className="form-header">Signup</h5>
+              <Input s={12} placeholder="sample@email.com" label="Email" type="email"
+                error={ this.props.showSignupError ? "Invalid email" : null }
+                value={ this.state.email }
+                onChange={ (e) => this.setState({ email: e.target.value }) } autoFocus />
+              <Input s={12} placeholder="password" label="Password"
+                error={ this.props.showSignupError ? "Invalid password" : null }
+                value={ this.state.password }
+                onChange={ (e) => this.setState({ password: e.target.value }) } />
+              <div><Button waves="light" type="submit">Submit</Button></div>
+              <div><a onClick={ this.props.redirectToLogin } href="/login" className="form-redirect">Already registered? Login</a></div>
+            </form>
+          </Row>
+        }
       </div>
     )
   }
 }
 
 const mapStateToProps = (state) => {
-  return { user: state.auth.user, showSignupError: state.auth.showSignupError }
+  return { user: state.auth.user, showSignupError: state.auth.showSignupError, isLoading: state.auth.isLoading }
 }
 
 function mapDispatchToProps (dispatch) {
