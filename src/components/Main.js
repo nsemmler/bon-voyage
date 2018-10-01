@@ -89,36 +89,14 @@ class Main extends Component {
     }
   }
 
-  displayRecommendations = () => {
-    return (
-      <div className="recommendations">
-        <Modal isOpen={ this.state.showModal }
-          contentLabel="Recommended Country Information"
-          onRequestClose={ () => this.displayCountryInformationModal({}) }
-          shouldCloseOnOverlayClick={ true }>
-          <div className="modal-container">
-            { (Object.keys(this.state.modalCountry).length !== 0) && <CountryInfo country={ this.state.modalCountry }/> }
-          </div>
-        </Modal>
-        {
-          <Recommendations recommendationsArr={ this.props.form.recommendations } displayCountryInformationModal={ this.displayCountryInformationModal } />
-        }
-      </div>
-    )
+  createChipsArr = (questions) => {
+    return questions.map((question, i) => {
+      return question.answer_choices.filter(ansr_choice => ansr_choice.checked).map(ansr_choice => ansr_choice.content)
+    })
   }
 
   displayTravelRecommendations = () => {
-    let chipsArr = this.props.form.questions.questions.map((question, i) => {
-      const selectedAnswers = question.answer_choices.filter((ansr_choice) => {
-        if (ansr_choice.checked) return ansr_choice.content
-      })
-
-      const selectedAnswerContent = selectedAnswers.map(ansr_obj => {
-        return ansr_obj.content
-      })
-
-      return selectedAnswerContent
-    })
+    let chipsArr = this.createChipsArr(this.props.form.questions.questions)
 
     return (
       <div className="Main">
@@ -130,7 +108,14 @@ class Main extends Component {
         <SelectedAnswersChips chipsArr={ chipsArr }/>
         <br/>
         <div className="response-container" id="responses">
-          { this.displayRecommendations() }
+          <div className="recommendations">
+            <Modal isOpen={ this.state.showModal } contentLabel="Recommended Country Information" onRequestClose={ () => this.displayCountryInformationModal({}) } shouldCloseOnOverlayClick={ true }>
+              <div className="modal-container">
+                { (Object.keys(this.state.modalCountry).length !== 0) && <CountryInfo country={ this.state.modalCountry }/> }
+              </div>
+            </Modal>
+            { <Recommendations recommendationsArr={ this.props.form.recommendations } displayCountryInformationModal={ this.displayCountryInformationModal } /> }
+          </div>
         </div>
       </div>
     )
@@ -192,9 +177,7 @@ class Main extends Component {
       <div className="main">
         <Nav />
         <div>
-          {
-            (this.props.form.recommendations.length) ? this.displayTravelRecommendations() : this.displayTravelQuiz()
-          }
+          { (this.props.form.recommendations.length) ? this.displayTravelRecommendations() : this.displayTravelQuiz() }
         </div>
       </div>
     )
