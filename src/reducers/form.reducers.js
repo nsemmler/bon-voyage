@@ -1,6 +1,8 @@
 import {
   UPDATE_ANSWER_CHOICE,
+  UPDATE_QUIZ_ANSWERS,
   FORM_SUBMISSION_PENDING,
+  RETAKE_QUIZ,
   SUBMIT_FORM
 } from "../actions/form.actions"
 
@@ -32,6 +34,13 @@ export default (state = { questions: initialState, recommendations: [], isLoadin
       })
 
       return { questions: updatedQuestionsCopy, recommendations: [] }
+      break
+    case UPDATE_QUIZ_ANSWERS:
+      return { questions: state.questions.questions, recommendations: [] }
+      break
+    case RETAKE_QUIZ:
+      console.log('initialState', initialState)
+      return { questions: initialState, recommendations: [] }
       break
     case SUBMIT_FORM:
       return { questions: state, recommendations: action.payload }
