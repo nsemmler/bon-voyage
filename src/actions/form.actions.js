@@ -1,5 +1,6 @@
 import axios from 'axios'
 
+export const FORM_SUBMISSION_PENDING = "FORM_SUBMISSION_PENDING"
 export const SUBMIT_FORM = "SUBMIT_FORM"
 export const UPDATE_ANSWER_CHOICE = "UPDATE_ANSWER_CHOICE"
 export const FAILED_SUBMISSION = "FAILED_SUBMISSION"
@@ -67,6 +68,7 @@ export const submitUserQuiz = (quiz) => {
 
   return async (dispatch) => {
     try {
+      dispatch({ type: FORM_SUBMISSION_PENDING })
       let response = await axios.post(`${BASE_URL}/countries/quiz`, quizPayload)
       dispatch({ type: SUBMIT_FORM, payload: response.data })
     } catch (err) {
