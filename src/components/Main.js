@@ -67,6 +67,28 @@ class Main extends Component {
     this.props.retakeQuiz()
   }
 
+  fetchPreviousQuestion = (e) => {
+    e.preventDefault()
+
+    if (this.state.questionIndex > 0) {
+      this.setState({
+        questionIndex: --this.state.questionIndex,
+        questionNum: --this.state.questionNum
+      })
+    }
+  }
+
+  fetchNextQuestion = (e) => {
+    e.preventDefault()
+
+    if (this.state.questionNum < this.state.numQuestions) {
+      this.setState({
+        questionIndex: ++this.state.questionIndex,
+        questionNum: ++this.state.questionNum
+      })
+    }
+  }
+
   displayRecommendations = () => {
     return (
       <div className="recommendations">
@@ -112,28 +134,6 @@ class Main extends Component {
         </div>
       </div>
     )
-  }
-
-  fetchPreviousQuestion = (e) => {
-    e.preventDefault()
-
-    if (this.state.questionIndex > 0) {
-      this.setState({
-        questionIndex: --this.state.questionIndex,
-        questionNum: --this.state.questionNum
-      })
-    }
-  }
-
-  fetchNextQuestion = (e) => {
-    e.preventDefault()
-
-    if (this.state.questionNum < this.state.numQuestions) {
-      this.setState({
-        questionIndex: ++this.state.questionIndex,
-        questionNum: ++this.state.questionNum
-      })
-    }
   }
 
   displayTravelQuiz = () => {
