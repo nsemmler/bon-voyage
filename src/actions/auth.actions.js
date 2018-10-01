@@ -28,7 +28,7 @@ export const userLogin = ({ email, password }) => {
 export const userSignup = (newUser) => {
   return async (dispatch) => {
     try {
-      dispatch({ type: USER_LOGIN_PENDING })
+      dispatch({ type: USER_SIGNUP_PENDING })
       let response = await axios.post(`${BASE_URL}/signup`, { 'user': { 'email': newUser.email, 'password': newUser.password } })
       dispatch({ type: USER_SIGNUP_SUCCESS, payload: response.data })
     } catch (err) {
