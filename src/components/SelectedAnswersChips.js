@@ -9,29 +9,24 @@ function SelectedAnswersChips (props) {
         return questionAnswersArr.map((answerChosen, j) => {
           return `Region: ${ answerChosen }`
         })
-        break
       case 1:
         return questionAnswersArr.map((answerChosen, j) => {
           return `Subregion: ${ answerChosen }`
         })
-        break
       case 2:
         return questionAnswersArr.map((answerChosen, j) => {
           return `Population: ${ answerChosen }`
         })
-        break
       case 3:
         return questionAnswersArr.map((answerChosen, j) => {
           if (answerChosen === "Yes") {
-            return "Only Islands"
+            return "Islands: Only"
           } else if (answerChosen === "No") {
-            return "No Islands"
+            return "Islands: None"
           } else {
-            return "Islands Ok"
+            return "Islands: Allowed"
           }
         })
-
-        break
       case 4:
         return questionAnswersArr.map((answerChosen, j) => {
           if (answerChosen === "Yes") {
@@ -42,8 +37,6 @@ function SelectedAnswersChips (props) {
             return "Language: Any"
           }
         })
-
-        break
       default:
         return "default"
     }
