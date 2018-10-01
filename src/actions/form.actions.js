@@ -2,6 +2,8 @@ import axios from 'axios'
 
 export const FORM_SUBMISSION_PENDING = "FORM_SUBMISSION_PENDING"
 export const SUBMIT_FORM = "SUBMIT_FORM"
+export const RETAKE_QUIZ = "RETAKE_QUIZ"
+export const UPDATE_QUIZ_ANSWERS = "UPDATE_QUIZ_ANSWERS"
 export const UPDATE_ANSWER_CHOICE = "UPDATE_ANSWER_CHOICE"
 export const FAILED_SUBMISSION = "FAILED_SUBMISSION"
 
@@ -12,6 +14,18 @@ window.axios = axios
 export const selectAnswerChoice = (questionID, answerChoiceID) => {
   return (dispatch) => {
     dispatch({ type: UPDATE_ANSWER_CHOICE, payload: { questionID, answerChoiceID } })
+  }
+}
+
+export const updateQuizAnswers = () => {
+  return (dispatch) => {
+    dispatch({ type: UPDATE_QUIZ_ANSWERS })
+  }
+}
+
+export const retakeQuiz = () => {
+  return (dispatch) => {
+    dispatch({ type: RETAKE_QUIZ })
   }
 }
 
