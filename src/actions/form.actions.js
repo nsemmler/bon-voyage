@@ -35,49 +35,45 @@ export const submitUserQuiz = (quiz) => {
   quiz.map((question, i) => {
     switch (i) {
       case 0:
-        var regions = question.answer_choices.map(ansr_choice => {
-          if (ansr_choice.checked) return ansr_choice.content
-        })
+        var regions = question.answer_choices.filter(ansr_choice => ansr_choice.checked).map(ansr_choice => ansr_choice.content)
 
         quizPayload['regions'] = regions.filter(Boolean)
         break
       case 1:
-        var subregions = question.answer_choices.map(ansr_choice => {
-          if (ansr_choice.checked) return ansr_choice.content
-        })
+        var subregions = question.answer_choices.filter(ansr_choice => ansr_choice.checked).map(ansr_choice => ansr_choice.content)
 
         quizPayload['subregions'] = subregions.filter(Boolean)
         break
       case 2:
-        var population = question.answer_choices.map(ansr_choice => {
-          if (ansr_choice.checked) return ansr_choice.content
-        })
+        var population = question.answer_choices.filter(ansr_choice => ansr_choice.checked).map(ansr_choice => ansr_choice.content)
 
         population.map(size => {
-          if (size === 'Small') { return 'S' }
-          else if (size === 'Medium') { return 'M' }
-          else if (size === 'Large') { return 'L' }
+          if (size === 'Small') {
+            return 'S'
+          } else if (size === 'Medium') {
+            return 'M'
+          } else {
+            return 'L'
+          }
         })
 
         quizPayload['population'] = population.filter(Boolean)
         break
       case 3:
-        var island = question.answer_choices.map(ansr_choice => {
-          if (ansr_choice.checked) return ansr_choice.content
-        })
+        var island = question.answer_choices.filter(ansr_choice => ansr_choice.checked).map(ansr_choice => ansr_choice.content)
 
         quizPayload['island'] = island.filter(Boolean)[0]
         break
       case 4:
-        var english_only = question.answer_choices.map(ansr_choice => {
-          if (ansr_choice.checked) return ansr_choice.content
-        })
+        var english_only = question.answer_choices.filter(ansr_choice => ansr_choice.checked).map(ansr_choice => ansr_choice.content)
 
         quizPayload['english_only'] = english_only.filter(Boolean)[0]
         break
       default:
         console.log('default case')
     }
+
+    return question
   })
 
   return async (dispatch) => {
