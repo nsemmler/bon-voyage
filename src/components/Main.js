@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { selectAnswerChoice, submitUserQuiz } from '../actions/form.actions'
-import { Input, Button } from 'react-materialize'
+import { Input, Button, Preloader } from 'react-materialize'
 import Question from './Question'
 import QuestionCount from './QuestionCount'
 import { withRouter } from 'react-router-dom'
@@ -115,40 +115,43 @@ class Main extends Component {
           <h5>Travel Quiz:</h5>
         </div>
         <br/>
-        <div className="quiz-container">
-          <div className="question-and-question-count-container">
-            <div className="question-container">
-              <Question content={ this.props.form.questions[this.state.questionIndex].question } />
+        {
+          this.props.isLoading ? <Preloader className="pending" /> : <div className="quiz-container">
+            <div className="question-and-question-count-container">
+              <div className="question-container">
+                <Question content={ this.props.form.questions[this.state.questionIndex].question } />
+              </div>
+              <div className="question-counter-container">
+                <QuestionCount counter={ this.state.questionNum } total={ this.state.numQuestions } />
+              </div>
             </div>
-            <div className="question-counter-container">
-              <QuestionCount counter={ this.state.questionNum } total={ this.state.numQuestions } />
-            </div>
-          </div>
-          <form className="question-form" onSubmit={ this.submitQuiz }>
-            <div className="quiz">
-              <div className="inputs-container">
+            <form className="question-form" onSubmit={ this.submitQuiz }>
+              <div className="quiz">
+                <div className="inputs-container">
+                  {
+                    this.props.form.questions[this.state.questionIndex].answer_choices.map(ansr_choice => {
+                      console.log('ansr_choice', ansr_choice)
+                      return <Input className="form-input" key={ `${ansr_choice.id}-${ansr_choice.checked}` } onClick={ (e) => this.toggleAnswerChoice(e, ansr_choice.id) } name={ `${ansr_choice.type}[]` } type='checkbox' checked={ ansr_choice.checked } label={ ansr_choice.content } />
+                    })
+                  }
+                </div>
+
                 {
-                  this.props.form.questions[this.state.questionIndex].answer_choices.map(ansr_choice => {
-                    return <Input className="form-input" key={ `${ansr_choice.id}-${ansr_choice.checked}` } onClick={ (e) => this.toggleAnswerChoice(e, ansr_choice.id) } name={ `${ansr_choice.type}[]` } type='checkbox' checked={ ansr_choice.checked } label={ ansr_choice.content } />
-                  })
+                  this.state.questionNum !== this.state.numQuestions && <div className="prev-next-questions-btns">
+                    <Button className="prevbtn" onClick={ this.fetchPreviousQuestion } waves="light" type="button" disabled={ this.state.questionNum === 1 }>Previous</Button>
+                    <Button className="nextbtn" onClick={ this.fetchNextQuestion } waves="light" type="button">Next</Button>
+                  </div>
+                }
+                {
+                  this.state.questionNum === this.state.numQuestions && <div className="submit-question-btn">
+                    <Button className="prevbtn" onClick={ this.fetchPreviousQuestion } waves="light" type="button">Previous</Button>
+                    <Button waves="light" type="submit">Submit</Button>
+                  </div>
                 }
               </div>
-
-              {
-                this.state.questionNum !== this.state.numQuestions && <div className="prev-next-questions-btns">
-                  <Button className="prevbtn" onClick={ this.fetchPreviousQuestion } waves="light" type="button" disabled={ this.state.questionNum === 1 }>Previous</Button>
-                  <Button className="nextbtn" onClick={ this.fetchNextQuestion } waves="light" type="button">Next</Button>
-                </div>
-              }
-              {
-                this.state.questionNum === this.state.numQuestions && <div className="submit-question-btn">
-                  <Button className="prevbtn" onClick={ this.fetchPreviousQuestion } waves="light" type="button">Previous</Button>
-                  <Button waves="light" type="submit">Submit</Button>
-                </div>
-              }
-            </div>
-          </form>
-        </div>
+            </form>
+          </div>
+        }
       </div>
     )
   }
@@ -168,7 +171,7 @@ class Main extends Component {
 }
 
 function mapStateToProps (state) {
-  return { form: state.form }
+  return { form: state.form, isLoading: state.auth.isLoading }
 }
 
 function mapDispatchToProps (dispatch) {
