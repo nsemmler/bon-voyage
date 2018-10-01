@@ -6,7 +6,7 @@ function CountryImages (props) {
     <div className="images-container">
       {
         JSON.parse(props.country.images).map((img, i) => {
-          return <img src={ img } alt={ `${props.country.name} Image ${i+1}` } className="countryimg" key={ `${props.country.name}-img-${props.country.id}` } />
+          return <img src={ img } alt={ `${props.country.name} Image ${i+1}` } className="countryimg" key={ `${props.country.name}-img-${i}` } />
         })
       }
     </div>
