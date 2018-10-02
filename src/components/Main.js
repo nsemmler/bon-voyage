@@ -8,6 +8,7 @@ import QuestionCount from './QuestionCount'
 import { withRouter } from 'react-router-dom'
 import Modal from 'react-modal'
 import Nav from './Nav'
+import QuizForm from './QuizForm'
 import CountryInfo from './CountryInfo'
 import Recommendations from './Recommendations'
 import SelectedAnswersChips from './SelectedAnswersChips'
@@ -140,32 +141,17 @@ class Main extends Component {
                 <QuestionCount counter={ this.state.questionNum } total={ this.state.numQuestions } />
               </div>
             </div>
-            <form className="question-form" onSubmit={ this.submitQuiz }>
-              <div className="quiz">
-                <div className="inputs-container">
-                  {
-                    this.props.form.questions[this.state.questionIndex].answer_choices.map(ansr_choice => {
-                      return <Input className="form-input" key={ `${ansr_choice.id}-${ansr_choice.checked}` } onClick={ (e) => this.toggleAnswerChoice(e, ansr_choice.id) } name={ `${ansr_choice.type}[]` } type='checkbox' checked={ ansr_choice.checked } label={ ansr_choice.content } />
-                    })
-                  }
-                </div>
-
-                <div className={(this.state.questionNum !== this.state.numQuestions) ? "prev-next-questions-btns" : "submit-question-btn"}>
-                  {
-                    (this.state.questionNum !== 1) &&
-                    <Button className="prevbtn" onClick={ this.fetchPreviousQuestion } waves="light" type="button" disabled={ this.state.questionNum === 1 }>Previous</Button>
-                  }
-                  {
-                    (this.state.questionNum !== this.state.numQuestions) &&
-                    <Button className="nextbtn" onClick={ this.fetchNextQuestion } waves="light" type="button" disabled={ (uniqueAnswerChoices.length === 1 && !uniqueAnswerChoices[0]) }>Next</Button>
-                  }
-                  {
-                    (this.state.questionNum === this.state.numQuestions) &&
-                    <Button waves="light" type="submit" disabled={ (uniqueAnswerChoices.length === 1 && !uniqueAnswerChoices[0]) }>Submit</Button>
-                  }
-                </div>
-              </div>
-            </form>
+            <QuizForm
+              submitQuiz={ this.submitQuiz }
+              uniqueAnswerChoices={ uniqueAnswerChoices }
+              form={ this.props.form }
+              questionIndex={ this.state.questionIndex }
+              questionNum={ this.state.questionNum }
+              numQuestions={ this.state.numQuestions }
+              fetchPreviousQuestion={ this.fetchPreviousQuestion }
+              fetchNextQuestion={ this.fetchNextQuestion }
+              toggleAnswerChoice={ this.toggleAnswerChoice }
+            />
           </div>
         }
       </div>
