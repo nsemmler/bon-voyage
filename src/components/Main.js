@@ -22,7 +22,8 @@ class Main extends Component {
       numQuestions: props.form.questions.length,
       questionName: props.form.questions[0].name,
       showModal: false,
-      modalCountry: {}
+      modalCountry: {},
+      countryName: ""
     }
   }
 
@@ -96,6 +97,12 @@ class Main extends Component {
     })
   }
 
+  filterRecommendations = (e) => {
+    e.preventDefault()
+
+    this.setState({ countryName: e.target.value })
+  }
+
   displayTravelRecommendations = () => {
     let chipsArr = this.createChipsArr(this.props.form.questions.questions)
 
@@ -105,8 +112,11 @@ class Main extends Component {
           <h5>Recommended Travel Destinations:</h5>
           <button className="back2quiz" onClick={ this.returnToQuiz } waves="light" type="button">Return to Quiz</button>
           <button className="retakeQuiz" onClick={ this.retakeQuiz } waves="light" type="button">Retake Quiz</button>
+          <div className="search-wrapper">
+            <span><input onChange={ this.filterRecommendations } id="search" placeholder="Filter Countries" /><i className="material-icons">search</i></span>
+          </div>
+          <SelectedAnswersChips chipsArr={ chipsArr }/>
         </div>
-        <SelectedAnswersChips chipsArr={ chipsArr }/>
         <br/>
         <div className="response-container" id="responses">
           <div className="recommendations">
@@ -115,7 +125,7 @@ class Main extends Component {
                 { (Object.keys(this.state.modalCountry).length !== 0) && <CountryInfo country={ this.state.modalCountry }/> }
               </div>
             </Modal>
-            { <Recommendations recommendationsArr={ this.props.form.recommendations } displayCountryInformationModal={ this.displayCountryInformationModal } /> }
+            { <Recommendations recommendationsArr={ this.props.form.recommendations } displayCountryInformationModal={ this.displayCountryInformationModal } countryName={ this.state.countryName } /> }
           </div>
         </div>
       </div>
