@@ -21,9 +21,17 @@ export default (state = { questions: initialState, recommendations: [], isLoadin
         if (i === questionID) {
           var updatedAnswerChoices = question.answer_choices.map(ansr_choice => {
             if (ansr_choice.id === answerChoiceID) {
-              return { ...ansr_choice, checked: !ansr_choice.checked }
+              if (questionID > 2) {
+                return { ...ansr_choice, checked: true }
+              } else {
+                return { ...ansr_choice, checked: !ansr_choice.checked }
+              }
             } else {
-              return ansr_choice
+              if (questionID > 2) {
+                return { ...ansr_choice, checked: false }
+              } else {
+                return ansr_choice
+              }
             }
           })
           return { ...question, answer_choices: updatedAnswerChoices }
