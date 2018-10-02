@@ -8,6 +8,7 @@ import QuestionCount from './QuestionCount'
 import { withRouter } from 'react-router-dom'
 import Modal from 'react-modal'
 import Nav from './Nav'
+import QuizForm from './QuizForm'
 import CountryInfo from './CountryInfo'
 import Recommendations from './Recommendations'
 import SelectedAnswersChips from './SelectedAnswersChips'
@@ -21,7 +22,8 @@ class Main extends Component {
       numQuestions: props.form.questions.length,
       questionName: props.form.questions[0].name,
       showModal: false,
-      modalCountry: {}
+      modalCountry: {},
+      countryName: ""
     }
   }
 
@@ -89,36 +91,20 @@ class Main extends Component {
     }
   }
 
-  displayRecommendations = () => {
-    return (
-      <div className="recommendations">
-        <Modal isOpen={ this.state.showModal }
-          contentLabel="Recommended Country Information"
-          onRequestClose={ () => this.displayCountryInformationModal({}) }
-          shouldCloseOnOverlayClick={ true }>
-          <div className="modal-container">
-            { (Object.keys(this.state.modalCountry).length !== 0) && <CountryInfo country={ this.state.modalCountry }/> }
-          </div>
-        </Modal>
-        {
-          <Recommendations recommendationsArr={ this.props.form.recommendations } displayCountryInformationModal={ this.displayCountryInformationModal } />
-        }
-      </div>
-    )
+  createChipsArr = (questions) => {
+    return questions.map((question, i) => {
+      return question.answer_choices.filter(ansr_choice => ansr_choice.checked).map(ansr_choice => ansr_choice.content)
+    })
+  }
+
+  filterRecommendations = (e) => {
+    e.preventDefault()
+
+    this.setState({ countryName: e.target.value })
   }
 
   displayTravelRecommendations = () => {
-    let chipsArr = this.props.form.questions.questions.map((question, i) => {
-      const selectedAnswers = question.answer_choices.filter((ansr_choice) => {
-        if (ansr_choice.checked) return ansr_choice.content
-      })
-
-      const selectedAnswerContent = selectedAnswers.map(ansr_obj => {
-        return ansr_obj.content
-      })
-
-      return selectedAnswerContent
-    })
+    let chipsArr = this.createChipsArr(this.props.form.questions.questions)
 
     return (
       <div className="Main">
@@ -126,11 +112,21 @@ class Main extends Component {
           <h5>Recommended Travel Destinations:</h5>
           <button className="back2quiz" onClick={ this.returnToQuiz } waves="light" type="button">Return to Quiz</button>
           <button className="retakeQuiz" onClick={ this.retakeQuiz } waves="light" type="button">Retake Quiz</button>
+          <div className="search-wrapper">
+            <span><input onChange={ this.filterRecommendations } id="search" placeholder="Filter Countries" /><i className="material-icons">search</i></span>
+          </div>
+          <SelectedAnswersChips chipsArr={ chipsArr }/>
         </div>
-        <SelectedAnswersChips chipsArr={ chipsArr }/>
         <br/>
         <div className="response-container" id="responses">
-          { this.displayRecommendations() }
+          <div className="recommendations">
+            <Modal isOpen={ this.state.showModal } contentLabel="Recommended Country Information" onRequestClose={ () => this.displayCountryInformationModal({}) } shouldCloseOnOverlayClick={ true }>
+              <div className="modal-container">
+                { (Object.keys(this.state.modalCountry).length !== 0) && <CountryInfo country={ this.state.modalCountry }/> }
+              </div>
+            </Modal>
+            { <Recommendations recommendationsArr={ this.props.form.recommendations } displayCountryInformationModal={ this.displayCountryInformationModal } countryName={ this.state.countryName } /> }
+          </div>
         </div>
       </div>
     )
@@ -155,32 +151,17 @@ class Main extends Component {
                 <QuestionCount counter={ this.state.questionNum } total={ this.state.numQuestions } />
               </div>
             </div>
-            <form className="question-form" onSubmit={ this.submitQuiz }>
-              <div className="quiz">
-                <div className="inputs-container">
-                  {
-                    this.props.form.questions[this.state.questionIndex].answer_choices.map(ansr_choice => {
-                      return <Input className="form-input" key={ `${ansr_choice.id}-${ansr_choice.checked}` } onClick={ (e) => this.toggleAnswerChoice(e, ansr_choice.id) } name={ `${ansr_choice.type}[]` } type='checkbox' checked={ ansr_choice.checked } label={ ansr_choice.content } />
-                    })
-                  }
-                </div>
-
-                <div className={(this.state.questionNum !== this.state.numQuestions) ? "prev-next-questions-btns" : "submit-question-btn"}>
-                  {
-                    (this.state.questionNum !== 1) &&
-                    <Button className="prevbtn" onClick={ this.fetchPreviousQuestion } waves="light" type="button" disabled={ this.state.questionNum === 1 }>Previous</Button>
-                  }
-                  {
-                    (this.state.questionNum !== this.state.numQuestions) &&
-                    <Button className="nextbtn" onClick={ this.fetchNextQuestion } waves="light" type="button" disabled={ (uniqueAnswerChoices.length === 1 && !uniqueAnswerChoices[0]) }>Next</Button>
-                  }
-                  {
-                    (this.state.questionNum === this.state.numQuestions) &&
-                    <Button waves="light" type="submit" disabled={ (uniqueAnswerChoices.length === 1 && !uniqueAnswerChoices[0]) }>Submit</Button>
-                  }
-                </div>
-              </div>
-            </form>
+            <QuizForm
+              submitQuiz={ this.submitQuiz }
+              uniqueAnswerChoices={ uniqueAnswerChoices }
+              form={ this.props.form }
+              questionIndex={ this.state.questionIndex }
+              questionNum={ this.state.questionNum }
+              numQuestions={ this.state.numQuestions }
+              fetchPreviousQuestion={ this.fetchPreviousQuestion }
+              fetchNextQuestion={ this.fetchNextQuestion }
+              toggleAnswerChoice={ this.toggleAnswerChoice }
+            />
           </div>
         }
       </div>
@@ -192,9 +173,7 @@ class Main extends Component {
       <div className="main">
         <Nav />
         <div>
-          {
-            (this.props.form.recommendations.length) ? this.displayTravelRecommendations() : this.displayTravelQuiz()
-          }
+          { (this.props.form.recommendations.length) ? this.displayTravelRecommendations() : this.displayTravelQuiz() }
         </div>
       </div>
     )
