@@ -48,138 +48,161 @@
       {
         "id": 1,
         "content": "Australia and New Zealand",
+        "region": "Oceania",
         "type": "subregion",
         "checked": false
       },
       {
         "id": 2,
         "content": "Caribbean",
+        "region": "Americas",
         "type": "subregion",
         "checked": false
       },
       {
         "id": 3,
         "content": "Central America",
+        "region": "Americas",
         "type": "subregion",
         "checked": false
       },
       {
         "id": 4,
         "content": "Central Asia",
+        "region": "Asia",
         "type": "subregion",
         "checked": false
       },
       {
         "id": 5,
         "content": "Eastern Africa",
+        "region": "Africa",
         "type": "subregion",
         "checked": false
       },
       {
         "id": 6,
         "content": "Eastern Asia",
+        "region": "Asia",
         "type": "subregion",
         "checked": false
       },
       {
         "id": 7,
         "content": "Eastern Europe",
+        "region": "Europe",
         "type": "subregion",
         "checked": false
       },
       {
         "id": 8,
         "content": "Melanesia",
+        "region": "Oceania",
         "type": "subregion",
         "checked": false
       },
       {
         "id": 9,
         "content": "Micronesia",
+        "region": "Oceania",
         "type": "subregion",
         "checked": false
       },
       {
         "id": 10,
         "content": "Middle Africa",
+        "region": "Africa",
         "type": "subregion",
         "checked": false
       },
       {
         "id": 11,
         "content": "Northern Africa",
+        "region": "Africa",
         "type": "subregion",
         "checked": false
       },
       {
         "id": 12,
         "content": "Northern America",
+        "region": "Americas",
         "type": "subregion",
         "checked": false
       },
       {
         "id": 13,
         "content": "Northern Europe",
+        "region": "Europe",
         "type": "subregion",
         "checked": false
       },
       {
         "id": 14,
-        "content": "Polynesia",
+        "content": "Polar",
+        "region": "Polar",
         "type": "subregion",
         "checked": false
       },
       {
         "id": 15,
-        "content": "South America",
+        "content": "Polynesia",
+        "region": "Oceania",
         "type": "subregion",
         "checked": false
       },
       {
         "id": 16,
-        "content": "South-Eastern Asia",
+        "content": "South America",
+        "region": "Americas",
         "type": "subregion",
         "checked": false
       },
       {
         "id": 17,
-        "content": "Southern Africa",
+        "content": "South-Eastern Asia",
+        "region": "Asia",
         "type": "subregion",
         "checked": false
       },
       {
         "id": 18,
-        "content": "Southern Asia",
+        "content": "Southern Africa",
+        "region": "Africa",
         "type": "subregion",
         "checked": false
       },
       {
         "id": 19,
-        "content": "Southern Europe",
+        "content": "Southern Asia",
+        "region": "Asia",
         "type": "subregion",
         "checked": false
       },
       {
         "id": 20,
-        "content": "Western Africa",
+        "content": "Southern Europe",
+        "region": "Europe",
         "type": "subregion",
         "checked": false
       },
       {
         "id": 21,
-        "content": "Western Asia",
+        "content": "Western Africa",
+        "region": "Africa",
         "type": "subregion",
         "checked": false
       },
       {
         "id": 22,
-        "content": "Western Europe",
+        "content": "Western Asia",
+        "region": "Asia",
         "type": "subregion",
         "checked": false
       },
       {
         "id": 23,
-        "content": "Other",
+        "content": "Western Europe",
+        "region": "Europe",
         "type": "subregion",
         "checked": false
       }
