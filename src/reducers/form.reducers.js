@@ -8,10 +8,10 @@ import {
 
 import initialState from '../questions.json'
 
-export default (state = { questions: initialState, recommendations: [], isLoading: false }, action) => {
+export default (state = { questions: initialState, recommendations: [], pois: [], isLoading: false }, action) => {
   switch (action.type) {
     case FORM_SUBMISSION_PENDING:
-      return { ...state, isLoading: true }
+      return { ...state, recommendations: [], pois: [], isLoading: true }
     case UPDATE_ANSWER_CHOICE:
       var questionsCopy = [ ...state.questions ]
       const answerChoiceID = action.payload.answerChoiceID
@@ -40,13 +40,13 @@ export default (state = { questions: initialState, recommendations: [], isLoadin
         }
       })
 
-      return { questions: updatedQuestionsCopy, recommendations: [] }
+      return { questions: updatedQuestionsCopy, recommendations: [], pois: [], isLoading: false }
     case UPDATE_QUIZ_ANSWERS:
-      return { questions: state.questions.questions, recommendations: [] }
+      return { questions: state.questions, recommendations: [], pois: [], isLoading: false }
     case RETAKE_QUIZ:
-      return { questions: initialState, recommendations: [] }
+      return { questions: initialState, recommendations: [], pois: [], isLoading: false }
     case SUBMIT_FORM:
-      return { questions: state, recommendations: action.payload }
+      return { ...state, recommendations: action.payload.countries, pois: action.payload.pois, isLoading: false }
     default:
       return state
   }
