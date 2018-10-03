@@ -11,6 +11,20 @@ const BASE_URL = "http://localhost:3000"
 
 window.axios = axios
 
+// export const fetchCountryPOIs = (countryId) => {
+//   return async (dispatch) => {
+//     // try {
+//     //   dispatch({ type: GET_POIS, payload: countryId })
+//
+//       let response = await axios.get(`${BASE_URL}/countries/${countryId}/pois`)
+//       console.log('fetchCountryPOIs Action payload:', response.data)
+//       dispatch({ type: GET_POIS, payload: response.data })
+//     // } catch (err) {
+//     //   dispatch({ type: FAILED_SUBMISSION, payload: err })
+//     // }
+//   }
+// }
+
 export const selectAnswerChoice = (questionID, answerChoiceID) => {
   return (dispatch) => {
     dispatch({ type: UPDATE_ANSWER_CHOICE, payload: { questionID, answerChoiceID } })
