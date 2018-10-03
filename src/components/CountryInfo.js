@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import CountryMap from './CountryMap'
 import GeneralInfo from './GeneralInfo'
 import CountryImages from './CountryImages'
+import PointsOfInterest from './PointsOfInterest'
 import { Tabs, Tab } from 'react-materialize'
 
 function CountryInfo (props) {
@@ -12,7 +13,7 @@ function CountryInfo (props) {
         <Tabs className="countrytabs">
           <Tab title="General Info" active>{ <GeneralInfo country={ props.country } /> }</Tab>
           <Tab title="Maps">{ <CountryMap latitude={ props.country.latitude } longitude={ props.country.longitude } /> }</Tab>
-          <Tab title="Points of Interest">{ <p>Points of Interest: Coming Soon!</p> }</Tab>
+          <Tab title="Points of Interest">{ <PointsOfInterest countryIndex={ props.countryIndex } pointsOfInterest={ props.pointsOfInterest } /> }</Tab>
           <Tab title="Images">{ <CountryImages country={ props.country } /> }</Tab>
         </Tabs>
       </div>
@@ -21,7 +22,9 @@ function CountryInfo (props) {
 }
 
 CountryInfo.propTypes = {
-  country: PropTypes.object.isRequired
+  country: PropTypes.object.isRequired,
+  countryIndex: PropTypes.number.isRequired,
+  pointsOfInterest: PropTypes.array.isRequired
 }
 
 export default CountryInfo
