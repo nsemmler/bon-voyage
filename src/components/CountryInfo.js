@@ -19,6 +19,8 @@ function CountryInfo (props) {
           <Tab title="Maps">
             { <CountryMap latitude={ props.country.latitude }
                           longitude={ props.country.longitude }
+                          countryIndex={ props.countryIndex }
+                          pointsOfInterest={ props.pointsOfInterest }
                           googleMapURL={ googleMapsURL }
                           clickableIcons={ false }
                           loadingElement={ <div style={{ height: "100%" }} /> }
