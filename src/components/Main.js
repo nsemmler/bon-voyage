@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { selectAnswerChoice, submitUserQuiz, updateQuizAnswers, retakeQuiz } from '../actions/form.actions'
-import { Input, Button, Preloader } from 'react-materialize'
+import { Preloader } from 'react-materialize'
 import Question from './Question'
 import QuestionCount from './QuestionCount'
 import { withRouter } from 'react-router-dom'
@@ -21,8 +21,9 @@ class Main extends Component {
       questionNum: props.form.questions[0].id,
       numQuestions: props.form.questions.length,
       questionName: props.form.questions[0].name,
-      showModal: false,
-      modalCountry: {},
+      showCountryInfo: false,
+      selectedCountry: {},
+      selectedCountryId: 0,
       countryName: ""
     }
   }
@@ -31,10 +32,21 @@ class Main extends Component {
     Modal.setAppElement('body')
   }
 
-  displayCountryInformationModal = (country={}) => {
+  isEmpty = (obj) => {
+    for (let key in obj) {
+      if(obj.hasOwnProperty(key)) return false
+    }
+    return true
+  }
+
+  displayCountryInformationModal = (country={}, countryIndex=0) => {
+    // Make Axios request to fetch all POI info for given country ID
+    // if (!this.isEmpty(country)) this.props.fetchCountryPOIs(country.id)
+    
     this.setState({
-      showModal: !this.state.showModal,
-      modalCountry: country
+      showCountryInfo: !this.state.showCountryInfo,
+      selectedCountry: country,
+      selectedCountryId: countryIndex
     })
   }
 
@@ -62,8 +74,8 @@ class Main extends Component {
 
     this.setState({
       questionIndex: 0,
-      questionNum: this.props.form.questions.questions[0].id,
-      questionName: this.props.form.questions.questions[0].name,
+      questionNum: this.props.form.questions[0].id,
+      questionName: this.props.form.questions[0].name,
     })
 
     this.props.retakeQuiz()
@@ -104,7 +116,7 @@ class Main extends Component {
   }
 
   displayTravelRecommendations = () => {
-    let chipsArr = this.createChipsArr(this.props.form.questions.questions)
+    let chipsArr = this.createChipsArr(this.props.form.questions)
 
     return (
       <div className="Main">
@@ -120,9 +132,9 @@ class Main extends Component {
         <br/>
         <div className="response-container" id="responses">
           <div className="recommendations">
-            <Modal isOpen={ this.state.showModal } contentLabel="Recommended Country Information" onRequestClose={ () => this.displayCountryInformationModal({}) } shouldCloseOnOverlayClick={ true }>
+            <Modal isOpen={ this.state.showCountryInfo } contentLabel="Recommended Country Information" onRequestClose={ () => this.displayCountryInformationModal({}) } shouldCloseOnOverlayClick={ true }>
               <div className="modal-container">
-                { (Object.keys(this.state.modalCountry).length !== 0) && <CountryInfo country={ this.state.modalCountry }/> }
+                { (Object.keys(this.state.selectedCountry).length !== 0) && <CountryInfo country={ this.state.selectedCountry } countryIndex={ this.state.selectedCountryId } pointsOfInterest={ this.props.form.pois } /> }
               </div>
             </Modal>
             { <Recommendations recommendationsArr={ this.props.form.recommendations } displayCountryInformationModal={ this.displayCountryInformationModal } countryName={ this.state.countryName } /> }
@@ -142,7 +154,7 @@ class Main extends Component {
         </div>
         <br/>
         {
-          this.props.isLoading ? <Preloader className="pending" /> : <div className="quiz-container">
+          this.props.form.isLoading ? <Preloader className="pending" /> : <div className="quiz-container">
             <div className="question-and-question-count-container">
               <div className="question-container">
                 <Question content={ this.props.form.questions[this.state.questionIndex].question } />
