@@ -1,18 +1,16 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import GoogleMaps from 'simple-react-google-maps'
-const { REACT_APP_GOOGLE_MAPS_KEY } = process.env
+import { withScriptjs, withGoogleMap, GoogleMap, Marker } from 'react-google-maps'
 
-function CountryMap (props) {
+const CountryMap = withScriptjs(withGoogleMap((props) => {
   return (
-    <GoogleMaps
-      apiKey={ REACT_APP_GOOGLE_MAPS_KEY }
-      style={ { height: "400px", width: "100%" } }
-      zoom={ 6 }
-      center={ { lat: props.latitude, lng: props.longitude } }
-    />
+    <div id="map">
+      <GoogleMap defaultZoom={ 8 } defaultCenter={{ lat: props.latitude, lng: props.longitude }}>
+        { false && <Marker position={{ lat: props.latitude, lng: props.longitude }} /> }
+      </GoogleMap>
+    </div>
   )
-}
+}))
 
 CountryMap.propTypes = {
   latitude: PropTypes.number.isRequired,
