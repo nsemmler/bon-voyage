@@ -2,6 +2,7 @@ import React from 'react'
 import Login from './components/Login'
 import Signup from './components/Signup'
 import Main from './components/Main'
+import PrivateRoute from './components/PrivateRoute'
 import './App.css'
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
 
@@ -14,7 +15,7 @@ export default function App () {
         <Switch>
           <Route exact path="/login" component={ Login } />
           <Route exact path="/signup" component={ Signup } />
-          <Route exact path="/quiz" component={ Main } />
+          <PrivateRoute path="/quiz" component={ Main } />
           <Redirect to="/login" />
         </Switch>
       </Router>
