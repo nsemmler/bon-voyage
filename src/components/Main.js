@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { selectAnswerChoice, submitUserQuiz, updateQuizAnswers, retakeQuiz } from '../actions/form.actions'
+import { selectAnswerChoice, submitUserQuiz, updateQuizAnswers, retakeQuiz, fetchUserFavorites } from '../actions/form.actions'
 import { Preloader } from 'react-materialize'
 import Question from './Question'
 import QuestionCount from './QuestionCount'
@@ -12,6 +12,7 @@ import QuizForm from './QuizForm'
 import CountryInfo from './CountryInfo'
 import Recommendations from './Recommendations'
 import SelectedAnswersChips from './SelectedAnswersChips'
+import MaterialIcon from 'material-icons-react'
 
 // Modal.defaultStyles.overlay.backgroundColor = 'cornsilk';
 // Modal.defaultStyles.overlay.position = 'absolute';
@@ -40,6 +41,10 @@ class Main extends Component {
   }
 
   componentWillMount() {
+    const token = localStorage.getItem('token')
+    const userId = parseInt(localStorage.getItem('userId'))
+
+    this.props.fetchUserFavorites(userId, token)
     Modal.setAppElement('body')
   }
 
@@ -141,6 +146,7 @@ class Main extends Component {
         <div className="response-container" id="responses">
           <div className="recommendations">
             <Modal id="modal" isOpen={ this.state.showCountryInfo } contentLabel="Recommended Country Information" onRequestClose={ () => this.displayCountryInformationModal({}) } shouldCloseOnOverlayClick={ true }>
+              <button className="favoritebtn" onClick={ console.log('CLICK') }><MaterialIcon icon="favorite" size="medium" color="#d10808"/></button>
               <div className="modal-container">
                 { (Object.keys(this.state.selectedCountry).length !== 0) && <CountryInfo country={ this.state.selectedCountry } countryIndex={ this.state.selectedCountryId } pointsOfInterest={ this.props.form.pois } /> }
               </div>
@@ -188,12 +194,34 @@ class Main extends Component {
     )
   }
 
+  displayFavorites = () => {
+    return (
+      <div className="testtestesttes">
+        displayFavorites
+        {/* <button onClick={}>Return to quiz</button> */}
+      </div>
+    )
+  }
+
+  displayRecommendationsOrQuiz = () => {
+    if (this.props.form.recommendations.length) {
+      return this.displayTravelRecommendations()
+    } else {
+      return this.displayTravelQuiz()
+    }
+  }
+
   render() {
     return (
       <div className="main">
         <Nav />
         <div>
-          { (this.props.form.recommendations.length) ? this.displayTravelRecommendations() : this.displayTravelQuiz() }
+          {/* { console.log('<Main> this.props', this.props) }
+          { console.log('<Main> this.state', this.state) } */}
+
+          {
+            (this.props.form.favorites.length) ? this.displayFavorites() : this.displayRecommendationsOrQuiz()
+          }
         </div>
       </div>
     )
@@ -206,7 +234,7 @@ function mapStateToProps (state) {
 
 function mapDispatchToProps (dispatch) {
   return bindActionCreators({
-    selectAnswerChoice, submitUserQuiz, updateQuizAnswers, retakeQuiz
+    selectAnswerChoice, submitUserQuiz, updateQuizAnswers, retakeQuiz, fetchUserFavorites
   }, dispatch)
 }
 
