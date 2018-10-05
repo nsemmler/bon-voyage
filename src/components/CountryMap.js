@@ -40,7 +40,7 @@ const CountryMap = compose(
               <div style={{ fontSize: '14px', fontColor: 'black' }}>
 
                 {
-                  poi.wikipedia_link ? <Card className='poi-card'
+                  poi.wikipedia_link ? <Card className='poi-card' key={ `poi-card-key-${poiIndex}` }
                     header={<CardTitle image={ JSON.parse(poi.image)[0] }>{ poi.name }<div className="badge score-badge">{ poi.score.toFixed(1) }</div></CardTitle>}
                     actions={[<a href={ poi.wikipedia_link } target="_blank">Read More</a>]}>
                     { poi.description }
