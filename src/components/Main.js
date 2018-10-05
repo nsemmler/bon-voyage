@@ -13,6 +13,17 @@ import CountryInfo from './CountryInfo'
 import Recommendations from './Recommendations'
 import SelectedAnswersChips from './SelectedAnswersChips'
 
+// Modal.defaultStyles.overlay.backgroundColor = 'cornsilk';
+// Modal.defaultStyles.overlay.position = 'absolute';
+// Modal.defaultStyles.overlay.top = '-2px';
+// Modal.defaultStyles.overlay.left = '100px';
+// Modal.defaultStyles.overlay.right = '100px';
+// Modal.defaultStyles.overlay.bottom = '-2px';
+// Modal.defaultStyles.overlay.border = '1px solid rgb(204, 204, 204)';
+// Modal.defaultStyles.overlay.background = 'rgb(255, 255, 255)';
+// Modal.defaultStyles.overlay.overflow = 'auto';
+// Modal.defaultStyles.overlay.padding = '20px';
+
 class Main extends Component {
   constructor(props) {
     super(props)
@@ -40,9 +51,6 @@ class Main extends Component {
   }
 
   displayCountryInformationModal = (country={}, countryIndex=0) => {
-    // Make Axios request to fetch all POI info for given country ID
-    // if (!this.isEmpty(country)) this.props.fetchCountryPOIs(country.id)
-    
     this.setState({
       showCountryInfo: !this.state.showCountryInfo,
       selectedCountry: country,
@@ -132,7 +140,7 @@ class Main extends Component {
         <br/>
         <div className="response-container" id="responses">
           <div className="recommendations">
-            <Modal isOpen={ this.state.showCountryInfo } contentLabel="Recommended Country Information" onRequestClose={ () => this.displayCountryInformationModal({}) } shouldCloseOnOverlayClick={ true }>
+            <Modal id="modal" isOpen={ this.state.showCountryInfo } contentLabel="Recommended Country Information" onRequestClose={ () => this.displayCountryInformationModal({}) } shouldCloseOnOverlayClick={ true }>
               <div className="modal-container">
                 { (Object.keys(this.state.selectedCountry).length !== 0) && <CountryInfo country={ this.state.selectedCountry } countryIndex={ this.state.selectedCountryId } pointsOfInterest={ this.props.form.pois } /> }
               </div>
