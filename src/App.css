@@ -135,6 +135,40 @@
   height: 100%;
 }
 
+.poi-container {
+  display: grid;
+  grid-template-columns: 150px 300px 25px;
+  grid-template-rows: auto auto;
+  grid-template-areas:
+    "img name score"
+    "img description description";
+}
+
+.poi-card {
+  max-height: 350px;
+  width: 354px;
+  padding-left: 2px;
+  padding-top: 2px;
+  padding-right: 2px;
+}
+
+.card-image img {
+  width: 350px !important;
+  height: auto;
+}
+
+.card-content, .card-action {
+  padding: 8px !important;
+  height: auto;
+}
+
+.score-badge {
+  background-color: #f21010 !important;
+  color: white !important;
+  padding: 0px !important;
+  float: right;
+}
+
 /******************************************************************************/
 /* Login Form */
 /******************************************************************************/
