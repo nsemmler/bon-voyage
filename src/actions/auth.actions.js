@@ -18,6 +18,7 @@ export const userLogin = ({ email, password }) => {
       dispatch({ type: USER_LOGIN_PENDING })
       let response = await axios.post(`${BASE_URL}/login`, { 'user': { 'email': email, 'password': password } })
       localStorage.setItem('token', response.headers.authorization)
+      localStorage.setItem('userId', response.data.id)
       dispatch({ type: USER_LOGIN_SUCCESS, payload: response })
     } catch (err) {
       dispatch({ type: USER_LOGIN_FAILED, payload: err })
@@ -40,6 +41,7 @@ export const userSignup = (newUser) => {
 export const userLogout = () => {
   return async (dispatch) => {
     localStorage.removeItem('token')
+    localStorage.removeItem('userId')
     dispatch({ type: USER_LOGOUT })
   }
 }
