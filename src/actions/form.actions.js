@@ -7,9 +7,11 @@ export const UPDATE_QUIZ_ANSWERS = "UPDATE_QUIZ_ANSWERS"
 export const UPDATE_ANSWER_CHOICE = "UPDATE_ANSWER_CHOICE"
 export const FAILED_SUBMISSION = "FAILED_SUBMISSION"
 
-const BASE_URL = "http://localhost:3000"
-
 window.axios = axios
+
+const BASE_URL = "http://localhost:3000"
+const token = localStorage.getItem('token')
+var config = { headers: {'Authorization': token } }
 
 // export const fetchCountryPOIs = (countryId) => {
 //   return async (dispatch) => {
@@ -93,7 +95,8 @@ export const submitUserQuiz = (quiz) => {
   return async (dispatch) => {
     try {
       dispatch({ type: FORM_SUBMISSION_PENDING })
-      let response = await axios.post(`${BASE_URL}/countries/quiz`, quizPayload)
+      console.log('config', config)
+      let response = await axios.post(`${BASE_URL}/countries/quiz`, quizPayload, config)
       dispatch({ type: SUBMIT_FORM, payload: response.data })
     } catch (err) {
       dispatch({ type: FAILED_SUBMISSION, payload: err })
