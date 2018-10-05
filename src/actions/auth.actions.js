@@ -8,9 +8,9 @@ export const USER_SIGNUP_SUCCESS = "USER_SIGNUP_SUCCESS"
 export const USER_SIGNUP_FAILED = "USER_SIGNUP_FAILED"
 export const USER_LOGOUT = "USER_LOGOUT"
 
-const BASE_URL = "http://localhost:3000"
-
 window.axios = axios
+
+const BASE_URL = "http://localhost:3000"
 
 export const userLogin = ({ email, password }) => {
   return async (dispatch) => {
