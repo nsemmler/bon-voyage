@@ -6,26 +6,20 @@ export const RETAKE_QUIZ = "RETAKE_QUIZ"
 export const UPDATE_QUIZ_ANSWERS = "UPDATE_QUIZ_ANSWERS"
 export const UPDATE_ANSWER_CHOICE = "UPDATE_ANSWER_CHOICE"
 export const FAILED_SUBMISSION = "FAILED_SUBMISSION"
+export const GET_USER_FAVORITES = "GET_USER_FAVORITES"
 
 window.axios = axios
 
 const BASE_URL = "http://localhost:3000"
-const token = localStorage.getItem('token')
-var config = { headers: {'Authorization': token } }
 
-// export const fetchCountryPOIs = (countryId) => {
-//   return async (dispatch) => {
-//     // try {
-//     //   dispatch({ type: GET_POIS, payload: countryId })
-//
-//       let response = await axios.get(`${BASE_URL}/countries/${countryId}/pois`)
-//       console.log('fetchCountryPOIs Action payload:', response.data)
-//       dispatch({ type: GET_POIS, payload: response.data })
-//     // } catch (err) {
-//     //   dispatch({ type: FAILED_SUBMISSION, payload: err })
-//     // }
-//   }
-// }
+export const fetchUserFavorites = (userId, token) => {
+  var config = { headers: { 'Authorization': token, 'Content-Type': 'application/json' } }
+
+  return async (dispatch) => {
+    let response = await axios.get(`${BASE_URL}/favorites?user_id=${parseInt(userId)}`, config)
+    dispatch({ type: GET_USER_FAVORITES, payload: response.data })
+  }
+}
 
 export const selectAnswerChoice = (questionID, answerChoiceID) => {
   return (dispatch) => {
@@ -95,7 +89,12 @@ export const submitUserQuiz = (quiz) => {
   return async (dispatch) => {
     try {
       dispatch({ type: FORM_SUBMISSION_PENDING })
-      console.log('config', config)
+      const token = localStorage.getItem('token')
+      var config = { headers: {
+        'Authorization': token,
+        'Content-Type': 'application/json'
+      }}
+
       let response = await axios.post(`${BASE_URL}/countries/quiz`, quizPayload, config)
       dispatch({ type: SUBMIT_FORM, payload: response.data })
     } catch (err) {
