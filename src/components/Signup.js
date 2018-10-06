@@ -4,7 +4,6 @@ import { bindActionCreators } from 'redux'
 import { userSignup } from '../actions/auth.actions'
 import { Row, Input, Button, Preloader } from 'react-materialize'
 import { withRouter } from 'react-router-dom'
-import Nav from './Nav'
 
 export class Signup extends Component {
   constructor (props) {
@@ -29,8 +28,7 @@ export class Signup extends Component {
 
   render() {
     return (
-      <div className="main">
-        <Nav />
+      <div className="signup-container">
         {
           this.props.isLoading ? <Preloader className="pending" /> : <Row className="signup-form">
             <form onSubmit={ this.userSignup }>
