@@ -73,10 +73,21 @@ class Main extends Component {
 
   goToQuiz = () => {
     console.log('Inside goToQuiz')
+    // onclick - render Quiz even if have favorites
   }
 
-  filterFavorites = () => {
+  filterFavorites = (e) => {
     console.log('Inside filterFavorites')
+    // check to see how you are doing it w/ recommendations and copy that
+    this.setState({ countryName: e.target.value })
+  }
+
+  renameThisFnLater = () => {
+    console.log('Inside renameThisFnLater')
+    // I need some way to determine here if the user has already favorited it
+    // either make API call or check favorites arr in props
+    // if favorite exists, make call to delete
+    // if favorite does not exist, create new favorite
   }
 
   fetchPreviousQuestion = (e) => {
@@ -125,6 +136,7 @@ class Main extends Component {
         retakeQuiz={ this.retakeQuiz }
         filterRecommendations={ this.filterRecommendations }
         displayCountryInformationModal={ this.displayCountryInformationModal }
+        renameThisFnLater={ this.renameThisFnLater }
         showCountryInfo={ this.state.showCountryInfo }
         selectedCountry={ this.state.selectedCountry }
         selectedCountryId={ this.state.selectedCountryId }
@@ -164,7 +176,8 @@ class Main extends Component {
           displayCountryInformationModal={ this.displayCountryInformationModal }
           goToQuiz={ this.goToQuiz }
           filterFavorites={ this.filterFavorites }
-          showCountryInfo={ this.state.showCountryInfo } /> }
+          showCountryInfo={ this.state.showCountryInfo }
+          countryName={ this.state.countryName } /> }
       </div>
     )
   }

@@ -11,7 +11,7 @@ function Favorites (props) {
         <h5>Favorites:</h5>
         <button className="go2quiz" onClick={ () => props.goToQuiz() } waves="light" type="button">Take Quiz!</button>
         <div className="filter-wrapper">
-          <span><input onChange={ () => props.filterFavorites() } id="filter" placeholder="Filter Favorites" /><i className="material-icons">search</i></span>
+          <span><input onChange={ (e) => props.filterFavorites(e) } id="filter" placeholder="Filter Favorites" /><i className="material-icons">search</i></span>
         </div>
       </div>
       <br/>
@@ -25,12 +25,14 @@ function Favorites (props) {
           </Modal>
           {
             props.favorites.countries.map((country, countryIndex) => {
-              return <Card className="favoriteCountry" key={ `favorite-${country.id}` }
-                header={ <CardTitle image={ JSON.parse(country.images)[0] } /> }
-                title={ `${country.name}` }
-                onClick={ () => props.displayCountryInformationModal(country, countryIndex) }>
-                { country.capital }{ false && <MaterialIcon icon="favorite" size="medium" color="#d10808"/>}
-              </Card>
+              if (country.name.toLowerCase().startsWith(props.countryName.toLowerCase()) || country.name.toLowerCase().includes(props.countryName.toLowerCase())) {
+                return <Card className="favoriteCountry" key={ `favorite-${country.id}` }
+                  header={ <CardTitle image={ JSON.parse(country.images)[0] } /> }
+                  title={ `${country.name}` }
+                  onClick={ () => props.displayCountryInformationModal(country, countryIndex) }>
+                  { country.capital }{ false && <MaterialIcon icon="favorite" size="medium" color="#d10808"/>}
+                </Card>
+              }
             })
           }
         </div>
@@ -44,7 +46,8 @@ Favorites.propTypes = {
   displayCountryInformationModal: PropTypes.func.isRequired,
   goToQuiz: PropTypes.func.isRequired,
   filterFavorites: PropTypes.func.isRequired,
-  showCountryInfo: PropTypes.bool.isRequired
+  showCountryInfo: PropTypes.bool.isRequired,
+  countryName: PropTypes.string.isRequired
 }
 
 export default Favorites
