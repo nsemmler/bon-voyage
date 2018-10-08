@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { selectAnswerChoice, submitUserQuiz, updateQuizAnswers, retakeQuiz, fetchUserFavorites } from '../actions/form.actions'
+import { selectAnswerChoice, submitUserQuiz, updateQuizAnswers, retakeQuiz, fetchUserFavorites, removeFromFavorites, addToFavorites } from '../actions/form.actions'
 import { Preloader } from 'react-materialize'
 import { withRouter } from 'react-router-dom'
 import Modal from 'react-modal'
@@ -20,7 +20,8 @@ class Main extends Component {
       showCountryInfo: false,
       selectedCountry: {},
       selectedCountryId: 0,
-      countryName: ""
+      countryName: "",
+      showFavorites: false
     }
   }
 
@@ -71,23 +72,37 @@ class Main extends Component {
     this.props.retakeQuiz()
   }
 
+  goToFavorites = () => {
+    this.setState({ showFavorites: true })
+  }
+
   goToQuiz = () => {
-    console.log('Inside goToQuiz')
-    // onclick - render Quiz even if have favorites
+    this.setState({ showFavorites: false })
   }
 
   filterFavorites = (e) => {
-    console.log('Inside filterFavorites')
-    // check to see how you are doing it w/ recommendations and copy that
     this.setState({ countryName: e.target.value })
   }
 
-  renameThisFnLater = () => {
-    console.log('Inside renameThisFnLater')
-    // I need some way to determine here if the user has already favorited it
-    // either make API call or check favorites arr in props
-    // if favorite exists, make call to delete
-    // if favorite does not exist, create new favorite
+  renameThisFnLater = async (country={}, countryIndex=0) => {
+    const token = localStorage.getItem('token')
+    const userId = parseInt(localStorage.getItem('userId'))
+
+    if (this.props.form.favorites.countries.length) {
+      const favoritesIds = this.props.form.favorites.countries.map(country => country.id)
+
+      if (favoritesIds.includes(country.id)) {
+        await this.props.removeFromFavorites(userId, country.id, token)
+        this.setState({ showCountryInfo: false })
+        // if no more favorites, redirect to quiz automatically
+      } else {
+        await this.props.addToFavorites(userId, country.id, token)
+      }
+    } else {
+      await this.props.addToFavorites(userId, country.id, token)
+    }
+
+    await this.props.fetchUserFavorites(userId, token)
   }
 
   fetchPreviousQuestion = (e) => {
@@ -135,12 +150,12 @@ class Main extends Component {
         returnToQuiz={ this.returnToQuiz }
         retakeQuiz={ this.retakeQuiz }
         filterRecommendations={ this.filterRecommendations }
-        displayCountryInformationModal={ this.displayCountryInformationModal }
         renameThisFnLater={ this.renameThisFnLater }
         showCountryInfo={ this.state.showCountryInfo }
         selectedCountry={ this.state.selectedCountry }
         selectedCountryId={ this.state.selectedCountryId }
-        pois={ this.props.form.pois } />
+        pois={ this.props.form.pois }
+        favorites={ this.props.form.favorites } />
     )
   }
 
@@ -151,6 +166,7 @@ class Main extends Component {
       <div className="Main">
         <div className="main-header">
           <h5>Travel Quiz:</h5>
+          <button className="goToFavorites" onClick={ () => this.goToFavorites() }>Go To Favorites</button>
         </div>
         <br/>
         {
@@ -177,7 +193,10 @@ class Main extends Component {
           goToQuiz={ this.goToQuiz }
           filterFavorites={ this.filterFavorites }
           showCountryInfo={ this.state.showCountryInfo }
-          countryName={ this.state.countryName } /> }
+          countryName={ this.state.countryName }
+          renameThisFnLater={ this.renameThisFnLater }
+          selectedCountry={ this.state.selectedCountry }
+          selectedCountryId={ this.state.selectedCountryId } /> }
       </div>
     )
   }
@@ -193,7 +212,7 @@ class Main extends Component {
   render() {
     return (
       <div>
-        { (this.props.form.favorites.countries.length) ? this.displayFavorites() : this.displayRecommendationsOrQuiz() }
+        { (this.state.showFavorites) ? this.displayFavorites() : this.displayRecommendationsOrQuiz() }
       </div>
     )
   }
@@ -205,7 +224,7 @@ function mapStateToProps (state) {
 
 function mapDispatchToProps (dispatch) {
   return bindActionCreators({
-    selectAnswerChoice, submitUserQuiz, updateQuizAnswers, retakeQuiz, fetchUserFavorites
+    selectAnswerChoice, submitUserQuiz, updateQuizAnswers, retakeQuiz, fetchUserFavorites, removeFromFavorites, addToFavorites
   }, dispatch)
 }
 
