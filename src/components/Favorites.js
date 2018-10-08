@@ -5,11 +5,12 @@ import MaterialIcon from 'material-icons-react'
 import Modal from 'react-modal'
 
 function Favorites (props) {
+  // add a generic thingy that prompts a user to add favorites by taking the quiz (if none)
   return (
     <div className="favorites-container">
       <div className="Favorites-header">
         <h5>Favorites:</h5>
-        <button className="go2quiz" onClick={ () => props.goToQuiz() } waves="light" type="button">Take Quiz!</button>
+        <button className="go2quiz" onClick={ () => props.goToQuiz() } waves="light" type="button">Go To Quiz</button>
         <div className="filter-wrapper">
           <span><input onChange={ (e) => props.filterFavorites(e) } id="filter" placeholder="Filter Favorites" /><i className="material-icons">search</i></span>
         </div>
@@ -18,7 +19,7 @@ function Favorites (props) {
       <div className="favorites-container" id="favorites">
         <div className="favorites">
           <Modal isOpen={ props.showCountryInfo } contentLabel="Recommended Country Information" onRequestClose={ () => props.displayCountryInformationModal({}) } shouldCloseOnOverlayClick={ true }>
-            <button className="favoritebtn" onClick={ () => { console.log('CLICK') } }><MaterialIcon icon="favorite" size="medium" color="#d10808"/></button>
+            <button className="favoritebtn" onClick={ () => props.renameThisFnLater(props.selectedCountry, props.selectedCountryId) }><MaterialIcon icon="favorite" size="medium" color="#d10808"/></button>
             <div className="modal-container">
               <p>PLACEHOLDER FOR COUNTRY INFO</p>
             </div>
@@ -47,7 +48,10 @@ Favorites.propTypes = {
   goToQuiz: PropTypes.func.isRequired,
   filterFavorites: PropTypes.func.isRequired,
   showCountryInfo: PropTypes.bool.isRequired,
-  countryName: PropTypes.string.isRequired
+  countryName: PropTypes.string.isRequired,
+  renameThisFnLater: PropTypes.func.isRequired,
+  selectedCountry: PropTypes.object.isRequired,
+  selectedCountryId: PropTypes.number.isRequired,
 }
 
 export default Favorites
