@@ -31,7 +31,7 @@ function Quiz (props) {
 }
 
 Quiz.propTypes = {
-  form: PropTypes.array.isRequired,
+  form: PropTypes.object.isRequired,
   questionIndex: PropTypes.number.isRequired,
   questionNum: PropTypes.number.isRequired,
   numQuestions: PropTypes.number.isRequired,
