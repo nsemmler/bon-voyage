@@ -1,232 +1,261 @@
 [
   {
     "id": 1,
-    "question": "Select all regions of the world you are interested in traveling to:",
+    "question": "Which regions of the world are you interested in traveling to? Select all that apply.",
     "answer_choices": [
       {
         "id": 1,
         "content": "Africa",
         "type": "region",
-        "checked": false
+        "checked": false,
+        "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/86/Africa_%28orthographic_projection%29.svg/1200px-Africa_%28orthographic_projection%29.svg.png"
       },
       {
         "id": 2,
         "content": "Americas",
         "type": "region",
-        "checked": false
+        "checked": false,
+        "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Americas_%28orthographic_projection%29.svg/1200px-Americas_%28orthographic_projection%29.svg.png"
       },
       {
         "id": 3,
         "content": "Asia",
         "type": "region",
-        "checked": false
+        "checked": false,
+        "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/Asia_%28orthographic_projection%29.svg/1220px-Asia_%28orthographic_projection%29.svg.png"
       },
       {
         "id": 4,
         "content": "Europe",
         "type": "region",
-        "checked": false
+        "checked": false,
+        "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Europe_orthographic_Caucasus_Urals_boundary_%28with_borders%29.svg/1200px-Europe_orthographic_Caucasus_Urals_boundary_%28with_borders%29.svg.png"
       },
       {
         "id": 5,
         "content": "Oceania",
         "type": "region",
-        "checked": false
+        "checked": false,
+        "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Oceania_%28orthographic_projection%29.svg/1220px-Oceania_%28orthographic_projection%29.svg.png"
       },
       {
         "id": 6,
         "content": "Polar",
         "type": "region",
-        "checked": false
+        "checked": false,
+        "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f2/Antarctica_%28orthographic_projection%29.svg/1220px-Antarctica_%28orthographic_projection%29.svg.png"
       }
     ]
   },
   {
     "id": 2,
-    "question": "Select all subregions of the world you are interested in traveling to:",
+    "question": "Which of these regions' subregions are you interested in traveling to? Select all that apply.",
     "answer_choices": [
       {
         "id": 1,
         "content": "Australia and New Zealand",
         "region": "Oceania",
         "type": "subregion",
-        "checked": false
+        "checked": false,
+        "image": "https://upload.wikimedia.org/wikipedia/commons/7/7f/Map_of_Australia_and_New_Zealand_coloured.png"
       },
       {
         "id": 2,
         "content": "Caribbean",
         "region": "Americas",
         "type": "subregion",
-        "checked": false
+        "checked": false,
+        "image": "https://commons.wikimedia.org/wiki/Category:Maps_of_the_Caribbean#/media/File:Caribbean_Sea_and_West_Indies.png"
       },
       {
         "id": 3,
         "content": "Central America",
         "region": "Americas",
         "type": "subregion",
-        "checked": false
+        "checked": false,
+        "image": "https://upload.wikimedia.org/wikipedia/commons/1/17/Map_of_Central_America_and_Mexico.svg"
       },
       {
         "id": 4,
         "content": "Central Asia",
         "region": "Asia",
         "type": "subregion",
-        "checked": false
+        "checked": false,
+        "image": "https://commons.wikimedia.org/wiki/Category:Central_Asia#/media/File:Central_Asia_(Including_Afghanistan).svg"
       },
       {
         "id": 5,
         "content": "Eastern Africa",
         "region": "Africa",
         "type": "subregion",
-        "checked": false
+        "checked": false,
+        "image": "https://commons.wikimedia.org/wiki/Category:East_Africa#/media/File:Africa_(Eastern_region).png"
       },
       {
         "id": 6,
         "content": "Eastern Asia",
         "region": "Asia",
         "type": "subregion",
-        "checked": false
+        "checked": false,
+        "image": "https://commons.wikimedia.org/wiki/Category:Maps_of_East_Asia#/media/File:East_Asia_(Geog).PNG"
       },
       {
         "id": 7,
         "content": "Eastern Europe",
         "region": "Europe",
         "type": "subregion",
-        "checked": false
+        "checked": false,
+        "image": "https://upload.wikimedia.org/wikipedia/commons/2/27/Eastern_Europe_Map.jpg"
       },
       {
         "id": 8,
         "content": "Melanesia",
         "region": "Oceania",
         "type": "subregion",
-        "checked": false
+        "checked": false,
+        "image": "http://world.350.org/pacific/files/2013/12/Melanesian_Cultural_Area1.png"
       },
       {
         "id": 9,
         "content": "Micronesia",
         "region": "Oceania",
         "type": "subregion",
-        "checked": false
+        "checked": false,
+        "image": "http://world.350.org/pacific/files/2013/12/Micronesian_Cultural_Area.png"
       },
       {
         "id": 10,
         "content": "Middle Africa",
         "region": "Africa",
         "type": "subregion",
-        "checked": false
+        "checked": false,
+        "image": "https://upload.wikimedia.org/wikipedia/commons/b/be/Middle-Africa-map.PNG"
       },
       {
         "id": 11,
         "content": "Northern Africa",
         "region": "Africa",
         "type": "subregion",
-        "checked": false
+        "checked": false,
+        "image": "https://commons.wikimedia.org/wiki/Category:Northern_Africa#/media/File:Afrika_%C3%87al%C4%B1%C5%9Fma_Alan%C4%B1.png"
       },
       {
         "id": 12,
         "content": "Northern America",
         "region": "Americas",
         "type": "subregion",
-        "checked": false
+        "checked": false,
+        "image": "http://cdoovision.com/wp-content/uploads/2018/01/us-map-including-puerto-rico-us-canada-all-territories.gif"
       },
       {
         "id": 13,
         "content": "Northern Europe",
         "region": "Europe",
         "type": "subregion",
-        "checked": false
+        "checked": false,
+        "image": "https://commons.wikimedia.org/wiki/Category:Maps_of_Northern_Europe#/media/File:Nordeuropa.png"
       },
       {
         "id": 14,
         "content": "Polar",
         "region": "Polar",
         "type": "subregion",
-        "checked": false
+        "checked": false,
+        "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f2/Antarctica_%28orthographic_projection%29.svg/1220px-Antarctica_%28orthographic_projection%29.svg.png"
       },
       {
         "id": 15,
         "content": "Polynesia",
         "region": "Oceania",
         "type": "subregion",
-        "checked": false
+        "checked": false,
+        "image": "https://commons.wikimedia.org/wiki/Polynesia#/media/File:Polynesia-triangle.png"
       },
       {
         "id": 16,
         "content": "South America",
         "region": "Americas",
         "type": "subregion",
-        "checked": false
+        "checked": false,
+        "image": "https://commons.wikimedia.org/wiki/Sudam%C3%A9rica_-_Am%C3%A9rica_do_Sul#/media/File:South_America_(orthographic_projection).svg"
       },
       {
         "id": 17,
         "content": "South-Eastern Asia",
         "region": "Asia",
         "type": "subregion",
-        "checked": false
+        "checked": false,
+        "image": "https://commons.wikimedia.org/wiki/Category:Maps_of_Southeast_Asia#/media/File:Bamboonetwork.svg"
       },
       {
         "id": 18,
         "content": "Southern Africa",
         "region": "Africa",
         "type": "subregion",
-        "checked": false
+        "checked": false,
+        "image": "https://commons.wikimedia.org/wiki/Category:Southern_Africa#/media/File:Africa_(Southern_region).png"
       },
       {
         "id": 19,
         "content": "Southern Asia",
         "region": "Asia",
         "type": "subregion",
-        "checked": false
+        "checked": false,
+        "image": "https://www.google.com/search?biw=1440&bih=767&tbm=isch&sa=1&ei=5X66W_iaOt660PEPwbE2&q=south+asia&oq=south+asia&gs_l=img.3..0l10.205803.206723..206816...0.0..0.47.414.10......1....1..gws-wiz-img.......35i39j0i67.qHoZswHsvYU#imgrc=v2pPu7ZvpPvjRM:"
       },
       {
         "id": 20,
         "content": "Southern Europe",
         "region": "Europe",
         "type": "subregion",
-        "checked": false
+        "checked": false,
+        "image": "https://commons.wikimedia.org/w/index.php?search=southern+europe&title=Special%3ASearch&go=Go#/media/File:Southern_Europe_map_green.png"
       },
       {
         "id": 21,
         "content": "Western Africa",
         "region": "Africa",
         "type": "subregion",
-        "checked": false
+        "checked": false,
+        "image": "https://upload.wikimedia.org/wikipedia/commons/4/43/Africa-countries-western.png"
       },
       {
         "id": 22,
         "content": "Western Asia",
         "region": "Asia",
         "type": "subregion",
-        "checked": false
+        "checked": false,
+        "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/Western_Asia_%28orthographic_projection%29.svg/1200px-Western_Asia_%28orthographic_projection%29.svg.png"
       },
       {
         "id": 23,
         "content": "Western Europe",
         "region": "Europe",
         "type": "subregion",
-        "checked": false
+        "checked": false,
+        "image": "http://www.freeworldmaps.net/europe/western/westerneurope-countries-un-hd.jpg"
       }
     ]
   },
   {
     "id": 3,
-    "question": "What size country would you like to visit?  Select all that apply.",
+    "question": "Select the size of the country you would like to visit. Select all that apply.",
     "answer_choices": [
       {
         "id": 1,
-        "content": "Small",
+        "content": "Small (< 1,000,000)",
         "type": "population",
         "checked": false
       },
       {
         "id": 2,
-        "content": "Medium",
+        "content": "Medium (1,000,000 - 10,000,000)",
         "type": "population",
         "checked": false
       },
       {
         "id": 3,
-        "content": "Large",
+        "content": "Large (> 10,000,000)",
         "type": "population",
         "checked": false
       }
@@ -234,7 +263,7 @@
   },
   {
     "id": 4,
-    "question": "Would you prefer your vacation on an island?",
+    "question": "Would you prefer to stay on an island?",
     "answer_choices": [
       {
         "id": 1,
@@ -250,7 +279,7 @@
       },
       {
         "id": 3,
-        "content": "Not sure",
+        "content": "Show both",
         "type": "island",
         "checked": false
       }
@@ -274,7 +303,7 @@
       },
       {
         "id": 3,
-        "content": "Not sure",
+        "content": "Show both",
         "type": "language",
         "checked": false
       }
