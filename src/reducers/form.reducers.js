@@ -4,7 +4,9 @@ import {
   FORM_SUBMISSION_PENDING,
   RETAKE_QUIZ,
   SUBMIT_FORM,
-  GET_USER_FAVORITES
+  GET_USER_FAVORITES,
+  ADD_COUNTRY_TO_FAVORITES,
+  REMOVE_COUNTRY_FROM_FAVORITES
 } from "../actions/form.actions"
 
 import initialState from '../questions.json'
@@ -13,6 +15,10 @@ export default (state = { questions: initialState, recommendations: [], pois: []
   switch (action.type) {
     case GET_USER_FAVORITES:
       return { ...state, favorites: { countries: action.payload.countries, pois: action.payload.pois } }
+    case ADD_COUNTRY_TO_FAVORITES:
+      return { ...state }
+    case REMOVE_COUNTRY_FROM_FAVORITES:
+      return { ...state }
     case FORM_SUBMISSION_PENDING:
       return { ...state, recommendations: [], pois: [], favorites: state.favorites, isLoading: true }
     case UPDATE_ANSWER_CHOICE:
