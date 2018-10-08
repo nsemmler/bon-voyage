@@ -7,17 +7,35 @@ export const UPDATE_QUIZ_ANSWERS = "UPDATE_QUIZ_ANSWERS"
 export const UPDATE_ANSWER_CHOICE = "UPDATE_ANSWER_CHOICE"
 export const FAILED_SUBMISSION = "FAILED_SUBMISSION"
 export const GET_USER_FAVORITES = "GET_USER_FAVORITES"
+export const ADD_COUNTRY_TO_FAVORITES = "ADD_COUNTRY_TO_FAVORITES"
+export const REMOVE_COUNTRY_FROM_FAVORITES = "REMOVE_COUNTRY_FROM_FAVORITES"
 
 window.axios = axios
 
 const BASE_URL = "http://localhost:3000"
 
 export const fetchUserFavorites = (userId, token) => {
-  var config = { headers: { 'Authorization': token, 'Content-Type': 'application/json' } }
-
   return async (dispatch) => {
+    var config = { headers: { 'Authorization': token, 'Content-Type': 'application/json' }}
     let response = await axios.get(`${BASE_URL}/favorites?user_id=${parseInt(userId)}`, config)
     dispatch({ type: GET_USER_FAVORITES, payload: response.data })
+  }
+}
+
+export const addToFavorites = (userId, countryId, token) => {
+  return async (dispatch) => {
+    var body = { country_id: parseInt(countryId), user_id: parseInt(userId) }
+    var config = { headers: { 'Authorization': token, 'Content-Type': 'application/json' }}
+    let response = await axios.post(`${BASE_URL}/favorites`, body, config)
+    dispatch({ type: ADD_COUNTRY_TO_FAVORITES, action: response.data })
+  }
+}
+
+export const removeFromFavorites = (userId, countryId, token) => {
+  return async (dispatch) => {
+    var config = { headers: { 'Authorization': token, 'Content-Type': 'application/json' }, data: { country_id: parseInt(countryId), user_id: parseInt(userId) } }
+    let response = await axios.delete(`${BASE_URL}/favorites`, config)
+    dispatch({ type: REMOVE_COUNTRY_FROM_FAVORITES, action: response.data })
   }
 }
 
