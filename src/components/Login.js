@@ -4,7 +4,6 @@ import { connect } from 'react-redux'
 import { userLogin } from '../actions/auth.actions'
 import { Row, Input, Button, Preloader } from 'react-materialize'
 import { withRouter } from 'react-router-dom'
-import Nav from './Nav'
 
 class Login extends Component {
   constructor (props) {
@@ -21,14 +20,13 @@ class Login extends Component {
     await this.props.userLogin(this.state)
 
     if (this.props.isLoggedIn && !this.props.showLoginError) {
-      this.props.history.push("/quiz")
+      this.props.history.push("/")
     }
   }
 
   render() {
     return (
-      <div className="main">
-        <Nav />
+      <div className="login-container">
         {
           this.props.isLoading ? <Preloader className="pending" /> : <Row className="login-form">
             <form onSubmit={ this.loginUser }>

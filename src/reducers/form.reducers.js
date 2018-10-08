@@ -4,17 +4,23 @@ import {
   FORM_SUBMISSION_PENDING,
   RETAKE_QUIZ,
   SUBMIT_FORM,
-  GET_USER_FAVORITES
+  GET_USER_FAVORITES,
+  ADD_COUNTRY_TO_FAVORITES,
+  REMOVE_COUNTRY_FROM_FAVORITES
 } from "../actions/form.actions"
 
 import initialState from '../questions.json'
 
-export default (state = { questions: initialState, recommendations: [], pois: [], favorites: [], isLoading: false }, action) => {
+export default (state = { questions: initialState, recommendations: [], pois: [], favorites: { countries: [], pois: [] }, isLoading: false }, action) => {
   switch (action.type) {
     case GET_USER_FAVORITES:
-      return { ...state, favorites: action.payload }
+      return { ...state, favorites: { countries: action.payload.countries, pois: action.payload.pois } }
+    case ADD_COUNTRY_TO_FAVORITES:
+      return { ...state }
+    case REMOVE_COUNTRY_FROM_FAVORITES:
+      return { ...state }
     case FORM_SUBMISSION_PENDING:
-      return { ...state, recommendations: [], pois: [], isLoading: true }
+      return { ...state, recommendations: [], pois: [], favorites: state.favorites, isLoading: true }
     case UPDATE_ANSWER_CHOICE:
       var questionsCopy = [ ...state.questions ]
       const answerChoiceID = action.payload.answerChoiceID
@@ -43,13 +49,13 @@ export default (state = { questions: initialState, recommendations: [], pois: []
         }
       })
 
-      return { questions: updatedQuestionsCopy, recommendations: [], pois: [], isLoading: false }
+      return { questions: updatedQuestionsCopy, recommendations: [], pois: [], favorites: state.favorites, isLoading: false }
     case UPDATE_QUIZ_ANSWERS:
-      return { questions: state.questions, recommendations: [], pois: [], isLoading: false }
+      return { questions: state.questions, recommendations: [], pois: [], favorites: state.favorites, isLoading: false }
     case RETAKE_QUIZ:
-      return { questions: initialState, recommendations: [], pois: [], isLoading: false }
+      return { questions: initialState, recommendations: [], pois: [], favorites: state.favorites, isLoading: false }
     case SUBMIT_FORM:
-      return { ...state, recommendations: action.payload.countries, pois: action.payload.pois, isLoading: false }
+      return { ...state, recommendations: action.payload.countries, pois: action.payload.pois, favorites: state.favorites, isLoading: false }
     default:
       return state
   }

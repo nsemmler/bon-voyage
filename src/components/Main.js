@@ -1,29 +1,13 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { selectAnswerChoice, submitUserQuiz, updateQuizAnswers, retakeQuiz, fetchUserFavorites } from '../actions/form.actions'
+import { selectAnswerChoice, submitUserQuiz, updateQuizAnswers, retakeQuiz, fetchUserFavorites, removeFromFavorites, addToFavorites } from '../actions/form.actions'
 import { Preloader } from 'react-materialize'
-import Question from './Question'
-import QuestionCount from './QuestionCount'
 import { withRouter } from 'react-router-dom'
 import Modal from 'react-modal'
-import Nav from './Nav'
-import QuizForm from './QuizForm'
-import CountryInfo from './CountryInfo'
+import Quiz from './Quiz'
 import Recommendations from './Recommendations'
-import SelectedAnswersChips from './SelectedAnswersChips'
-import MaterialIcon from 'material-icons-react'
-
-// Modal.defaultStyles.overlay.backgroundColor = 'cornsilk';
-// Modal.defaultStyles.overlay.position = 'absolute';
-// Modal.defaultStyles.overlay.top = '-2px';
-// Modal.defaultStyles.overlay.left = '100px';
-// Modal.defaultStyles.overlay.right = '100px';
-// Modal.defaultStyles.overlay.bottom = '-2px';
-// Modal.defaultStyles.overlay.border = '1px solid rgb(204, 204, 204)';
-// Modal.defaultStyles.overlay.background = 'rgb(255, 255, 255)';
-// Modal.defaultStyles.overlay.overflow = 'auto';
-// Modal.defaultStyles.overlay.padding = '20px';
+import Favorites from './Favorites'
 
 class Main extends Component {
   constructor(props) {
@@ -36,7 +20,8 @@ class Main extends Component {
       showCountryInfo: false,
       selectedCountry: {},
       selectedCountryId: 0,
-      countryName: ""
+      countryName: "",
+      showFavorites: false
     }
   }
 
@@ -46,13 +31,6 @@ class Main extends Component {
 
     this.props.fetchUserFavorites(userId, token)
     Modal.setAppElement('body')
-  }
-
-  isEmpty = (obj) => {
-    for (let key in obj) {
-      if(obj.hasOwnProperty(key)) return false
-    }
-    return true
   }
 
   displayCountryInformationModal = (country={}, countryIndex=0) => {
@@ -94,6 +72,39 @@ class Main extends Component {
     this.props.retakeQuiz()
   }
 
+  goToFavorites = () => {
+    this.setState({ showFavorites: true })
+  }
+
+  goToQuiz = () => {
+    this.setState({ showFavorites: false })
+  }
+
+  filterFavorites = (e) => {
+    this.setState({ countryName: e.target.value })
+  }
+
+  renameThisFnLater = async (country={}, countryIndex=0) => {
+    const token = localStorage.getItem('token')
+    const userId = parseInt(localStorage.getItem('userId'))
+
+    if (this.props.form.favorites.countries.length) {
+      const favoritesIds = this.props.form.favorites.countries.map(country => country.id)
+
+      if (favoritesIds.includes(country.id)) {
+        await this.props.removeFromFavorites(userId, country.id, token)
+        this.setState({ showCountryInfo: false })
+        // if no more favorites, redirect to quiz automatically
+      } else {
+        await this.props.addToFavorites(userId, country.id, token)
+      }
+    } else {
+      await this.props.addToFavorites(userId, country.id, token)
+    }
+
+    await this.props.fetchUserFavorites(userId, token)
+  }
+
   fetchPreviousQuestion = (e) => {
     e.preventDefault()
 
@@ -132,29 +143,19 @@ class Main extends Component {
     let chipsArr = this.createChipsArr(this.props.form.questions)
 
     return (
-      <div className="Main">
-        <div className="main-header">
-          <h5>Recommended Travel Destinations:</h5>
-          <button className="back2quiz" onClick={ this.returnToQuiz } waves="light" type="button">Return to Quiz</button>
-          <button className="retakeQuiz" onClick={ this.retakeQuiz } waves="light" type="button">Retake Quiz</button>
-          <div className="search-wrapper">
-            <span><input onChange={ this.filterRecommendations } id="search" placeholder="Filter Countries" /><i className="material-icons">search</i></span>
-          </div>
-          <SelectedAnswersChips chipsArr={ chipsArr }/>
-        </div>
-        <br/>
-        <div className="response-container" id="responses">
-          <div className="recommendations">
-            <Modal id="modal" isOpen={ this.state.showCountryInfo } contentLabel="Recommended Country Information" onRequestClose={ () => this.displayCountryInformationModal({}) } shouldCloseOnOverlayClick={ true }>
-              <button className="favoritebtn" onClick={ console.log('CLICK') }><MaterialIcon icon="favorite" size="medium" color="#d10808"/></button>
-              <div className="modal-container">
-                { (Object.keys(this.state.selectedCountry).length !== 0) && <CountryInfo country={ this.state.selectedCountry } countryIndex={ this.state.selectedCountryId } pointsOfInterest={ this.props.form.pois } /> }
-              </div>
-            </Modal>
-            { <Recommendations recommendationsArr={ this.props.form.recommendations } displayCountryInformationModal={ this.displayCountryInformationModal } countryName={ this.state.countryName } /> }
-          </div>
-        </div>
-      </div>
+      <Recommendations recommendationsArr={ this.props.form.recommendations }
+        displayCountryInformationModal={ this.displayCountryInformationModal }
+        countryName={ this.state.countryName }
+        chipsArr={ chipsArr }
+        returnToQuiz={ this.returnToQuiz }
+        retakeQuiz={ this.retakeQuiz }
+        filterRecommendations={ this.filterRecommendations }
+        renameThisFnLater={ this.renameThisFnLater }
+        showCountryInfo={ this.state.showCountryInfo }
+        selectedCountry={ this.state.selectedCountry }
+        selectedCountryId={ this.state.selectedCountryId }
+        pois={ this.props.form.pois }
+        favorites={ this.props.form.favorites } />
     )
   }
 
@@ -165,30 +166,20 @@ class Main extends Component {
       <div className="Main">
         <div className="main-header">
           <h5>Travel Quiz:</h5>
+          <button className="goToFavorites" onClick={ () => this.goToFavorites() }>Go To Favorites</button>
         </div>
         <br/>
         {
-          this.props.form.isLoading ? <Preloader className="pending" /> : <div className="quiz-container">
-            <div className="question-and-question-count-container">
-              <div className="question-container">
-                <Question content={ this.props.form.questions[this.state.questionIndex].question } />
-              </div>
-              <div className="question-counter-container">
-                <QuestionCount counter={ this.state.questionNum } total={ this.state.numQuestions } />
-              </div>
-            </div>
-            <QuizForm
-              submitQuiz={ this.submitQuiz }
-              uniqueAnswerChoices={ uniqueAnswerChoices }
-              form={ this.props.form }
-              questionIndex={ this.state.questionIndex }
-              questionNum={ this.state.questionNum }
-              numQuestions={ this.state.numQuestions }
-              fetchPreviousQuestion={ this.fetchPreviousQuestion }
-              fetchNextQuestion={ this.fetchNextQuestion }
-              toggleAnswerChoice={ this.toggleAnswerChoice }
-            />
-          </div>
+          this.props.form.isLoading ? <Preloader className="pending" /> :
+          <Quiz form={ this.props.form }
+            questionIndex={ this.state.questionIndex }
+            questionNum={ this.state.questionNum }
+            numQuestions={ this.state.numQuestions }
+            uniqueAnswerChoices={ uniqueAnswerChoices }
+            submitQuiz={ this.submitQuiz }
+            fetchPreviousQuestion={ this.fetchPreviousQuestion }
+            fetchNextQuestion={ this.fetchNextQuestion }
+            toggleAnswerChoice={ this.toggleAnswerChoice } />
         }
       </div>
     )
@@ -196,9 +187,16 @@ class Main extends Component {
 
   displayFavorites = () => {
     return (
-      <div className="testtestesttes">
-        displayFavorites
-        {/* <button onClick={}>Return to quiz</button> */}
+      <div className="favorites-container">
+        { <Favorites favorites={ this.props.form.favorites }
+          displayCountryInformationModal={ this.displayCountryInformationModal }
+          goToQuiz={ this.goToQuiz }
+          filterFavorites={ this.filterFavorites }
+          showCountryInfo={ this.state.showCountryInfo }
+          countryName={ this.state.countryName }
+          renameThisFnLater={ this.renameThisFnLater }
+          selectedCountry={ this.state.selectedCountry }
+          selectedCountryId={ this.state.selectedCountryId } /> }
       </div>
     )
   }
@@ -213,16 +211,8 @@ class Main extends Component {
 
   render() {
     return (
-      <div className="main">
-        <Nav />
-        <div>
-          {/* { console.log('<Main> this.props', this.props) }
-          { console.log('<Main> this.state', this.state) } */}
-
-          {
-            (this.props.form.favorites.length) ? this.displayFavorites() : this.displayRecommendationsOrQuiz()
-          }
-        </div>
+      <div>
+        { (this.state.showFavorites) ? this.displayFavorites() : this.displayRecommendationsOrQuiz() }
       </div>
     )
   }
@@ -234,7 +224,7 @@ function mapStateToProps (state) {
 
 function mapDispatchToProps (dispatch) {
   return bindActionCreators({
-    selectAnswerChoice, submitUserQuiz, updateQuizAnswers, retakeQuiz, fetchUserFavorites
+    selectAnswerChoice, submitUserQuiz, updateQuizAnswers, retakeQuiz, fetchUserFavorites, removeFromFavorites, addToFavorites
   }, dispatch)
 }
 
