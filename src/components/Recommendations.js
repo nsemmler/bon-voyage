@@ -7,6 +7,8 @@ import CountryInfo from './CountryInfo'
 import SelectedAnswersChips from './SelectedAnswersChips'
 
 function Recommendations (props) {
+  const favoritesIds = props.favorites.countries.map(country => country.id)
+
   return (
     <div className="Main">
       <div className="main-header">
@@ -22,7 +24,7 @@ function Recommendations (props) {
       <div className="response-container" id="responses">
         <div className="recommendations">
           <Modal id="modal" isOpen={ props.showCountryInfo } contentLabel="Recommended Country Information" onRequestClose={ () => props.displayCountryInformationModal({}) } shouldCloseOnOverlayClick={ true }>
-            <button className="favoritebtn" onClick={ console.log('CLICK') }><MaterialIcon icon="favorite" size="medium" color="#d10808"/></button>
+            <button className="favoritebtn" onClick={ () => props.renameThisFnLater(props.selectedCountry, props.selectedCountryId) }><MaterialIcon icon={ favoritesIds.includes(props.selectedCountry.id) ? "favorite" : "favorite_border" } size="medium" color="#d10808"/></button>
             <div className="modal-container">
               { (Object.keys(props.selectedCountry).length !== 0) && <CountryInfo country={ props.selectedCountry } countryIndex={ props.selectedCountryId } pointsOfInterest={ props.pois } /> }
             </div>
