@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { clearFavorites } from './form.actions.js'
 
 export const USER_LOGIN_PENDING = "USER_LOGIN_PENDING"
 export const USER_LOGIN_SUCCESS = "USER_LOGIN_SUCCESS"
@@ -42,6 +43,7 @@ export const userLogout = () => {
   return async (dispatch) => {
     localStorage.removeItem('token')
     localStorage.removeItem('userId')
+    dispatch(clearFavorites())
     dispatch({ type: USER_LOGOUT })
   }
 }
