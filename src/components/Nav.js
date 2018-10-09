@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import { Navbar, NavItem } from 'react-materialize'
 import { createHashHistory } from 'history'
 import { withRouter } from 'react-router-dom'
+import '../styling/Nav.css'
 
 export const history = createHashHistory()
 
