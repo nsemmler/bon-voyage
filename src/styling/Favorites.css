@@ -1,0 +1,38 @@
+/******************************************************************************/
+/* Favorites */
+/******************************************************************************/
+.Favorites {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  width: 80%;
+  border: 1px solid black;
+  padding: 20px;
+  margin-left: 10%;
+}
+
+.favorites-header-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.favorites-header {
+  align-self: center;
+}
+
+.favorites {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.favoriteCountry {
+  width: 350px;
+  height: 260px;
+}
+
+.favoriteCountry-img img {
+  width: 350px;
+  height: auto;
+}
