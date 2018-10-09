@@ -7,8 +7,6 @@ import PrivateRoute from './components/PrivateRoute'
 import './App.css'
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
 
-require('dotenv').config()
-
 export default function App () {
   return (
     <div id="main">
