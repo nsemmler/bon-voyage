@@ -21,13 +21,21 @@
   font-size: large;
 }
 
-@keyframes App-logo-spin {
+@keyframes App-logo-spin {f
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
 
+input {
+  border-bottom: 1px solid #343477 !important;
+}
+
+input:focus {
+  box-shadow: 0px 1px 0px 0px #343477 !important;
+}
+
 /******************************************************************************/
-/* Home */
+/* Main */
 /******************************************************************************/
 .Main {
   display: flex;
@@ -142,8 +150,12 @@
   float: right;
 }
 
+.btn {
+  background: #AA8C39 !important;
+}
+
 /******************************************************************************/
-/* Login Form */
+/* Login & Signup Forms */
 /******************************************************************************/
 .login-form {
   width: 900px;
@@ -152,20 +164,26 @@
   border: 1px solid #333333;
 }
 
+.signup-form {
+  width: 900px;
+  margin-top: 90px;
+  padding: 15px;
+  border: 1px solid #333333;
+}
+
+.login-signup-redirect {
+  margin-top: 10px;
+}
+
+.form-redirect {
+  margin-top: 10px;
+  padding: 6px;
+}
+
 .form-header {
   margin-left: 10px;
 }
 
 input[type=password]+label:after, input[type=email]+label:after {
   width: 400px;
-}
-
-/******************************************************************************/
-/* Signup Form */
-/******************************************************************************/
-.signup-form {
-  width: 900px;
-  margin-top: 90px;
-  padding: 15px;
-  border: 1px solid #333333;
 }

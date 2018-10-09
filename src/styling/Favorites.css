@@ -36,3 +36,33 @@
   width: 350px;
   height: auto;
 }
+
+.favoriteCountry-div {
+  position: relative;
+  width: 350px;
+  height: 260px;
+  max-width: 350px;
+  max-height: 260px;
+  border: 2px solid black;
+  margin: 8px 0 8px 0;
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
+  transition: all 0.3s ease-in-out;
+}
+
+.favorite-name {
+  color: white;
+  font-size: 22px;
+  position: absolute;
+  bottom: 0;
+  padding-left: 20px;
+  margin: 0px 0px 20px 0px !important;
+  /* -webkit-text-fill-color: white;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: black; */
+}
+
+.favoriteCountry-div img {
+  width: 350px;
+}

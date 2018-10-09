@@ -25,27 +25,28 @@
   flex-wrap: wrap;
 }
 
-.recommendedCountry {
+.recommendedCountry-div {
+  position: relative;
   width: 350px;
   height: 260px;
-  margin-top: 0;
+  border: 2px solid black;
+  margin: 8px 0 8px 0;
+  background-size: cover;
+  background-position: center;
 }
 
-.card-content {
-  margin-bottom: 20px !important;
-  padding-top: 0px !important;
-  padding-bottom: 0px !important;
-}
-
-.card-content .card-title {
-  font-family: 'News Cycle', sans-serif;
-  font-weight: bolder;
-  /* -webkit-text-fill-color: white; */
-  /* -webkit-text-stroke-width: 2px;
+.recommendation-name {
+  color: white;
+  font-size: 22px;
+  position: absolute;
+  bottom: 0;
+  padding-left: 20px;
+  margin: 0px 0px 20px 0px !important;
+  /* -webkit-text-fill-color: white;
+  -webkit-text-stroke-width: 1px;
   -webkit-text-stroke-color: black; */
 }
 
-.recommendedCountry-img img {
+.recommendedCountry-div img {
   width: 350px;
-  height: auto;
 }
