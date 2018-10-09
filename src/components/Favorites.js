@@ -10,7 +10,6 @@ function Favorites (props) {
     <div className="favorites-container">
       <div className="Favorites-header">
         <h5>Favorites:</h5>
-        <button className="go2quiz" onClick={ () => props.goToQuiz() } waves="light" type="button">Go To Quiz</button>
         <div className="filter-wrapper">
           <span><input onChange={ (e) => props.filterFavorites(e) } id="filter" placeholder="Filter Favorites" /><i className="material-icons">search</i></span>
         </div>
@@ -45,7 +44,6 @@ function Favorites (props) {
 Favorites.propTypes = {
   favorites: PropTypes.object.isRequired,
   displayCountryInformationModal: PropTypes.func.isRequired,
-  goToQuiz: PropTypes.func.isRequired,
   filterFavorites: PropTypes.func.isRequired,
   showCountryInfo: PropTypes.bool.isRequired,
   countryName: PropTypes.string.isRequired,
