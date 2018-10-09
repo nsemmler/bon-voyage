@@ -6,6 +6,10 @@ import Modal from 'react-modal'
 import CountryInfo from './CountryInfo'
 import SelectedAnswersChips from './SelectedAnswersChips'
 
+function backToQuiz (props) {
+  props.history.push("/quiz")
+}
+
 function Recommendations (props) {
   const favoritesIds = props.favorites.countries.map(country => country.id)
 
@@ -13,8 +17,7 @@ function Recommendations (props) {
     <div className="Main">
       <div className="main-header">
         <h5>Recommended Travel Destinations:</h5>
-        <button className="back2quiz" onClick={ props.returnToQuiz } waves="light" type="button">Return to Quiz</button>
-        <button className="retakeQuiz" onClick={ props.retakeQuiz } waves="light" type="button">Retake Quiz</button>
+        <button className="backToQuiz" onClick={ () => backToQuiz(props) } waves="light" type="button">Update Quiz</button>
         <div className="search-wrapper">
           <span><input onChange={ props.filterRecommendations } id="search" placeholder="Filter Countries" /><i className="material-icons">search</i></span>
         </div>
