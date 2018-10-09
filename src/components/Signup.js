@@ -41,8 +41,8 @@ export class Signup extends Component {
                 error={ this.props.showSignupError ? "Invalid password" : null }
                 value={ this.state.password }
                 onChange={ (e) => this.setState({ password: e.target.value }) } />
-              <div><Button waves="light" type="submit">Submit</Button></div>
-              <div><a onClick={ this.props.redirectToLogin } href="/login" className="form-redirect">Already registered? Login</a></div>
+              <div className="signup-btn-div"><Button waves="light" type="submit">Submit</Button></div>
+              <div className="login-signup-redirect"><a onClick={ this.props.redirectToLogin } href="/login" className="form-redirect">Already registered? Login</a></div>
             </form>
           </Row>
         }
