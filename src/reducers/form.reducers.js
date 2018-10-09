@@ -6,7 +6,8 @@ import {
   SUBMIT_FORM,
   GET_USER_FAVORITES,
   ADD_COUNTRY_TO_FAVORITES,
-  REMOVE_COUNTRY_FROM_FAVORITES
+  REMOVE_COUNTRY_FROM_FAVORITES,
+  CLEAR_USER_FAVORITES
 } from "../actions/form.actions"
 
 import initialState from '../questions.json'
@@ -15,6 +16,8 @@ export default (state = { questions: initialState, recommendations: [], pois: []
   switch (action.type) {
     case GET_USER_FAVORITES:
       return { ...state, favorites: { countries: action.payload.countries, pois: action.payload.pois } }
+    case CLEAR_USER_FAVORITES:
+      return { ...state, favorites: { countries: [], pois: [] } }
     case ADD_COUNTRY_TO_FAVORITES:
       return { ...state }
     case REMOVE_COUNTRY_FROM_FAVORITES:
