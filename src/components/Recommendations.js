@@ -20,7 +20,7 @@ function Recommendations (props) {
         <h5 className="recommendations-header">Recommended Travel Destinations:</h5>
         <div className="search-wrapper">
           <input onChange={ props.filterRecommendations } id="recommendations-filter" placeholder="Filter Countries" autoFocus />
-          <button className="backToQuiz" onClick={ () => backToQuiz(props) } waves="light" type="button">Update Quiz</button>
+          <button className="btn backToQuiz" onClick={ () => backToQuiz(props) } waves="light" type="button">Update Quiz</button>
         </div>
         <SelectedAnswersChips chipsArr={ props.chipsArr }/>
       </div>
@@ -37,11 +37,10 @@ function Recommendations (props) {
           {
             props.recommendationsArr.map((country, countryIndex) => {
               if (country.name.toLowerCase().startsWith(props.countryName.toLowerCase()) || country.name.toLowerCase().includes(props.countryName.toLowerCase())) {
-                return <Card className="recommendedCountry" key={ `recommendation-${country.id}` }
-                  title={ `${country.name}` }
-                  header={ <CardTitle className="recommendedCountry-img" image={ JSON.parse(country.images)[0] } /> }
-                  onClick={ () => props.displayCountryInformationModal(country, countryIndex) }>
-                </Card>
+                const imageURL = JSON.parse(country.images)[0]
+                return <div className="recommendedCountry-div" onClick={ () => props.displayCountryInformationModal(country, countryIndex) } style={{ backgroundImage: `url(${imageURL})` }}>
+                  <p className="recommendation-name">{ `${country.name}` }</p>
+                </div>
               }
             })
           }
@@ -50,8 +49,6 @@ function Recommendations (props) {
     </div>
   )
 }
-
-// { false && <MaterialIcon icon="favorite" size="medium" color="#d10808"/>}
 
 // Recommendations.propTypes = {
 //   recommendationsArr: PropTypes.array.isRequired,

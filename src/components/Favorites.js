@@ -25,16 +25,19 @@ function Favorites (props) {
               { (Object.keys(props.selectedCountry).length !== 0) && <CountryInfo country={ props.selectedCountry } countryIndex={ props.selectedCountryId } pointsOfInterest={ props.favorites.pois } /> }
             </div>
           </Modal>
-          {
-            props.favorites.countries.map((country, countryIndex) => {
-              if (country.name.toLowerCase().startsWith(props.countryName.toLowerCase()) || country.name.toLowerCase().includes(props.countryName.toLowerCase())) {
-                return <Card className="favoriteCountry" key={ `favorite-${country.id}` }
-                  title={ `${country.name}` }
-                  header={ <CardTitle className="favoriteCountry-img" image={ JSON.parse(country.images)[0] } /> }
-                  onClick={ () => props.displayCountryInformationModal(country, countryIndex) }>
-                </Card>
-              }
-            })
+          { (props.favorites.countries.length) ?
+              props.favorites.countries.map((country, countryIndex) => {
+                if (country.name.toLowerCase().startsWith(props.countryName.toLowerCase()) || country.name.toLowerCase().includes(props.countryName.toLowerCase())) {
+                  const imageURL = JSON.parse(country.images)[0]
+                  return <div className="favoriteCountry-div" onClick={ () => props.displayCountryInformationModal(country, countryIndex) } style={{ backgroundImage: `url(${imageURL})` }}>
+                    <p className="favorite-name">{ `${country.name}` }</p>
+                  </div>
+                }
+              })
+            :
+              <div className="empty-favorites">
+                <p>You currently have no favorites.  To add countries to favorites, take the Quiz and click the heart container for any country.</p>
+              </div>
           }
         </div>
       </div>
