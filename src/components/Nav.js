@@ -23,28 +23,24 @@ class Nav extends Component {
     this.props.history.push("/login")
   }
 
-  displayLogoutOrLoginSignupBtns = () => {
-    return (
-      <Navbar brand="Bon Voyage" right>
-        {
-          (localStorage.getItem('token')) ?
-            <NavItem onClick={ this.logoutUser } href="/logout">Logout</NavItem>
-            :
-            <div>
-              <NavItem onClick={ this.props.redirectToLogin } href="/login">Login</NavItem>
-              <NavItem onClick={ this.props.redirectToSignup } href="/signup">Signup</NavItem>
-            </div>
-        }
-      </Navbar>
-    )
-  }
-
   render() {
     return (
       <div>
-        {
-          this.displayLogoutOrLoginSignupBtns()
-        }
+        <Navbar brand="Bon Voyage" right>
+          {
+            (localStorage.getItem('token')) ?
+              <div>
+                <NavItem onClick={ this.goToFavorites } href="/favorites">Favorites</NavItem>
+                <NavItem onClick={ this.goToQuiz } href="/quiz">Take Quiz</NavItem>
+                <NavItem onClick={ this.logoutUser } href="/logout">Logout</NavItem>
+              </div>
+              :
+              <div>
+                <NavItem onClick={ this.props.redirectToLogin } href="/login">Login</NavItem>
+                <NavItem onClick={ this.props.redirectToSignup } href="/signup">Signup</NavItem>
+              </div>
+          }
+        </Navbar>
       </div>
     )
   }
