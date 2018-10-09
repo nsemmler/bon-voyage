@@ -51,7 +51,6 @@ Favorites.propTypes = {
   renameThisFnLater: PropTypes.func.isRequired,
   selectedCountry: PropTypes.object.isRequired,
   selectedCountryId: PropTypes.number.isRequired,
-  pois: PropTypes.array.isRequired
 }
 
 export default Favorites
