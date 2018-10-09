@@ -31,14 +31,14 @@ class Nav extends Component {
           {
             (localStorage.getItem('token')) ?
               <div>
-                <NavItem onClick={ this.goToFavorites } href="/favorites">Favorites</NavItem>
-                <NavItem onClick={ this.goToQuiz } href="/quiz">Take Quiz</NavItem>
-                <NavItem onClick={ this.logoutUser } href="/logout">Logout</NavItem>
+                <li><NavItem to="/favorites">Favorites</NavItem></li>
+                <li><NavItem to="/quiz">Take Quiz</NavItem></li>
+                <li><NavItem to="/logout">Logout</NavItem></li>
               </div>
               :
               <div>
-                <NavItem onClick={ this.props.redirectToLogin } href="/login">Login</NavItem>
-                <NavItem onClick={ this.props.redirectToSignup } href="/signup">Signup</NavItem>
+                <li><NavItem to="/login">Login</NavItem></li>
+                <li><NavItem to="/signup">Signup</NavItem></li>
               </div>
           }
         </Navbar>
