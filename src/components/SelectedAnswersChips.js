@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Chip } from 'react-materialize'
+import '../styling/Chips.css'
 
 function SelectedAnswersChips (props) {
   const updatedChipsArr = props.chipsArr.map((questionAnswersArr, questionIndex) => {
@@ -46,7 +47,8 @@ function SelectedAnswersChips (props) {
     <div className="answerChoicesChips">
       {
         updatedChipsArr.flat().map((chipText, i) => {
-          return <Chip key={ `Chip${i}` }>{ chipText }</Chip>
+          chipText = chipText.replace(" (< 1,000,000)", "").replace(" (1,000,000 - 10,000,000)", "").replace(" (> 10,000,000)", "")
+          return <Chip className={ `${chipText.split(':')[0]}-chip` } key={ `Chip${i}` }>{ chipText }</Chip>
         })
       }
     </div>
