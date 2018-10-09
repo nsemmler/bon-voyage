@@ -5,6 +5,7 @@ import MaterialIcon from 'material-icons-react'
 import Modal from 'react-modal'
 import CountryInfo from './CountryInfo'
 import SelectedAnswersChips from './SelectedAnswersChips'
+import '../styling/Recommendations.css'
 
 function backToQuiz (props) {
   props.history.push("/quiz")
@@ -15,11 +16,11 @@ function Recommendations (props) {
 
   return (
     <div className="Main">
-      <div className="main-header">
-        <h5>Recommended Travel Destinations:</h5>
-        <button className="backToQuiz" onClick={ () => backToQuiz(props) } waves="light" type="button">Update Quiz</button>
+      <div className="recommendations-header-container">
+        <h5 className="recommendations-header">Recommended Travel Destinations:</h5>
         <div className="search-wrapper">
-          <span><input onChange={ props.filterRecommendations } id="search" placeholder="Filter Countries" /><i className="material-icons">search</i></span>
+          <input onChange={ props.filterRecommendations } id="recommendations-filter" placeholder="Filter Countries" autoFocus />
+          <button className="backToQuiz" onClick={ () => backToQuiz(props) } waves="light" type="button">Update Quiz</button>
         </div>
         <SelectedAnswersChips chipsArr={ props.chipsArr }/>
       </div>
@@ -37,10 +38,9 @@ function Recommendations (props) {
             props.recommendationsArr.map((country, countryIndex) => {
               if (country.name.toLowerCase().startsWith(props.countryName.toLowerCase()) || country.name.toLowerCase().includes(props.countryName.toLowerCase())) {
                 return <Card className="recommendedCountry" key={ `recommendation-${country.id}` }
-                  header={ <CardTitle image={ JSON.parse(country.images)[0] } /> }
                   title={ `${country.name}` }
+                  header={ <CardTitle className="recommendedCountry-img" image={ JSON.parse(country.images)[0] } /> }
                   onClick={ () => props.displayCountryInformationModal(country, countryIndex) }>
-                  { country.capital }{ false && <MaterialIcon icon="favorite" size="medium" color="#d10808"/>}
                 </Card>
               }
             })
@@ -50,6 +50,8 @@ function Recommendations (props) {
     </div>
   )
 }
+
+// { false && <MaterialIcon icon="favorite" size="medium" color="#d10808"/>}
 
 // Recommendations.propTypes = {
 //   recommendationsArr: PropTypes.array.isRequired,
