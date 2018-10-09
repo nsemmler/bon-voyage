@@ -9,6 +9,7 @@ export const FAILED_SUBMISSION = "FAILED_SUBMISSION"
 export const GET_USER_FAVORITES = "GET_USER_FAVORITES"
 export const ADD_COUNTRY_TO_FAVORITES = "ADD_COUNTRY_TO_FAVORITES"
 export const REMOVE_COUNTRY_FROM_FAVORITES = "REMOVE_COUNTRY_FROM_FAVORITES"
+export const CLEAR_USER_FAVORITES = "CLEAR_USER_FAVORITES"
 
 window.axios = axios
 
@@ -36,6 +37,12 @@ export const removeFromFavorites = (userId, countryId, token) => {
     var config = { headers: { 'Authorization': token, 'Content-Type': 'application/json' }, data: { country_id: parseInt(countryId), user_id: parseInt(userId) } }
     let response = await axios.delete(`${BASE_URL}/favorites`, config)
     dispatch({ type: REMOVE_COUNTRY_FROM_FAVORITES, action: response.data })
+  }
+}
+
+export const clearFavorites = () => {
+  return async (dispatch) => {
+    dispatch({ type: CLEAR_USER_FAVORITES })
   }
 }
 
