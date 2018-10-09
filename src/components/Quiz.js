@@ -6,26 +6,32 @@ import QuizForm from './QuizForm'
 
 function Quiz (props) {
   return (
-    <div className="quiz-container">
-      <div className="question-and-question-count-container">
-        <div className="question-container">
-          <Question content={ props.form.questions[props.questionIndex].question } />
-        </div>
-        <div className="question-counter-container">
-          <QuestionCount counter={ props.questionNum } total={ props.numQuestions } />
-        </div>
+    <div className="Main">
+      <div className="main-header">
+        <h5>Travel Quiz:</h5>
       </div>
-      <QuizForm
-        submitQuiz={ props.submitQuiz }
-        uniqueAnswerChoices={ props.uniqueAnswerChoices }
-        form={ props.form }
-        questionIndex={ props.questionIndex }
-        questionNum={ props.questionNum }
-        numQuestions={ props.numQuestions }
-        fetchPreviousQuestion={ props.fetchPreviousQuestion }
-        fetchNextQuestion={ props.fetchNextQuestion }
-        toggleAnswerChoice={ props.toggleAnswerChoice }
-      />
+      <br/>
+      <div className="quiz-container">
+        <div className="question-and-question-count-container">
+          <div className="question-container">
+            <Question content={ props.form.questions[props.questionIndex].question } />
+          </div>
+          <div className="question-counter-container">
+            <QuestionCount counter={ props.questionNum } total={ props.numQuestions } />
+          </div>
+        </div>
+        <QuizForm
+          submitQuiz={ props.submitQuiz }
+          uniqueAnswerChoices={ props.uniqueAnswerChoices }
+          form={ props.form }
+          questionIndex={ props.questionIndex }
+          questionNum={ props.questionNum }
+          numQuestions={ props.numQuestions }
+          fetchPreviousQuestion={ props.fetchPreviousQuestion }
+          fetchNextQuestion={ props.fetchNextQuestion }
+          toggleAnswerChoice={ props.toggleAnswerChoice }
+        />
+      </div>
     </div>
   )
 }
