@@ -1,0 +1,51 @@
+/******************************************************************************/
+/* Recommendations */
+/******************************************************************************/
+.response-container {
+  width: 80%;
+  border: 1px solid black;
+  padding: 20px;
+}
+
+.recommendations-header-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 80%;
+}
+
+.recommendations-header {
+  align-self: center;
+}
+
+.recommendations {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.recommendedCountry {
+  width: 350px;
+  height: 260px;
+  margin-top: 0;
+}
+
+.card-content {
+  margin-bottom: 20px !important;
+  padding-top: 0px !important;
+  padding-bottom: 0px !important;
+}
+
+.card-content .card-title {
+  font-family: 'News Cycle', sans-serif;
+  font-weight: bolder;
+  /* -webkit-text-fill-color: white; */
+  /* -webkit-text-stroke-width: 2px;
+  -webkit-text-stroke-color: black; */
+}
+
+.recommendedCountry-img img {
+  width: 350px;
+  height: auto;
+}

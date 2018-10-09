@@ -91,27 +91,6 @@
   padding: 5px;
 }
 
-.response-container {
-  /* display: flex;
-  flex-direction: column;
-  justify-content: center; */
-  width: 80%;
-  border: 1px solid black;
-  padding: 20px;
-}
-
-.recommendations {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  flex-wrap: wrap;
-}
-
-.recommendedCountry {
-  max-width: 24%;
-  margin-top: 0;
-}
-
 #map {
   width: 100%;
   max-width: 600px;
@@ -150,16 +129,6 @@
   padding-left: 2px;
   padding-top: 2px;
   padding-right: 2px;
-}
-
-.card-image img {
-  width: 350px !important;
-  height: auto;
-}
-
-.card-content, .card-action {
-  padding: 8px !important;
-  height: auto;
 }
 
 .score-badge {
