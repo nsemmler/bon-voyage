@@ -40,7 +40,7 @@ class Login extends Component {
                 value={ this.state.password }
                 onChange={ (e) => this.setState({ password: e.target.value }) } />
               <div className="login-btn-div"><Button waves="light" type="submit">Submit</Button></div>
-              <div><a onClick={ this.props.redirectToSignup } href="/signup" className="form-redirect">Signup Here</a></div>
+              <div className="login-signup-redirect"><a onClick={ this.props.redirectToSignup } href="/signup" className="form-redirect">Signup Here</a></div>
             </form>
           </Row>
         }
