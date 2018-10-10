@@ -43,53 +43,6 @@ input:focus {
   align-items: center;
 }
 
-.quiz-container {
-  display: grid;
-  grid-template-columns: auto;
-  grid-template-rows: auto;
-  grid-template-areas:
-    "question-and-question-count"
-    "answer-choices";
-  border: 2px solid black;
-  width: 80%;
-  padding: 1%;
-  margin-bottom: 200px;
-}
-
-.question-and-question-count-container {
-  grid-area: "question-and-question-count";
-  display: grid;
-  grid-template-columns: auto 50px;
-  grid-template-rows: 100%;
-  grid-template-areas: "question question-counter";
-}
-
-.question-container {
-  grid-area: "question";
-}
-
-.question-counter-container {
-  grid-area: "question-counter";
-}
-
-.question-form {
-  grid-area: "answer-choices";
-}
-
-.prev-next-questions-btns {
-  margin-top: 10px;
-  float: right;
-}
-
-.prevbtn {
-  margin-right: 15px;
-}
-
-.submit-question-btn {
-  margin-top: 10px;
-  float: right;
-}
-
 .form-header {
   font-size: 14pt;
 }
