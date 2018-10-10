@@ -1,14 +1,16 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { Carousel } from 'react-materialize'
+import '../styling/CountryInfo.css'
 
 function CountryImages (props) {
+  const imagesArr = JSON.parse(props.country.images).map((img, i) => {
+    return img
+  })
+
   return (
     <div className="images-container">
-      {
-        JSON.parse(props.country.images).map((img, i) => {
-          return <img src={ img } alt={ `${props.country.name} ${i+1}` } className="countryimg" key={ `${props.country.name}-img-${i}` } />
-        })
-      }
+      <Carousel className="img-carousel" options={{ fullWidth: true }} images={ imagesArr } />
     </div>
   )
 }
