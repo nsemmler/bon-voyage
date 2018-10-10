@@ -7,7 +7,6 @@ import CountryInfo from './CountryInfo'
 import '../styling/Favorites.css'
 
 function Favorites (props) {
-  // add a generic thingy that prompts a user to add favorites by taking the quiz (if none)
   return (
     <div className="Favorites">
       <div className="favorites-header-container">
@@ -54,6 +53,7 @@ Favorites.propTypes = {
   renameThisFnLater: PropTypes.func.isRequired,
   selectedCountry: PropTypes.object.isRequired,
   selectedCountryId: PropTypes.number.isRequired,
+  goToQuiz: PropTypes.func.isRequired
 }
 
 export default Favorites
