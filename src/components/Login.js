@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { userLogin } from '../actions/auth.actions'
 import { Row, Input, Button, Preloader } from 'react-materialize'
 import { withRouter } from 'react-router-dom'
+import Nav from './Nav'
 
 class Login extends Component {
   constructor (props) {
@@ -26,24 +27,27 @@ class Login extends Component {
 
   render() {
     return (
-      <div className="login-container">
-        {
-          this.props.isLoading ? <Preloader className="pending" /> : <Row className="login-form">
-            <form onSubmit={ this.loginUser }>
-              <h5 className="form-header">Login</h5>
-              <Input s={12} placeholder="sample@email.com" label="Email" type="email"
-                error={ this.props.showLoginError ? "Invalid email" : null }
-                value={ this.state.email }
-                onChange={ (e) => this.setState({ email: e.target.value }) } autoFocus />
-              <Input s={12} placeholder="password" label="Password" type="password"
-                error={ this.props.showLoginError ? "Invalid password" : null }
-                value={ this.state.password }
-                onChange={ (e) => this.setState({ password: e.target.value }) } />
-              <div className="login-btn-div"><Button waves="light" type="submit">Submit</Button></div>
-              <div className="login-signup-redirect"><a onClick={ this.props.redirectToSignup } href="/signup" className="form-redirect">Signup Here</a></div>
-            </form>
-          </Row>
-        }
+      <div className="main">
+        <Nav />
+        <div className="login-container">
+          {
+            this.props.isLoading ? <Preloader className="pending" /> : <Row className="login-form">
+              <form onSubmit={ this.loginUser }>
+                <h5 className="form-header">Login</h5>
+                <Input s={12} placeholder="sample@email.com" label="Email" type="email"
+                  error={ this.props.showLoginError ? "Invalid email" : null }
+                  value={ this.state.email }
+                  onChange={ (e) => this.setState({ email: e.target.value }) } autoFocus />
+                <Input s={12} placeholder="password" label="Password" type="password"
+                  error={ this.props.showLoginError ? "Invalid password" : null }
+                  value={ this.state.password }
+                  onChange={ (e) => this.setState({ password: e.target.value }) } />
+                <div className="login-btn-div"><Button waves="light" type="submit">Submit</Button></div>
+                <div className="login-signup-redirect"><a onClick={ this.props.redirectToSignup } href="/signup" className="form-redirect">Signup Here</a></div>
+              </form>
+            </Row>
+          }
+        </div>
       </div>
     )
   }
