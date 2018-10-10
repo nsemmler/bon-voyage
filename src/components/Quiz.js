@@ -3,12 +3,13 @@ import PropTypes from 'prop-types'
 import Question from './Question'
 import QuestionCount from './QuestionCount'
 import QuizForm from './QuizForm'
+import '../styling/Quiz.css'
 
 function Quiz (props) {
   return (
-    <div className="Main">
-      <div className="main-header">
-        <h5>Travel Quiz:</h5>
+    <div className="Quiz">
+      <div className="quiz-header-container">
+        <h5 className="quiz-header">Travel Quiz:</h5>
       </div>
       <br/>
       <div className="quiz-container">
@@ -45,7 +46,8 @@ Quiz.propTypes = {
   submitQuiz: PropTypes.func.isRequired,
   fetchPreviousQuestion: PropTypes.func.isRequired,
   fetchNextQuestion: PropTypes.func.isRequired,
-  toggleAnswerChoice: PropTypes.func.isRequired
+  toggleAnswerChoice: PropTypes.func.isRequired,
+  goToFavorites: PropTypes.func.isRequired
 }
 
 export default Quiz
