@@ -2,10 +2,10 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { selectAnswerChoice, submitUserQuiz, updateQuizAnswers, retakeQuiz, fetchUserFavorites, removeFromFavorites, addToFavorites } from '../actions/form.actions'
-import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
-import { Preloader } from 'react-materialize'
+// import { Preloader } from 'react-materialize'
 import { withRouter } from 'react-router-dom'
 import Modal from 'react-modal'
+import Nav from './Nav'
 import Quiz from './Quiz'
 import PropsRoute from './PropsRoute'
 import Recommendations from './Recommendations'
@@ -60,7 +60,6 @@ class Main extends Component {
 
     var quiz = this.props.form.questions
     this.props.submitUserQuiz(quiz)
-    this.props.history.push("/recommendations")
   }
 
   returnToQuiz = (e) => {
@@ -103,7 +102,6 @@ class Main extends Component {
       if (favoritesIds.includes(country.id)) {
         await this.props.removeFromFavorites(userId, country.id, token)
         this.setState({ showCountryInfo: false })
-        // if no more favorites, redirect to quiz automatically
       } else {
         await this.props.addToFavorites(userId, country.id, token)
       }
@@ -148,54 +146,63 @@ class Main extends Component {
     this.setState({ countryName: e.target.value })
   }
 
-  render() {
-    if (!this.props.form.isLoading && this.state.fetchedUserFavorites) {
-      let uniqueAnswerChoices = this.props.form.questions[this.state.questionIndex].answer_choices.map((ansr_choice) => { return ansr_choice.checked }).filter((val, i, array) => array.indexOf(val) === i)
+  displayRecommendationsOrQuiz = () => {
+    if (this.props.form.recommendations.length) {
       let chipsArr = this.createChipsArr(this.props.form.questions)
 
+      return <Recommendations recommendationsArr={ this.props.form.recommendations }
+          displayCountryInformationModal={ this.displayCountryInformationModal }
+          countryName={ this.state.countryName }
+          chipsArr={ chipsArr }
+          filterRecommendations={ this.filterRecommendations }
+          renameThisFnLater={ this.renameThisFnLater }
+          showCountryInfo={ this.state.showCountryInfo }
+          selectedCountry={ this.state.selectedCountry }
+          selectedCountryId={ this.state.selectedCountryId }
+          pois={ this.props.form.pois }
+          favorites={ this.props.form.favorites }
+          returnToQuiz={ this.returnToQuiz }
+          retakeQuiz={ this.retakeQuiz }
+          goToFavorites={ this.goToFavorites }
+          goToQuiz={ this.goToQuiz } />
+    } else {
+      let uniqueAnswerChoices = this.props.form.questions[this.state.questionIndex].answer_choices.map((ansr_choice) => { return ansr_choice.checked }).filter((val, i, array) => array.indexOf(val) === i)
+
+      return <Quiz form={ this.props.form }
+          questionIndex={ this.state.questionIndex }
+          questionNum={ this.state.questionNum }
+          numQuestions={ this.state.numQuestions }
+          uniqueAnswerChoices={ uniqueAnswerChoices }
+          submitQuiz={ this.submitQuiz }
+          fetchPreviousQuestion={ this.fetchPreviousQuestion }
+          fetchNextQuestion={ this.fetchNextQuestion }
+          toggleAnswerChoice={ this.toggleAnswerChoice }
+          goToFavorites={ this.goToFavorites }
+          goToQuiz={ this.goToQuiz } />
+    }
+  }
+
+  render() {
+    if (!this.props.form.isLoading && this.state.fetchedUserFavorites) {
       return (
-        <div>
-          <Router>
-            <Switch>
-              <PropsRoute exact path="/favorites" component={ Favorites } favorites={ this.props.form.favorites }
+        <div className="main">
+          <Nav goToFavorites={ () => this.goToFavorites() }
+            goToQuiz={ () => this.goToQuiz() } />
+          {
+            (this.state.showFavorites) ?
+              <Favorites favorites={ this.props.form.favorites }
                 displayCountryInformationModal={ this.displayCountryInformationModal }
                 filterFavorites={ this.filterFavorites }
                 showCountryInfo={ this.state.showCountryInfo }
                 countryName={ this.state.countryName }
                 renameThisFnLater={ this.renameThisFnLater }
                 selectedCountry={ this.state.selectedCountry }
-                selectedCountryId={ this.state.selectedCountryId } />
-              <PropsRoute exact path='/quiz' component={ Quiz } form={ this.props.form }
-                questionIndex={ this.state.questionIndex }
-                questionNum={ this.state.questionNum }
-                numQuestions={ this.state.numQuestions }
-                uniqueAnswerChoices={ uniqueAnswerChoices }
-                submitQuiz={ this.submitQuiz }
-                fetchPreviousQuestion={ this.fetchPreviousQuestion }
-                fetchNextQuestion={ this.fetchNextQuestion }
-                toggleAnswerChoice={ this.toggleAnswerChoice } />
-              <PropsRoute exact path ='/recommendations' component={ Recommendations } recommendationsArr={ this.props.form.recommendations }
-                displayCountryInformationModal={ this.displayCountryInformationModal }
-                countryName={ this.state.countryName }
-                chipsArr={ chipsArr }
-                filterRecommendations={ this.filterRecommendations }
-                renameThisFnLater={ this.renameThisFnLater }
-                showCountryInfo={ this.state.showCountryInfo }
-                selectedCountry={ this.state.selectedCountry }
                 selectedCountryId={ this.state.selectedCountryId }
-                pois={ this.props.form.pois }
-                favorites={ this.props.form.favorites } />
-              {
-                (this.props.form.recommendations.length) ?
-                  <Redirect to="/recommendations" />
-                :
-                  (this.props.form.favorites.countries.length) ?
-                    <Redirect to="/favorites" />
-                  :
-                    <Redirect to="/quiz" />
-              }
-            </Switch>
-          </Router>
+                goToFavorites={ this.goToFavorites }
+                goToQuiz={ this.goToQuiz } />
+            :
+              this.displayRecommendationsOrQuiz()
+          }
         </div>
       )
     } else {
