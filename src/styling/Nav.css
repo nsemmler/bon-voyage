@@ -2,6 +2,37 @@
   background: #343477;
 }
 
+.workshift-navitem {
+  background: #343477;
+  color: white;
+  border: none;
+  max-height: 64px;
+}
+
+.workshift-navitem:hover {
+  background: #3c3c84;
+}
+
+.workshift-navitem:active {
+  background: #343477;
+}
+
+.workshift-navitem:focus {
+  background: #343477;
+}
+
+.navlink:hover {
+  background: #3c3c84;
+}
+
+.navlink:active {
+  background: #343477;
+}
+
+.navlink:focus {
+  background: #343477;
+}
+
 .brand-logo {
   padding-left: 25px !important;
 }

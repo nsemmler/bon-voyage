@@ -1,0 +1,71 @@
+/******************************************************************************/
+/* Quiz */
+/******************************************************************************/
+.Quiz {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  width: 80%;
+  border: 1px solid black;
+  padding: 20px;
+  margin-left: 10%;
+  margin-bottom: 5%;
+}
+
+.quiz-header-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.quiz-header {
+  align-self: center;
+}
+
+.quiz-container {
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: auto;
+  grid-template-areas:
+    "question-and-question-count"
+    "answer-choices";
+  border: 2px solid black;
+  width: 80%;
+  padding: 1%;
+  margin-bottom: 200px;
+  align-self: center;
+}
+
+.question-and-question-count-container {
+  grid-area: "question-and-question-count";
+  display: grid;
+  grid-template-columns: auto 50px;
+  grid-template-rows: 100%;
+  grid-template-areas: "question question-counter";
+}
+
+.question-container {
+  grid-area: "question";
+}
+
+.question-counter-container {
+  grid-area: "question-counter";
+}
+
+.question-form {
+  grid-area: "answer-choices";
+}
+
+.prev-next-questions-btns {
+  margin-top: 10px;
+  float: right;
+}
+
+.prevbtn {
+  margin-right: 15px;
+}
+
+.submit-question-btn {
+  margin-top: 10px;
+  float: right;
+}

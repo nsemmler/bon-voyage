@@ -1,0 +1,68 @@
+.CountryInfo-container {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  grid-template-rows: 100%;
+  grid-template-areas:
+    "generalandimgs map"
+}
+
+.info-and-images-container {
+  grid-area: "generalandimgs";
+
+  display: grid;
+  grid-template-rows: 30% 70%;
+  grid-template-columns: 100%;
+  grid-template-areas:
+    "general"
+    "images"
+}
+
+.map-container {
+  grid-area: "map";
+}
+
+.info-container {
+  grid-area: "general";
+}
+
+.images-container {
+  grid-area: "images";
+}
+
+.img-carousel {
+  width: 600px;
+  margin-top: 20px;
+}
+
+.general-info-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.countryimg {
+  width: 615px;
+  height: auto;
+}
+
+.countryflag {
+  height: 200px;
+  width: auto;
+  padding-right: 20px;
+}
+
+.countryInfoItem {
+  font-size: 18px;
+}
+
+.country-name {
+  margin-bottom: 4px !important;
+}
+
+.country-capital {
+  margin-top: 4px !important;
+}
+
+.country-capital {
+  font-style: italic;
+}

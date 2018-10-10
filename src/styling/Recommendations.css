@@ -1,10 +1,47 @@
 /******************************************************************************/
 /* Recommendations */
 /******************************************************************************/
-.response-container {
+.Recommendations {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
   width: 80%;
   border: 1px solid black;
   padding: 20px;
+  margin-left: 10%;
+  margin-bottom: 5%;
+}
+
+.recommendations-header-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-left: 10%;
+}
+
+.recommendations-header {
+  align-self: center;
+}
+
+.quiz-buttons-and-header {
+  display: flex;
+  justify-content: space-around;
+}
+
+.back2quiz {
+  width: 200px;
+}
+
+.retakeQuiz {
+  width: 200px;
+}
+
+.recommended-fav-icon {
+  float: right;
+  padding-top: 4px;
+  padding-right: 4px;
+  border: none;
 }
 
 .recommendations-header-container {
@@ -12,10 +49,6 @@
   flex-direction: column;
   justify-content: center;
   width: 80%;
-}
-
-.recommendations-header {
-  align-self: center;
 }
 
 .recommendations {
