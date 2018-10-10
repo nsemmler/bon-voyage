@@ -1,20 +1,32 @@
-# Bon Voyage
+# [Bon Voyage](https://bonvoyage.surge.sh)
 
-[![Build Status](https://travis-ci.org/nsemmler/bon-voyage.svg?branch=master)](https://travis-ci.org/nsemmler/bon-voyage)
+<img src ="./public/bon-voyage-screenshot.png">
 
-### Getting Started
+### About
+Most travel sites provide users with the tools to help them plan and book their next
+vacation.  This requires the user to have already chosen their vacation destination
+in advance, which is a difficult decision to make.  Bon Voyage is aimed at helping
+users determine *where* in the world to travel.
 
-To get started:
+When a user logs in for the first time they are re-directed to a short quiz.  The
+quiz is intended to help the user filter out countries that don't meet their criteria
+for a good vacation.  Once the user has taken the quiz they can browse through the
+recommended vacation destinations and choose favorites that they can save for later.
 
-```shell
+### Technologies Used
+- React
+- Redux
+- React Materialize
+- HTML
+- CSS
+- Axios
+- Google Maps
+
+
+### Get Started Locally
+```bash
 git clone https://github.com/nsemmler/bon-voyage.git
 cd bon-voyage
-npm i
-```
-
-### Test Login
-
-```text
-Email: test@gmail.com
-Password: password
+npm install
+npm start
 ```
