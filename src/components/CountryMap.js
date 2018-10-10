@@ -11,7 +11,7 @@ const CountryMap = compose(
   withProps({
     googleMapURL: googleMapsURL,
     loadingElement: <div style={{ height: `100%` }} />,
-    containerElement: <div style={{ height: `800px` }} />,
+    containerElement: <div style={{ height: `650px` }} />,
     mapElement: <div style={{ height: `100%` }} />,
   }),
   withStateHandlers(() => ({
