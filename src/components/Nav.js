@@ -31,14 +31,14 @@ class Nav extends Component {
           {
             (localStorage.getItem('token')) ?
               <div>
-                <NavItem tag={ Link } to="/favorites">Favorites</NavItem>
-                <NavItem tag={ Link } to="/quiz">Take Quiz</NavItem>
-                <NavItem tag={ Link } to="/logout">Logout</NavItem>
+                <Link to="/favorites">Favorites</Link>
+                <Link to="/quiz">Take Quiz</Link>
+                <Link to="/logout">Logout</Link>
               </div>
               :
               <div>
-                <NavItem tag={ Link } to="/login">Login</NavItem>
-                <NavItem tag={ Link } to="/signup">Signup</NavItem>
+                <Link to="/login">Login</Link>
+                <Link to="/signup">Signup</Link>
               </div>
           }
         </Navbar>
