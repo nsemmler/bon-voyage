@@ -6,6 +6,7 @@ import { Navbar, NavItem } from 'react-materialize'
 import { createHashHistory } from 'history'
 import { withRouter, Link } from 'react-router-dom'
 import '../styling/Nav.css'
+import { goToFavorites, goToQuiz } from './Main'
 
 export const history = createHashHistory()
 
@@ -31,14 +32,14 @@ class Nav extends Component {
           {
             (localStorage.getItem('token')) ?
               <div>
-                <Link to="/favorites">Favorites</Link>
-                <Link to="/quiz">Take Quiz</Link>
-                <Link to="/logout">Logout</Link>
+                <button className="workshift-navitem" onClick={ () => this.props.goToFavorites() }>Favorites</button>
+                <button className="workshift-navitem" onClick={ () => this.props.goToQuiz() }>Quiz</button>
+                <button className="workshift-navitem" onClick={ this.logoutUser }>Logout</button>
               </div>
               :
               <div>
-                <Link to="/login">Login</Link>
-                <Link to="/signup">Signup</Link>
+                <button className="workshift-navitem"><Link className="navlink" to="/login">Login</Link></button>
+                <button className="workshift-navitem"><Link className="navlink" to="/signup">Signup</Link></button>
               </div>
           }
         </Navbar>
