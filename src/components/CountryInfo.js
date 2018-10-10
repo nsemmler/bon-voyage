@@ -4,26 +4,28 @@ import CountryMap from './CountryMap'
 import GeneralInfo from './GeneralInfo'
 import CountryImages from './CountryImages'
 import { Tabs, Tab } from 'react-materialize'
+import '../styling/CountryInfo.css'
 
 function CountryInfo (props) {
   return (
     <div className="CountryInfo-container">
-      <div className="tabs-container">
-        <Tabs className="countrytabs">
-          <Tab title="General Info" active>
-            { <GeneralInfo country={ props.country } /> }
-          </Tab>
-          <Tab title="Points of Interest">
-            { <CountryMap latitude={ props.country.latitude }
-                          longitude={ props.country.longitude }
-                          countryIndex={ props.countryIndex }
-                          pointsOfInterest={ props.pointsOfInterest } /> }
-          </Tab>
-          <Tab title="Images">
-            { <CountryImages country={ props.country } /> }
-          </Tab>
-        </Tabs>
+
+      <div className="info-and-images-container">
+        <div className="info-container">
+          { <GeneralInfo country={ props.country } /> }
+        </div>
+        <div className="images-container">
+          { <CountryImages country={ props.country } /> }
+        </div>
       </div>
+
+      <div className="map-container">
+        { <CountryMap latitude={ props.country.latitude }
+                      longitude={ props.country.longitude }
+                      countryIndex={ props.countryIndex }
+                      pointsOfInterest={ props.pointsOfInterest } /> }
+      </div>
+
     </div>
   )
 }
