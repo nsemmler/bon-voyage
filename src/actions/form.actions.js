@@ -13,7 +13,7 @@ export const CLEAR_USER_FAVORITES = "CLEAR_USER_FAVORITES"
 
 window.axios = axios
 
-const BASE_URL = "https://bon-voyage-api.herokuapp.com"
+const BASE_URL = (process.env.NODE_ENV === 'production') ? "bon-voyage-api.herokuapp.com" : "http://localhost:3000"
 
 export const fetchUserFavorites = (userId, token) => {
   return async (dispatch) => {
