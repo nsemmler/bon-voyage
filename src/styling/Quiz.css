@@ -7,7 +7,7 @@
   justify-content: center;
 
   width: 80%;
-  border: 1px solid black;
+  /* border: 1px solid black; */
   padding: 20px;
   margin-left: 10%;
   margin-bottom: 5%;
@@ -20,6 +20,8 @@
 
 .quiz-header {
   align-self: center;
+  font-size: 34px;
+  font-family: 'Pacifico', cursive;
 }
 
 .quiz-container {

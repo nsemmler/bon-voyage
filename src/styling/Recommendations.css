@@ -7,7 +7,7 @@
   justify-content: center;
 
   width: 80%;
-  border: 1px solid black;
+  /* border: 1px solid black; */
   padding: 20px;
   margin-left: 10%;
   margin-bottom: 5%;
@@ -22,6 +22,8 @@
 
 .recommendations-header {
   align-self: center;
+  font-size: 34px;
+  font-family: 'Pacifico', cursive;
 }
 
 .quiz-buttons-and-header {
@@ -30,11 +32,19 @@
 }
 
 .back2quiz {
-  width: 200px;
+  width: 125px;
+  font-size: 14px;
+  padding: 0px !important;
+  font-family: 'Quicksand', sans-serif;
+  font-weight: bold;
 }
 
 .retakeQuiz {
-  width: 200px;
+  width: 125px;
+  font-size: 14px;
+  padding: 0px !important;
+  font-family: 'Quicksand', sans-serif;
+  font-weight: bold;
 }
 
 .recommended-fav-icon {

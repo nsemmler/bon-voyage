@@ -7,6 +7,9 @@
   color: white;
   border: none;
   max-height: 64px;
+  font-family: 'Quicksand', sans-serif;
+  font-weight: bold;
+  margin: 0px 4px 0px 4px;
 }
 
 .workshift-navitem:hover {
@@ -35,4 +38,5 @@
 
 .brand-logo {
   padding-left: 25px !important;
+  font-family: 'Pacifico', cursive;
 }
