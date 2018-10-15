@@ -14,8 +14,8 @@ function Recommendations (props) {
     <div className="Recommendations">
       <div className="recommendations-header-container">
         <div className="quiz-buttons-and-header">
-          <button className="btn back2quiz" onClick={ props.returnToQuiz } waves="light" type="button">Update Answers</button>
-          <h5 className="recommendations-header">Recommended Travel Destinations:</h5>
+          <button className="btn back2quiz" onClick={ props.returnToQuiz } waves="light" type="button">Update Quiz</button>
+          <h5 className="recommendations-header">Recommendations:</h5>
           <button className="btn retakeQuiz" onClick={ props.retakeQuiz } waves="light" type="button">Retake Quiz</button>
         </div>
         <div className="filter-wrapper">
