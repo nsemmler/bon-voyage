@@ -2,8 +2,6 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { withRouter } from 'react-router-dom'
-import { Card, CardTitle } from 'react-materialize'
-import MaterialIcon from 'material-icons-react'
 import Modal from 'react-modal'
 import CountryInfo from './CountryInfo'
 import { fetchUserFavorites, removeFromFavorites, addToFavorites } from '../actions/form.actions'
@@ -32,8 +30,8 @@ class Favorites extends Component {
     const token = localStorage.getItem('token')
     const userId = parseInt(localStorage.getItem('userId'))
 
-    if (this.props.form.favorites.countries.length) {
-      const favoritesIds = this.props.form.favorites.countries.map(country => country.id)
+    if (this.props.favorites.length) {
+      const favoritesIds = this.props.favorites.map(country => country.id)
 
       if (favoritesIds.includes(country.id)) {
         await this.props.removeFromFavorites(userId, country.id, token)
@@ -72,10 +70,9 @@ class Favorites extends Component {
         <br/>
         <div className="favorites-container" id="favorites">
           <div className="favorites">
-            <Modal isOpen={ this.state.showCountryInfo } contentLabel="Recommended Country Information" onRequestClose={ () => this.displayCountryInformationModal({}) } shouldCloseOnOverlayClick={ true }>
-              <button className="favoritebtn" onClick={ () => this.updateUserFavorites(this.state.selectedCountry, this.state.selectedCountryId) }><MaterialIcon icon="favorite" size="medium" color="#d10808"/></button>
+            <Modal isOpen={ this.state.showCountryInfo } contentLabel="Country Information" onRequestClose={ () => this.displayCountryInformationModal({}) } shouldCloseOnOverlayClick={ true }>
               <div className="modal-container">
-                { (Object.keys(this.state.selectedCountry).length !== 0) && <CountryInfo country={ this.state.selectedCountry } countryIndex={ this.state.selectedCountryId } pointsOfInterest={ this.props.pois } /> }
+                { (Object.keys(this.state.selectedCountry).length !== 0) && <CountryInfo country={ this.state.selectedCountry } countryIndex={ this.state.selectedCountryId } pointsOfInterest={ this.props.pois } updateUserFavorites={ this.updateUserFavorites } favorites={ this.props.favorites } /> }
               </div>
             </Modal>
             { (this.props.favorites.length) ?
