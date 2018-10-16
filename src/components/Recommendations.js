@@ -1,41 +1,123 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { withRouter } from 'react-router-dom'
 import { Card, CardTitle } from 'react-materialize'
 import MaterialIcon from 'material-icons-react'
 import Modal from 'react-modal'
 import CountryInfo from './CountryInfo'
 import SelectedAnswersChips from './SelectedAnswersChips'
+import { selectAnswerChoice, submitUserQuiz, updateQuizAnswers, retakeQuiz, fetchUserFavorites, removeFromFavorites, addToFavorites } from '../actions/form.actions'
 import '../styling/Recommendations.css'
 
-function Recommendations (props) {
-  const favoritesIds = props.favorites.countries.map(country => country.id)
+class Recommendations extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      questionIndex: 0,
+      questionNum: this.props.questions[0].id,
+      numQuestions: this.props.questions.length,
+      questionName: this.props.questions[0].name,
+      showCountryInfo: false,
+      selectedCountry: {},
+      selectedCountryId: 0,
+      countryName: "",
+      showFavorites: false,
+      fetchedUserFavorites: false
+    }
+  }
 
-  return (
-    <div className="Recommendations">
-      <div className="recommendations-header-container">
-        <div className="quiz-buttons-and-header">
-          <button className="btn back2quiz" onClick={ props.returnToQuiz } waves="light" type="button">Update Quiz</button>
-          <h5 className="recommendations-header">Recommendations:</h5>
-          <button className="btn retakeQuiz" onClick={ props.retakeQuiz } waves="light" type="button">Retake Quiz</button>
+  async componentWillMount() {
+    Modal.setAppElement('body')
+  }
+
+  returnToQuiz = (e) => {
+    e.preventDefault()
+    this.props.updateQuizAnswers()
+  }
+
+  updateUserFavorites = async (country={}, countryIndex=0) => {
+    const token = localStorage.getItem('token')
+    const userId = parseInt(localStorage.getItem('userId'))
+
+    if (this.props.form.favorites.countries.length) {
+      const favoritesIds = this.props.form.favorites.countries.map(country => country.id)
+
+      if (favoritesIds.includes(country.id)) {
+        await this.props.removeFromFavorites(userId, country.id, token)
+        this.setState({ showCountryInfo: false })
+      } else {
+        await this.props.addToFavorites(userId, country.id, token)
+      }
+    } else {
+      await this.props.addToFavorites(userId, country.id, token)
+    }
+
+    await this.props.fetchUserFavorites(userId, token)
+  }
+
+  displayCountryInformationModal = (country={}, countryIndex=0) => {
+    this.setState({
+      showCountryInfo: !this.state.showCountryInfo,
+      selectedCountry: country,
+      selectedCountryId: countryIndex
+    })
+  }
+
+  retakeQuiz = (e) => {
+    e.preventDefault()
+
+    this.setState({
+      questionIndex: 0,
+      questionNum: this.props.form.questions[0].id,
+      questionName: this.props.form.questions[0].name,
+    })
+
+    this.props.retakeQuiz()
+  }
+
+  createChipsArr = (questions) => {
+    return questions.map((question, i) => {
+      return question.answer_choices.filter(ansr_choice => ansr_choice.checked).map(ansr_choice => ansr_choice.content)
+    })
+  }
+
+  filterRecommendations = (e) => {
+    e.preventDefault()
+    this.setState({ countryName: e.target.value })
+  }
+
+
+  render () {
+    let chipsArr = this.createChipsArr(this.props.questions)
+    let favoritesIds = this.props.favorites.map(country => country.id)
+
+    return (
+      <div className="Recommendations">
+        <div className="recommendations-header-container">
+          <div className="quiz-buttons-and-header">
+            <button className="btn back2quiz" onClick={ this.returnToQuiz } waves="light" type="button">Update Quiz</button>
+            <h5 className="recommendations-header">Recommendations:</h5>
+            <button className="btn retakeQuiz" onClick={ this.retakeQuiz } waves="light" type="button">Retake Quiz</button>
+          </div>
+          <div className="filter-wrapper">
+          <input onChange={ this.filterRecommendations } id="recommendations-filter" placeholder="Filter Countries" autoFocus />
         </div>
-        <div className="filter-wrapper">
-          <input onChange={ props.filterRecommendations } id="recommendations-filter" placeholder="Filter Countries" autoFocus />
-        </div>
-        <SelectedAnswersChips chipsArr={ props.chipsArr }/>
+        <SelectedAnswersChips chipsArr={ chipsArr }/>
       </div>
       <br/>
       <div className="recommendations">
-        <Modal id="modal" isOpen={ props.showCountryInfo } contentLabel="Recommended Country Information" onRequestClose={ () => props.displayCountryInformationModal({}) } shouldCloseOnOverlayClick={ true }>
-          <button className="favoritebtn" onClick={ () => props.renameThisFnLater(props.selectedCountry, props.selectedCountryId) }><MaterialIcon icon={ favoritesIds.includes(props.selectedCountry.id) ? "favorite" : "favorite_border" } size="medium" color="#d10808"/></button>
+        <Modal id="modal" isOpen={ this.state.showCountryInfo } contentLabel="Recommended Country Information" onRequestClose={ () => this.displayCountryInformationModal({}) } shouldCloseOnOverlayClick={ true }>
+          <button className="favoritebtn" onClick={ () => this.updateUserFavorites(this.state.selectedCountry, this.state.selectedCountryId) }><MaterialIcon icon={ favoritesIds.includes(this.state.selectedCountry.id) ? "favorite" : "favorite_border" } size="medium" color="#d10808"/></button>
           <div className="modal-container">
-            { (Object.keys(props.selectedCountry).length !== 0) && <CountryInfo country={ props.selectedCountry } countryIndex={ props.selectedCountryId } pointsOfInterest={ props.pois } /> }
+            { (Object.keys(this.state.selectedCountry).length !== 0) && <CountryInfo country={ this.state.selectedCountry } countryIndex={ this.state.selectedCountryId } pointsOfInterest={ this.props.pois } /> }
           </div>
         </Modal>
         {
-          props.recommendationsArr.map((country, countryIndex) => {
-            if (country.name.toLowerCase().startsWith(props.countryName.toLowerCase()) || country.name.toLowerCase().includes(props.countryName.toLowerCase())) {
+          this.props.recommendations.map((country, countryIndex) => {
+            if (country.name.toLowerCase().startsWith(this.state.countryName.toLowerCase()) || country.name.toLowerCase().includes(this.state.countryName.toLowerCase())) {
               const imageURL = JSON.parse(country.images)[0]
-              return <div className="recommendedCountry-div" onClick={ () => props.displayCountryInformationModal(country, countryIndex) } style={{ backgroundImage: `url(${imageURL})` }}>
+              return <div className="recommendedCountry-div" onClick={ () => this.displayCountryInformationModal(country, countryIndex) } style={{ backgroundImage: `url(${imageURL})` }}>
                 { favoritesIds.includes(country.id) && <button className="recommended-fav-icon"><MaterialIcon className="favd-recommendation" icon="favorite" size="medium" color="#d10808"/></button> }
                 <p className="recommendation-name">{ `${country.name}` }</p>
               </div>
@@ -44,22 +126,17 @@ function Recommendations (props) {
         }
       </div>
     </div>
-  )
+  )}
 }
 
-// Recommendations.propTypes = {
-//   recommendationsArr: PropTypes.array.isRequired,
-//   displayCountryInformationModal: PropTypes.func.isRequired,
-//   countryName: PropTypes.string.isRequired,
-//   chipsArr: PropTypes.array.isRequired,
-//   returnToQuiz: PropTypes.func.isRequired,
-//   retakeQuiz: PropTypes.func.isRequired,
-//   filterRecommendations: PropTypes.func.isRequired,
-//   displayCountryInformationModal: PropTypes.func.isRequired,
-//   showCountryInfo: PropTypes.bool.isRequired,
-//   selectedCountry: PropTypes.obj.isRequired,
-//   selectedCountryId: PropTypes.number.isRequired,
-//   pois: PropTypes.array.isRequired
-// }
+function mapStateToProps (state) {
+  return { recommendations: state.form.recommendations, favorites: state.form.favorites.countries, questions: state.form.questions, pois: state.form.pois }
+}
 
-export default Recommendations
+function mapDispatchToProps (dispatch) {
+  return bindActionCreators({
+    selectAnswerChoice, submitUserQuiz, updateQuizAnswers, retakeQuiz, fetchUserFavorites, removeFromFavorites, addToFavorites
+  }, dispatch)
+}
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Recommendations))
