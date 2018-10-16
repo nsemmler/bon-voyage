@@ -37,6 +37,8 @@
 }
 
 .brand-logo {
+  float: left;
+  position: static !important;
   padding-left: 25px !important;
   font-family: 'Pacifico', cursive;
 }
