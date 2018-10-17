@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Card, CardTitle } from 'react-materialize'
 import { withScriptjs, withGoogleMap, GoogleMap, Marker } from 'react-google-maps'
+import '../styling/Map.css'
 const { InfoBox } = require('react-google-maps/lib/components/addons/InfoBox')
 const { compose, withProps, withStateHandlers } = require('recompose')
 
@@ -35,24 +36,23 @@ const CountryMap = compose(
     {
       props.pointsOfInterest[props.countryIndex].map((poi, poiIndex) => {
         return <Marker position={{ lat: poi.latitude, lng: poi.longitude }} key={ `marker-${poiIndex}` } onClick={ () => props.onToggleOpen(poiIndex) }>
-          { props.isOpen[poiIndex] && <InfoBox id={ `infobox-${poiIndex}` } onCloseClick={ () => props.onToggleOpen(poiIndex) } key={ `countryinfobox-${poiIndex}` } options={{ closeBoxURL: '', enableEventPropagation: true }} >
-            <div style={{ opacity: 1, padding: '4px' }}>
-              <div style={{ fontSize: '14px', fontColor: 'black' }}>
-
-                {
-                  poi.wikipedia_link ? <Card className='poi-card' key={ `poi-card-key-${poiIndex}` }
-                    header={<CardTitle image={ JSON.parse(poi.image)[poiIndex] }>{ poi.name }<div className="badge score-badge">{ poi.score.toFixed(1) }</div></CardTitle>}
+          {
+            props.isOpen[poiIndex] && <InfoBox id={ `infobox-${poiIndex}` } className="poi-infobox" onCloseClick={ () => props.onToggleOpen(poiIndex) } key={ `countryinfobox-${poiIndex}` } options={{ closeBoxURL: '', enableEventPropagation: true }} >
+              {
+                poi.wikipedia_link ?
+                  <Card className='poi-card' key={ `poi-card-key-${poiIndex}` }
+                    header={<CardTitle image={ JSON.parse(poi.image)[poiIndex] }><div className="badge score-badge">{ poi.score.toFixed(1) }</div>{ poi.name }</CardTitle>}
                     actions={[<a href={ poi.wikipedia_link } target="_blank">Read More</a>]}>
                     { poi.description }
-                  </Card> : <Card className='poi-card'
+                  </Card>
+                :
+                  <Card className='poi-card'
                     header={<CardTitle image={ JSON.parse(poi.image)[poiIndex] }>{ poi.name }<div className="badge score-badge">{ poi.score.toFixed(1) }</div></CardTitle>}>
                     { poi.description }
                   </Card>
-                }
-
-              </div>
-            </div>
-          </InfoBox> }
+              }
+            </InfoBox>
+          }
         </Marker>
       })
     }
