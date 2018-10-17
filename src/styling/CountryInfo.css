@@ -19,10 +19,17 @@
 
 .map-container {
   grid-area: "map";
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
 }
 
 .info-container {
   grid-area: "general";
+}
+
+.info-div {
+  font-family: 'Quicksand', cursive;
 }
 
 .images-container {
@@ -30,8 +37,17 @@
 }
 
 .img-carousel {
-  width: 600px;
-  margin-top: 20px;
+  height: 100% !important;
+  margin-top: 20px !important;
+  margin-right: 20px !important;
+}
+
+.carousel, .carousel-div {
+  height: 100% !important;
+}
+
+.control-arrow {
+  height: 400px !important;
 }
 
 .general-info-container {
@@ -45,6 +61,29 @@
   height: auto;
 }
 
+.images-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: -20px;
+  margin-right: 20px;
+  font-family: 'Quicksand', cursive;
+}
+
+.moreimgs-link {
+  margin-top: 15px;
+}
+
+.fav-btn:focus, .fav-btn:active {
+  background-color: buttonface !important;
+}
+
+.fav-btn {
+  height: 38px;
+  width: 150px;
+  padding: 0px !important;
+}
+
 .countryflag {
   height: 200px;
   width: auto;
@@ -56,11 +95,11 @@
 }
 
 .country-name {
-  margin-bottom: 4px !important;
+  margin: 0px !important;
 }
 
 .country-capital {
-  margin-top: 4px !important;
+  margin: 0px !important;
 }
 
 .country-capital {

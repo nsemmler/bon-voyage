@@ -26,7 +26,7 @@ class Quiz extends Component {
     e.preventDefault()
     var quiz = this.props.form.questions
     await this.props.submitUserQuiz(quiz)
-    if (this.props.form.recommendations.length) this.props.history.push("/recommendations")
+    this.props.history.push("/recommendations")
   }
 
   toggleAnswerChoice = (e, id) => {

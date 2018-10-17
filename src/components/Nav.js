@@ -4,7 +4,7 @@ import { userLogout } from '../actions/auth.actions'
 import { connect } from 'react-redux'
 import { Navbar, NavItem } from 'react-materialize'
 import { createHashHistory } from 'history'
-import { withRouter, Link } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import '../styling/Nav.css'
 
 export const history = createHashHistory()
@@ -32,7 +32,7 @@ class Nav extends Component {
             (localStorage.getItem('token')) ?
               <div>
                 <NavItem href="/favorites">Favorites</NavItem>
-                <NavItem href="/quiz">Take Quiz</NavItem>
+                <NavItem href="/quiz">Quiz</NavItem>
                 <NavItem onClick={ this.logoutUser } href="/logout">Logout</NavItem>
               </div>
               :
