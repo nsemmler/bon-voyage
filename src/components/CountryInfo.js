@@ -15,7 +15,7 @@ function CountryInfo (props) {
         <div className="images-container">
           <div className="images-header">
             <h5>Images:</h5>
-            <a className="moreimgs-link" href={ `https://www.bing.com/images/search?q=${props.country.name}` }>See more images</a>
+            <a className="moreimgs-link" href={ `https://www.bing.com/images/search?q=${props.country.name}%20tourist%20attractions` } target="_blank">See more images</a>
           </div>
           { <CountryImages country={ props.country } /> }
         </div>
