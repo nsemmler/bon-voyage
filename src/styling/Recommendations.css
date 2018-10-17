@@ -68,7 +68,6 @@
 .recommendations {
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
   flex-wrap: wrap;
 }
 
@@ -77,12 +76,15 @@
   width: 350px;
   height: 260px;
   border: 2px solid black;
-  margin: 8px 0 8px 0;
+  margin: 8px 0 8px 13px;
   background-size: cover;
   background-position: center;
 }
 
 .recommendation-name {
+  font-family: 'Quicksand', sans-serif;
+  font-weight: bold;
+  text-shadow: 2px 2px black;
   color: white;
   font-size: 22px;
   position: absolute;
