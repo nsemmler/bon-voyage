@@ -11,7 +11,8 @@ export const USER_LOGOUT = "USER_LOGOUT"
 
 window.axios = axios
 
-const BASE_URL = (process.env.NODE_ENV === 'production') ? "bon-voyage-api.herokuapp.com" : "http://localhost:3000"
+// const BASE_URL = (process.env.NODE_ENV === 'production') ? "bon-voyage-api.herokuapp.com" : "http://localhost:3000"
+const BASE_URL = "https://bon-voyage-api.herokuapp.com"
 
 export const userLogin = ({ email, password }) => {
   return async (dispatch) => {

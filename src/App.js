@@ -11,10 +11,10 @@ import './App.css'
 
 export default function App () {
   return (
-    <Router>
-      <div className="App">
-        <Nav />
+    <div className="App">
+      <Router>
         <div className="main-container">
+          <Nav />
           <Switch>
             <Route exact path="/login" component={ Login } />
             <Route exact path="/signup" component={ Signup } />
@@ -24,7 +24,7 @@ export default function App () {
             <Redirect to="/favorites" />
           </Switch>
         </div>
-      </div>
-    </Router>
+      </Router>
+    </div>
   )
 }
