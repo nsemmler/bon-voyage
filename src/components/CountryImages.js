@@ -14,7 +14,7 @@ function CountryImages (props) {
       {
         imagesArr.map((url, index) => {
           return <div className="carousel-div" key={ index }>
-             <img src={ url } />
+             <img src={ url.replace("http://", "https://") } alt={ `${props.country.name} tourist attriaction ${index}` } />
              <p>Legend</p>
           </div>
         })
