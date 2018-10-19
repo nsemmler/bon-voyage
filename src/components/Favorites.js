@@ -86,7 +86,12 @@ class Favorites extends Component {
                 })
               :
                 <div className="empty-favorites">
-                  <p>You currently have no favorites.  To add countries to favorites, take the Quiz and click the heart container for any country.</p>
+                  <div className="nofavs-desc-container">
+                    <p>You have no favorites.  To add countries to favorites, take the Quiz and click the heart container for any country.</p>
+                  </div>
+                  <div className="nofavs-img-container">
+                    <img src="https://image.ibb.co/krAJML/world-travel.jpg" alt="World Travel - Designed by Alvaro Cabrera" className="nofavs-img" border="0" />
+                  </div>
                 </div>
             }
           </div>
