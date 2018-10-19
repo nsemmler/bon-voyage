@@ -34,10 +34,10 @@ class Recommendations extends Component {
     if (!this.props.isLoading) await this.props.fetchUserFavorites(userId, token)
   }
 
-  returnToQuiz = (e) => {
-    e.preventDefault()
-    this.props.updateQuizAnswers()
-  }
+  // returnToQuiz = (e) => {
+  //   e.preventDefault()
+  //   this.props.updateQuizAnswers()
+  // }
 
   updateUserFavorites = async (country={}, countryIndex=0) => {
     const token = localStorage.getItem('token')
@@ -67,17 +67,17 @@ class Recommendations extends Component {
     })
   }
 
-  retakeQuiz = (e) => {
-    e.preventDefault()
-
-    this.setState({
-      questionIndex: 0,
-      questionNum: this.props.form.questions[0].id,
-      questionName: this.props.form.questions[0].name,
-    })
-
-    this.props.retakeQuiz()
-  }
+  // retakeQuiz = (e) => {
+  //   e.preventDefault()
+  //
+  //   this.setState({
+  //     questionIndex: 0,
+  //     questionNum: this.props.form.questions[0].id,
+  //     questionName: this.props.form.questions[0].name,
+  //   })
+  //
+  //   this.props.retakeQuiz()
+  // }
 
   createChipsArr = (questions) => {
     return questions.map((question, i) => {
@@ -99,9 +99,7 @@ class Recommendations extends Component {
       <div className="Recommendations">
         <div className="recommendations-header-container">
           <div className="quiz-buttons-and-header">
-            <button className="btn back2quiz" onClick={ this.returnToQuiz } waves="light" type="button">Update Quiz</button>
             <h5 className="recommendations-header">Recommendations:</h5>
-            <button className="btn retakeQuiz" onClick={ this.retakeQuiz } waves="light" type="button">Retake Quiz</button>
           </div>
           <div className="filter-wrapper">
           <input onChange={ this.filterRecommendations } id="recommendations-filter" placeholder="Filter Countries" autoFocus />
