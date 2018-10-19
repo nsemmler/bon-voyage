@@ -2,6 +2,7 @@ import React from 'react'
 import Login from './components/Login'
 import Signup from './components/Signup'
 import Nav from './components/Nav'
+import Footer from './components/Footer'
 import Favorites from './components/Favorites'
 import Quiz from './components/Quiz'
 import Recommendations from './components/Recommendations'
@@ -11,8 +12,8 @@ import './App.css'
 
 export default function App () {
   return (
-    <div className="App">
-      <Router>
+    <Router>
+      <div className="App">
         <div className="main-container">
           <Nav />
           <Switch>
@@ -24,7 +25,8 @@ export default function App () {
             <Redirect to="/favorites" />
           </Switch>
         </div>
-      </Router>
-    </div>
+        <Footer />
+      </div>
+    </Router>
   )
 }
