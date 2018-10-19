@@ -26,19 +26,19 @@ class Nav extends Component {
 
   render() {
     return (
-      <div>
+      <div className="nav-container">
         <Navbar brand="Bon Voyage" right>
           {
             (localStorage.getItem('token')) ?
-              <div>
-                <NavItem href="/favorites">Favorites</NavItem>
-                <NavItem href="/quiz">Quiz</NavItem>
-                <NavItem onClick={ this.logoutUser } href="/logout">Logout</NavItem>
+              <div className="nav-links">
+                <NavItem className="navlink" href="/favorites">Favorites</NavItem>
+                <NavItem className="navlink" href="/quiz">Quiz</NavItem>
+                <NavItem className="navlink" onClick={ this.logoutUser } href="/logout">Logout</NavItem>
               </div>
               :
-              <div>
-                <NavItem href="/login">Login</NavItem>
-                <NavItem href="/signup">Signup</NavItem>
+              <div className="nav-links">
+                <NavItem className="navlink" href="/login">Login</NavItem>
+                <NavItem className="navlink" href="/signup">Signup</NavItem>
               </div>
           }
         </Navbar>
