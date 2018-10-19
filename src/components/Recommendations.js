@@ -102,35 +102,36 @@ class Recommendations extends Component {
             <h5 className="recommendations-header">Recommendations:</h5>
           </div>
           <div className="filter-wrapper">
-          <input onChange={ this.filterRecommendations } id="recommendations-filter" placeholder="Filter Countries" autoFocus />
-        </div>
-        <SelectedAnswersChips chipsArr={ chipsArr }/>
-      </div>
-      <br/>
-      <div className="recommendations">
-        <Modal id="modal" isOpen={ this.state.showCountryInfo } contentLabel="Country Information" onRequestClose={ () => this.displayCountryInformationModal({}) } shouldCloseOnOverlayClick={ true }>
-          <div className="modal-container">
-            { (Object.keys(this.state.selectedCountry).length !== 0) && <CountryInfo country={ this.state.selectedCountry } countryIndex={ this.state.selectedCountryId } pointsOfInterest={ this.props.pois } updateUserFavorites={ this.updateUserFavorites } favorites={ this.props.favorites } /> }
+            <input onChange={ this.filterRecommendations } id="recommendations-filter" placeholder="Filter Countries" autoFocus />
           </div>
-        </Modal>
-        { (this.props.recommendations.length) ?
-            this.props.recommendations.map((country, countryIndex) => {
-              if (country.name.toLowerCase().startsWith(this.state.countryName.toLowerCase()) || country.name.toLowerCase().includes(this.state.countryName.toLowerCase())) {
-                const imageURL = JSON.parse(country.images)[0]
-                return <div className="recommendedCountry-div" onClick={ () => this.displayCountryInformationModal(country, countryIndex) } style={{ backgroundImage: `url(${imageURL})` }}>
-                  { favoritesIds.includes(country.id) && <div className="recommended-fav-icon"><MaterialIcon icon="favorite" size="small" color="#d10808"/></div> }
-                  <p className="recommendation-name">{ `${country.name}` }</p>
-                </div>
-              }
-            })
-          :
-            <div className="empty-recommendations">
-              <p>No countries fit your search criteria.  Please try again.</p>
+          {/* <SelectedAnswersChips chipsArr={ chipsArr }/> */}
+        </div>
+        <br/>
+        <div className="recommendations">
+          <Modal id="modal" isOpen={ this.state.showCountryInfo } contentLabel="Country Information" onRequestClose={ () => this.displayCountryInformationModal({}) } shouldCloseOnOverlayClick={ true }>
+            <div className="modal-container">
+              { (Object.keys(this.state.selectedCountry).length !== 0) && <CountryInfo country={ this.state.selectedCountry } countryIndex={ this.state.selectedCountryId } pointsOfInterest={ this.props.pois } updateUserFavorites={ this.updateUserFavorites } favorites={ this.props.favorites } /> }
             </div>
-        }
+          </Modal>
+          { (this.props.recommendations.length) ?
+              this.props.recommendations.map((country, countryIndex) => {
+                if (country.name.toLowerCase().startsWith(this.state.countryName.toLowerCase()) || country.name.toLowerCase().includes(this.state.countryName.toLowerCase())) {
+                  const imageURL = JSON.parse(country.images)[0]
+                  return <div className="recommendedCountry-div" onClick={ () => this.displayCountryInformationModal(country, countryIndex) } style={{ backgroundImage: `url(${imageURL})` }}>
+                    { favoritesIds.includes(country.id) && <div className="recommended-fav-icon"><MaterialIcon icon="favorite" size="small" color="#d10808"/></div> }
+                    <p className="recommendation-name">{ `${country.name}` }</p>
+                  </div>
+                }
+              })
+            :
+              <div className="empty-recommendations">
+                <p>No countries fit your search criteria.  Please try again.</p>
+              </div>
+          }
+        </div>
       </div>
-    </div>
-  )}
+    )
+  }
 }
 
 function mapStateToProps (state) {
