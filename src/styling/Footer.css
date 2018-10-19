@@ -1,0 +1,46 @@
+.footer {
+  position: absolute;
+  bottom: 0;
+  height: 52px;
+  width: 100%;
+  overflow:hidden;
+  background: #343477;
+  color: #b3b3cc;
+  font-family: 'Quicksand', sans-serif;
+  padding: 10px;
+  display: grid;
+  grid-template-rows: 100%;
+  grid-template-columns: 20% 60% 20%;
+  grid-template-areas: "empty links copyright";
+  justify-content: space-between;
+}
+
+.empty-footer-div {
+  grid-area: "empty-footer-div";
+}
+
+.copyright-div {
+  grid-area: "copyright";
+  display: flex;
+  justify-content: center;
+}
+
+.copyright {
+  color: white;
+  margin: auto 0px auto 0px;
+  float: right;
+}
+
+.footer-links {
+  grid-area: "links";
+  display: flex;
+  justify-content: center;
+}
+
+.footer-link {
+  margin: 0px 12px 0px 12px;
+}
+
+.fab {
+  color: white;
+}
