@@ -25,6 +25,7 @@
 }
 
 .quiz-container {
+  background: white;
   display: grid;
   grid-template-columns: auto;
   grid-template-rows: auto;
@@ -34,7 +35,6 @@
   border: 2px solid black;
   width: 80%;
   padding: 1%;
-  margin-bottom: 200px;
   align-self: center;
 }
 
@@ -58,9 +58,16 @@
   grid-area: "answer-choices";
 }
 
+.question, .questionCount, .inputs-container {
+  font-family: 'Quicksand', sans-serif;
+  font-weight: bolder;
+}
+
 .prev-next-questions-btns {
   margin-top: 10px;
   float: right;
+  font-family: 'Quicksand', sans-serif;
+  font-weight: bolder;
 }
 
 .prevbtn {

@@ -7,10 +7,20 @@
   justify-content: center;
 
   width: 80%;
-  /* border: 1px solid black; */
+  /* background: white; */
   padding: 20px;
   margin-left: 10%;
   margin-bottom: 5%;
+  min-height: 100%;
+  /* margin-bottom: -52px; */
+  position: relative;
+
+  flex: 1 0 auto;
+}
+
+.Favorites:after {
+  content: "";
+  display: block;
 }
 
 .favorites-header-container {
@@ -27,6 +37,7 @@
 .favorites {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
 }
 
 .favoriteCountry {

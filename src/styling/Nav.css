@@ -1,39 +1,21 @@
 .nav-wrapper {
   background: #343477;
-}
-
-.workshift-navitem {
-  background: #343477;
-  color: white;
-  border: none;
-  max-height: 64px;
-  font-family: 'Quicksand', sans-serif;
-  font-weight: bold;
-  margin: 0px 4px 0px 4px;
-}
-
-.workshift-navitem:hover {
-  background: #3c3c84;
-}
-
-.workshift-navitem:active {
-  background: #343477;
-}
-
-.workshift-navitem:focus {
-  background: #343477;
+  border-bottom: 1px solid black;
 }
 
 .navlink:hover {
   background: #3c3c84;
+  border-bottom: 3px solid black;
 }
 
 .navlink:active {
   background: #343477;
+  border-bottom: 3px solid black;
 }
 
 .navlink:focus {
   background: #343477;
+  border-bottom: 3px solid black;
 }
 
 .brand-logo {
