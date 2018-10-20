@@ -8,9 +8,9 @@
   width: 80%;
   padding: 20px;
   margin-left: 10%;
-  margin-bottom: 5%;
   min-height: 100%;
   position: relative;
+  margin-bottom: 52px;
 }
 
 .Favorites:after {
@@ -54,12 +54,16 @@
   height: 260px;
   max-width: 350px;
   max-height: 260px;
-  border: 2px solid black;
-  margin: 8px 0 8px 14px;
+  margin: 8px 0 8px 12px;
   background-size: cover;
   background-position: center;
+  background-repeat: no-repeat;
   overflow: hidden;
   transition: all 0.3s ease-in-out;
+}
+
+.favoriteCountry-div:hover {
+  cursor: pointer;
 }
 
 .favorite-name {
@@ -86,21 +90,14 @@
 .empty-favorites {
   font-family: 'Quicksand', sans-serif;
   font-weight: bold;
+  display: flex;
+  justify-content: center;
+  width: 100%;
 }
 
 .nofavs-desc-container {
   display: flex;
   justify-content: center;
-}
-
-.nofavs-img-container {
-  width: 800px;
-  height: 300px;
-  max-width: 800px;
-  max-height: 300px;
-  background-position: 50% 50%;
-  overflow: hidden;
-  margin-bottom: 20px;
 }
 
 .nofavs-img-container img {

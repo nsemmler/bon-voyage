@@ -58,6 +58,11 @@
   grid-area: "answer-choices";
 }
 
+/* div surrounding the quiz answer choices */
+.inputs-container {
+  padding: 5px;
+}
+
 .question, .questionCount, .inputs-container {
   font-family: 'Quicksand', sans-serif;
   font-weight: bolder;

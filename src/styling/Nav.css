@@ -1,20 +1,42 @@
-.nav-wrapper {
-  background: #343477;
+.nav {
+  background: #531C42 !important;
+  opacity: 0.8;
   border-bottom: 1px solid black;
 }
 
+nav {
+  background: none !important;
+}
+
+.nav-items {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-right: 14px;
+}
+
+#logo {
+  margin-left: 14px;
+  font-family: 'Pacifico', cursive;
+  font-size: 34px;
+}
+
+.navlink {
+  padding: 20px 14px 20px 14px;
+}
+
 .navlink:hover {
-  background: #3c3c84;
+  background: #581845;
   border-bottom: 3px solid black;
 }
 
 .navlink:active {
-  background: #343477;
+  background: #581845;
   border-bottom: 3px solid black;
 }
 
 .navlink:focus {
-  background: #343477;
+  background: #581845;
   border-bottom: 3px solid black;
 }
 

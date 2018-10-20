@@ -58,11 +58,6 @@ input:focus {
   font-size: 14pt;
 }
 
-.inputs-container {
-  border: 1px solid grey;
-  padding: 5px;
-}
-
 #map {
   width: 100%;
   height: 100%;
@@ -84,7 +79,8 @@ input:focus {
 }
 
 .btn {
-  background: #AA8C39 !important;
+  background: #C3C22D !important;
+  opacity: 0.9;
 }
 
 /******************************************************************************/

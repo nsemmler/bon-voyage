@@ -8,7 +8,6 @@
   width: 80%;
   padding: 20px;
   margin-left: 10%;
-  margin-bottom: 5%;
   min-height: 100%;
   margin-bottom: 52px;
   position: relative;
@@ -17,6 +16,34 @@
 .Recommendations:after {
   content: "";
   display: block;
+}
+
+.recommendations {
+  display: flex;
+  flex-direction: column;
+
+  border: 2px solid black;
+  padding: 20px 0 20px 0;
+  background: white;
+}
+
+.line {
+  border-top: none !important;
+  border-bottom: 1px solid black;
+  height: 1px;
+  width: 99%;
+  margin: auto;
+}
+
+.subregion-header {
+  font-family: 'Quicksand', sans-serif;
+  margin-left: 8px;
+}
+
+.subregion-recommendations {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
 }
 
 .recommendations-header-container {
@@ -71,23 +98,18 @@
   width: 80%;
 }
 
-/* .recommendations {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  border: 2px solid black;
-  padding: 20px 0 20px 0;
-  background: white;
-} */
-
 .recommendedCountry-div {
   position: relative;
   width: 350px;
   height: 260px;
-  border: 2px solid black;
-  margin: 8px 0 8px 14px;
+  margin: 8px 0 8px 12px;
   background-size: cover;
+  background-repeat: no-repeat;
   background-position: center;
+}
+
+.recommendedCountry-div:hover {
+  cursor: pointer;
 }
 
 .recommendation-name {
@@ -110,41 +132,4 @@
   display: flex;
   justify-content: center;
   width: 100%;
-}
-
-
-
-
-
-
-
-
-
-
-.recommendations {
-  display: flex;
-  flex-direction: column;
-
-  border: 2px solid black;
-  padding: 20px 0 20px 0;
-  background: white;
-}
-
-.line {
-  border-top: none !important;
-  border-bottom: 1px solid black;
-  height: 1px;
-  width: 99%;
-  margin: auto;
-}
-
-.subregion-header {
-  font-family: 'Quicksand', sans-serif;
-  margin-left: 8px;
-}
-
-.subregion-recommendations {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
 }
