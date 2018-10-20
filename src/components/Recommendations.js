@@ -43,7 +43,6 @@ class Recommendations extends Component {
 
       if (favoritesIds.includes(country.id)) {
         await this.props.removeFromFavorites(userId, country.id, token)
-        this.setState({ showCountryInfo: false })
       } else {
         await this.props.addToFavorites(userId, country.id, token)
       }
