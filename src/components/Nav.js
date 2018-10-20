@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 import { userLogout } from '../actions/auth.actions'
 import { connect } from 'react-redux'
-import { Navbar, NavItem } from 'react-materialize'
 import { createHashHistory } from 'history'
 import { withRouter } from 'react-router-dom'
 import '../styling/Nav.css'
@@ -27,21 +26,27 @@ class Nav extends Component {
   render() {
     return (
       <div className="nav-container">
-        <Navbar brand="Bon Voyage" right>
+        <nav className="nav">
           {
             (localStorage.getItem('token')) ?
-              <div className="nav-links">
-                <NavItem className="navlink" href="/favorites">Favorites</NavItem>
-                <NavItem className="navlink" href="/quiz">Quiz</NavItem>
-                <NavItem className="navlink" onClick={ this.logoutUser } href="/logout">Logout</NavItem>
+              <div className="nav-items">
+                <a id="logo" href="/">Bon Voyage</a>
+                <div className="nav-links">
+                  <a className="navlink" href="/favorites">Favorites</a>
+                  <a className="navlink" href="/quiz">Quiz</a>
+                  <a className="navlink" onClick={ this.logoutUser } href="/logout">Logout</a>
+                </div>
               </div>
               :
-              <div className="nav-links">
-                <NavItem className="navlink" href="/login">Login</NavItem>
-                <NavItem className="navlink" href="/signup">Signup</NavItem>
+              <div className="nav-items">
+                <a id="logo" href="/">Bon Voyage</a>
+                <div className="nav-links">
+                  <a className="navlink" href="/login">Login</a>
+                  <a className="navlink" href="/signup">Signup</a>
+                </div>
               </div>
           }
-        </Navbar>
+        </nav>
       </div>
     )
   }
