@@ -16,6 +16,7 @@ export class Signup extends Component {
 
   userSignup = (e) => {
     e.preventDefault()
+    
     if (this.state.email.length > 0 && this.state.password.length > 0) {
       this.props.userSignup(this.state)
       this.props.history.push("/login")
