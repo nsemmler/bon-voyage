@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux'
 import { withRouter } from 'react-router-dom'
 import Modal from 'react-modal'
 import CountryInfo from './CountryInfo'
+import ScrollToTop from 'react-scroll-up'
 import { fetchUserFavorites, removeFromFavorites, addToFavorites } from '../actions/form.actions'
 import '../styling/Favorites.css'
 
@@ -75,6 +76,9 @@ class Favorites extends Component {
                 { (Object.keys(this.state.selectedCountry).length !== 0) && <CountryInfo country={ this.state.selectedCountry } countryIndex={ this.state.selectedCountryId } pointsOfInterest={ this.props.pois } updateUserFavorites={ this.updateUserFavorites } favorites={ this.props.favorites } /> }
               </div>
             </Modal>
+            <ScrollToTop className="scrollToTop" showUnder={ 160 } style={{ bottom: 100, right: 50 }}>
+              <span><i class="far fa-3x fa-arrow-alt-circle-up"></i></span>
+            </ScrollToTop>
             { (this.props.favorites.length) ?
                 this.props.favorites.map((country, countryIndex) => {
                   if (country.name.toLowerCase().startsWith(this.state.countryName.toLowerCase()) || country.name.toLowerCase().includes(this.state.countryName.toLowerCase())) {
@@ -88,9 +92,6 @@ class Favorites extends Component {
                 <div className="empty-favorites">
                   <div className="nofavs-desc-container">
                     <p>You have no favorites.  To add countries to favorites, take the Quiz and click the heart container for any country.</p>
-                  </div>
-                  <div className="nofavs-img-container">
-                    <img src="https://image.ibb.co/krAJML/world-travel.jpg" alt="World Travel - Designed by Alvaro Cabrera" className="nofavs-img" border="0" />
                   </div>
                 </div>
             }

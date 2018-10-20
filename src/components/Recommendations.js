@@ -90,18 +90,14 @@ class Recommendations extends Component {
 
   render () {
     let favoritesIds = this.props.favorites.map(country => country.id)
-
     let subregionsArr = this.props.recommendations.map(country => country.subregion)
     let uniqueSubregions = Array.from(new Set(subregionsArr))
-
     let recommendationsObject = {}
+
     this.props.recommendations.map(country => {
       if (!Object.keys(recommendationsObject).includes(country.subregion)) recommendationsObject[country.subregion] = []
       recommendationsObject[country.subregion].push(country)
     })
-
-    console.log('uniqueSubregions', uniqueSubregions)
-    console.log('recommendationsObject', recommendationsObject)
 
     return (
       <div className="Recommendations">
@@ -120,17 +116,9 @@ class Recommendations extends Component {
               { (Object.keys(this.state.selectedCountry).length !== 0) && <CountryInfo country={ this.state.selectedCountry } countryIndex={ this.state.selectedCountryId } pointsOfInterest={ this.props.pois } updateUserFavorites={ this.updateUserFavorites } favorites={ this.props.favorites } /> }
             </div>
           </Modal>
-
-          <ScrollToTop showUnder={ 160 }>
+          <ScrollToTop className="scrollToTop" showUnder={ 160 } style={{ bottom: 100, right: 50 }}>
             <span><i class="far fa-3x fa-arrow-alt-circle-up"></i></span>
           </ScrollToTop>
-
-          {/* dont have a big conditional - render the headers dynamically using the
-          subregion that it has to be === to anyways...
-
-          iterate over object - use keys to make headers and lines, add values to
-          divs using same methedology - could maybe abstract at a later date/time? */}
-
           {
             (this.props.recommendations.length) ?
               uniqueSubregions.map(subregion => {
@@ -141,24 +129,6 @@ class Recommendations extends Component {
                 <p>No countries fit your search criteria.  Please try again.</p>
               </div>
           }
-
-          {/* {
-            (this.props.recommendations.length) ?
-              this.props.recommendations.map((country, countryIndex) => {
-                if (country.name.toLowerCase().startsWith(this.state.countryName.toLowerCase()) || country.name.toLowerCase().includes(this.state.countryName.toLowerCase())) {
-                  const imageURL = JSON.parse(country.images)[0]
-
-                  return <div className="recommendedCountry-div" onClick={ () => this.displayCountryInformationModal(country, countryIndex) } style={{ backgroundImage: `url(${imageURL})` }}>
-                    { favoritesIds.includes(country.id) && <div className="recommended-fav-icon"><MaterialIcon icon="favorite" size="small" color="#d10808"/></div> }
-                    <p className="recommendation-name">{ `${country.name}` }</p>
-                  </div>
-                }
-              })
-            :
-              <div className="empty-recommendations">
-                <p>No countries fit your search criteria.  Please try again.</p>
-              </div>
-          } */}
         </div>
       </div>
     )
