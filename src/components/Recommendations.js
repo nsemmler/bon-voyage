@@ -5,7 +5,7 @@ import { withRouter } from 'react-router-dom'
 import MaterialIcon from 'material-icons-react'
 import Modal from 'react-modal'
 import CountryInfo from './CountryInfo'
-import SelectedAnswersChips from './SelectedAnswersChips'
+import ScrollToTop from 'react-scroll-up'
 import { selectAnswerChoice, submitUserQuiz, updateQuizAnswers, retakeQuiz, fetchUserFavorites, removeFromFavorites, addToFavorites } from '../actions/form.actions'
 import '../styling/Recommendations.css'
 
@@ -33,11 +33,6 @@ class Recommendations extends Component {
     const userId = parseInt(localStorage.getItem('userId'))
     if (!this.props.isLoading) await this.props.fetchUserFavorites(userId, token)
   }
-
-  // returnToQuiz = (e) => {
-  //   e.preventDefault()
-  //   this.props.updateQuizAnswers()
-  // }
 
   updateUserFavorites = async (country={}, countryIndex=0) => {
     const token = localStorage.getItem('token')
@@ -67,33 +62,46 @@ class Recommendations extends Component {
     })
   }
 
-  // retakeQuiz = (e) => {
-  //   e.preventDefault()
-  //
-  //   this.setState({
-  //     questionIndex: 0,
-  //     questionNum: this.props.form.questions[0].id,
-  //     questionName: this.props.form.questions[0].name,
-  //   })
-  //
-  //   this.props.retakeQuiz()
-  // }
-
-  createChipsArr = (questions) => {
-    return questions.map((question, i) => {
-      return question.answer_choices.filter(ansr_choice => ansr_choice.checked).map(ansr_choice => ansr_choice.content)
-    })
-  }
-
   filterRecommendations = (e) => {
     e.preventDefault()
     this.setState({ countryName: e.target.value })
   }
 
+  generateSubregionBlock = (subregion, uniqueSubregions, favoritesIds, recommendationsObject) => {
+    return <div className="subregion-block">
+      <h5 className="subregion-header">{ subregion }</h5>
+      <hr className="line"></hr>
+      <div className="subregion-recommendations">
+        {
+          recommendationsObject[subregion].map((country, countryIndex) => {
+            if (country.name.toLowerCase().startsWith(this.state.countryName.toLowerCase()) || country.name.toLowerCase().includes(this.state.countryName.toLowerCase())) {
+              const imageURL = JSON.parse(country.images)[0]
+
+              return <div className="recommendedCountry-div" onClick={ () => this.displayCountryInformationModal(country, countryIndex) } style={{ backgroundImage: `url(${imageURL})` }}>
+                { favoritesIds.includes(country.id) && <div className="recommended-fav-icon"><MaterialIcon icon="favorite" size="small" color="#d10808"/></div> }
+                <p className="recommendation-name">{ `${country.name}` }</p>
+              </div>
+            }
+          })
+        }
+      </div>
+    </div>
+  }
 
   render () {
-    let chipsArr = this.createChipsArr(this.props.questions)
     let favoritesIds = this.props.favorites.map(country => country.id)
+
+    let subregionsArr = this.props.recommendations.map(country => country.subregion)
+    let uniqueSubregions = Array.from(new Set(subregionsArr))
+
+    let recommendationsObject = {}
+    this.props.recommendations.map(country => {
+      if (!Object.keys(recommendationsObject).includes(country.subregion)) recommendationsObject[country.subregion] = []
+      recommendationsObject[country.subregion].push(country)
+    })
+
+    console.log('uniqueSubregions', uniqueSubregions)
+    console.log('recommendationsObject', recommendationsObject)
 
     return (
       <div className="Recommendations">
@@ -104,7 +112,6 @@ class Recommendations extends Component {
           <div className="filter-wrapper">
             <input onChange={ this.filterRecommendations } id="recommendations-filter" placeholder="Filter Countries" autoFocus />
           </div>
-          {/* <SelectedAnswersChips chipsArr={ chipsArr }/> */}
         </div>
         <br/>
         <div className="recommendations">
@@ -113,10 +120,34 @@ class Recommendations extends Component {
               { (Object.keys(this.state.selectedCountry).length !== 0) && <CountryInfo country={ this.state.selectedCountry } countryIndex={ this.state.selectedCountryId } pointsOfInterest={ this.props.pois } updateUserFavorites={ this.updateUserFavorites } favorites={ this.props.favorites } /> }
             </div>
           </Modal>
-          { (this.props.recommendations.length) ?
+
+          <ScrollToTop showUnder={ 160 }>
+            <span><i class="far fa-3x fa-arrow-alt-circle-up"></i></span>
+          </ScrollToTop>
+
+          {/* dont have a big conditional - render the headers dynamically using the
+          subregion that it has to be === to anyways...
+
+          iterate over object - use keys to make headers and lines, add values to
+          divs using same methedology - could maybe abstract at a later date/time? */}
+
+          {
+            (this.props.recommendations.length) ?
+              uniqueSubregions.map(subregion => {
+                return this.generateSubregionBlock(subregion, uniqueSubregions, favoritesIds, recommendationsObject)
+              })
+            :
+              <div className="empty-recommendations">
+                <p>No countries fit your search criteria.  Please try again.</p>
+              </div>
+          }
+
+          {/* {
+            (this.props.recommendations.length) ?
               this.props.recommendations.map((country, countryIndex) => {
                 if (country.name.toLowerCase().startsWith(this.state.countryName.toLowerCase()) || country.name.toLowerCase().includes(this.state.countryName.toLowerCase())) {
                   const imageURL = JSON.parse(country.images)[0]
+
                   return <div className="recommendedCountry-div" onClick={ () => this.displayCountryInformationModal(country, countryIndex) } style={{ backgroundImage: `url(${imageURL})` }}>
                     { favoritesIds.includes(country.id) && <div className="recommended-fav-icon"><MaterialIcon icon="favorite" size="small" color="#d10808"/></div> }
                     <p className="recommendation-name">{ `${country.name}` }</p>
@@ -127,7 +158,7 @@ class Recommendations extends Component {
               <div className="empty-recommendations">
                 <p>No countries fit your search criteria.  Please try again.</p>
               </div>
-          }
+          } */}
         </div>
       </div>
     )
