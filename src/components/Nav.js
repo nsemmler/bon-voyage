@@ -30,7 +30,10 @@ class Nav extends Component {
           {
             (localStorage.getItem('token')) ?
               <div className="nav-items">
-                <a id="logo" href="/">Bon Voyage</a>
+                <div className="logo-container">
+                  <a id="logo" href="/">Bon Voyage</a>
+                  <div className="logo-div" />
+                </div>
                 <div className="nav-links">
                   <a className="navlink" href="/favorites">Favorites</a>
                   <a className="navlink" href="/quiz">Quiz</a>
@@ -39,7 +42,10 @@ class Nav extends Component {
               </div>
               :
               <div className="nav-items">
-                <a id="logo" href="/">Bon Voyage</a>
+                <div className="logo-container">
+                  <a id="logo" href="/">Bon Voyage</a>
+                  <div className="logo-div" />
+                </div>
                 <div className="nav-links">
                   <a className="navlink" href="/login">Login</a>
                   <a className="navlink" href="/signup">Signup</a>
