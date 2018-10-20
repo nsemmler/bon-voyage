@@ -79,14 +79,16 @@ input:focus {
 }
 
 .btn {
-  background: #C3C22D !important;
-  opacity: 0.9;
+  background: #1C532D !important;
+  opacity: 0.8;
 }
 
 /******************************************************************************/
 /* Login & Signup Forms */
 /******************************************************************************/
 .login-form {
+  font-family: 'Quicksand', cursive;
+  font-weight: bold;
   width: 900px;
   margin-top: 90px;
   padding: 15px;
@@ -95,6 +97,8 @@ input:focus {
 }
 
 .signup-form {
+  font-family: 'Quicksand', cursive;
+  font-weight: bold;
   width: 900px;
   margin-top: 90px;
   padding: 15px;
