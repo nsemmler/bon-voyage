@@ -1,6 +1,5 @@
 .nav {
-  background: #6F3563 !important;
-  /* opacity: 0.8; */
+  background: #29274C !important;
   border-bottom: 1px solid black;
 }
 
@@ -43,17 +42,17 @@ nav {
 }
 
 .navlink:hover {
-  background: #581845;
+  background: #29274C;
   border-bottom: 3px solid black;
 }
 
 .navlink:active {
-  background: #581845;
+  background: #29274C;
   border-bottom: 3px solid black;
 }
 
 .navlink:focus {
-  background: #581845;
+  background: #29274C;
   border-bottom: 3px solid black;
 }
 

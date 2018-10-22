@@ -129,7 +129,7 @@ class Recommendations extends Component {
           }
         </div>
         <ScrollToTop className="scrollToTop" showUnder={ 160 } style={
-          (media_query.matches) ? { bottom: 75, right: 50, zIndex: 0, display: "flex", position: "static", justifyContent: "flex-end", margin: "10px 10px 0px 0px" } : { bottom: 75, right: 50, zIndex: 0, position: "fixed" }
+          (media_query.matches) ? { bottom: 75, right: 50, zIndex: 0, display: "flex", position: "static", justifyContent: "flex-end", margin: "10px 10px 0px 0px", color: "#29274C" } : { bottom: 75, right: 50, zIndex: 0, position: "fixed", color: "#29274C" }
         }>
           <span><i className="far fa-3x fa-arrow-alt-circle-up"></i></span>
         </ScrollToTop>

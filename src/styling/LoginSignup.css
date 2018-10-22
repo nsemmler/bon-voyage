@@ -1,0 +1,39 @@
+/******************************************************************************/
+/* Login & Signup Forms */
+/******************************************************************************/
+.login-form {
+  font-family: 'Quicksand', cursive;
+  font-weight: bold;
+  width: 900px;
+  margin-top: 90px;
+  padding: 15px;
+  border: 2px solid #333333;
+  background: white;
+}
+
+.signup-form {
+  font-family: 'Quicksand', cursive;
+  font-weight: bold;
+  width: 900px;
+  margin-top: 90px;
+  padding: 15px;
+  border: 2px solid #333333;
+  background: white;
+}
+
+.login-signup-redirect {
+  margin-top: 10px;
+}
+
+.form-redirect {
+  margin-top: 10px;
+  padding: 6px;
+}
+
+.form-header {
+  margin-left: 10px;
+}
+
+input[type=password]+label:after, input[type=email]+label:after {
+  width: 400px;
+}

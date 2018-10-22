@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux'
 import { userSignup } from '../actions/auth.actions'
 import { Row, Input, Button, Preloader } from 'react-materialize'
 import { withRouter } from 'react-router-dom'
+import '../styling/LoginSignup.css'
 
 export class Signup extends Component {
   constructor (props) {
@@ -16,7 +17,7 @@ export class Signup extends Component {
 
   userSignup = (e) => {
     e.preventDefault()
-    
+
     if (this.state.email.length > 0 && this.state.password.length > 0) {
       this.props.userSignup(this.state)
       this.props.history.push("/login")

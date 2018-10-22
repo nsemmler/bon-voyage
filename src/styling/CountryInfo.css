@@ -87,6 +87,8 @@
   height: 38px;
   width: 150px;
   padding: 0px !important;
+  border-radius: 5px;
+  background: #EAEAEA;
 }
 
 .countryflag {

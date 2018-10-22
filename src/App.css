@@ -16,11 +16,6 @@
   padding-bottom: 0px;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
-}
-
 .App-header {
   background-color: #222;
   height: 150px;
@@ -32,26 +27,12 @@
   font-size: large;
 }
 
-@keyframes App-logo-spin {f
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
 input {
   border-bottom: 1px solid #343477 !important;
 }
 
 input:focus {
   box-shadow: 0px 1px 0px 0px #343477 !important;
-}
-
-/******************************************************************************/
-/* Main */
-/******************************************************************************/
-.Main {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 }
 
 .form-header {
@@ -74,61 +55,18 @@ input:focus {
   left: 50%;
 }
 
-.answerChoicesChips {
-  margin-top: 10px;
-}
-
 .btn {
   background: #1C532D !important;
   opacity: 0.8;
 }
 
 /******************************************************************************/
-/* Login & Signup Forms */
-/******************************************************************************/
-.login-form {
-  font-family: 'Quicksand', cursive;
-  font-weight: bold;
-  width: 900px;
-  margin-top: 90px;
-  padding: 15px;
-  border: 2px solid #333333;
-  background: white;
-}
-
-.signup-form {
-  font-family: 'Quicksand', cursive;
-  font-weight: bold;
-  width: 900px;
-  margin-top: 90px;
-  padding: 15px;
-  border: 2px solid #333333;
-  background: white;
-}
-
-.login-signup-redirect {
-  margin-top: 10px;
-}
-
-.form-redirect {
-  margin-top: 10px;
-  padding: 6px;
-}
-
-.form-header {
-  margin-left: 10px;
-}
-
-input[type=password]+label:after, input[type=email]+label:after {
-  width: 400px;
-}
-
-
-
-/******************************************************************************/
 /* Mobile View */
 /******************************************************************************/
 @media screen and (max-width: 700px) {
+  /*********************************************/
+  /* Nav */
+  /*********************************************/
   #logo {
     font-size: 24px;
   }
@@ -137,17 +75,13 @@ input[type=password]+label:after, input[type=email]+label:after {
     padding: 10px 8px 10px 8px;
   }
 
+  /*********************************************/
+  /* Favorites, Quiz, Recommendations */
+  /*********************************************/
   .Favorites, .Quiz, .Recommendations {
     width: 90%;
     padding: 20px 0px;
     margin-left: 5%;
-  }
-
-  .ReactModal__Content {
-    top: 50px !important;
-    bottom: 50px !important;
-    right: 0px !important;
-    left: 0px !important;
   }
 
   .recommendations, .favorites {
@@ -156,6 +90,7 @@ input[type=password]+label:after, input[type=email]+label:after {
 
   .recommendations-header-container {
     width: 100% !important;
+    margin-left: 0px;
   }
 
   .recommendedCountry-div {
@@ -169,6 +104,9 @@ input[type=password]+label:after, input[type=email]+label:after {
     padding: 2%;
   }
 
+  /*********************************************/
+  /* Footer */
+  /*********************************************/
   .footer {
     grid-template-columns: 1% 60% 39%;
   }
@@ -177,15 +115,24 @@ input[type=password]+label:after, input[type=email]+label:after {
     justify-content: flex-end;
   }
 
-  .tabs {
-    overflow-x: hidden;
-    overflow-y: hidden;
+  /*********************************************/
+  /* Login / Signup */
+  /*********************************************/
+
+  .login-form, .signup-form {
+    width: 95%;
+    margin-top: 90px;
+    padding: 15px;
   }
 
-  .flag-div {
-    background-size: cover;
-    background-position: center;
-    overflow: hidden;
+  /*********************************************/
+  /* Country Info */
+  /*********************************************/
+  .ReactModal__Content {
+    top: 50px !important;
+    bottom: 50px !important;
+    right: 0px !important;
+    left: 0px !important;
   }
 
   .CountryInfo-container {
@@ -207,15 +154,36 @@ input[type=password]+label:after, input[type=email]+label:after {
       "images"
   }
 
+  .tab a {
+    color: #29274C !important;
+  }
+
+  .tabs .indicator {
+    background-color: #29274C !important;
+  }
+
+  /*********************************************/
+  /* Country General Info */
+  /*********************************************/
   .general-info-container {
     flex-direction: column;
     margin-top: 10px;
   }
 
-  .map-container {
-    height: 350px;
+  .tabs {
+    overflow-x: hidden;
+    overflow-y: hidden;
   }
 
+  .flag-div {
+    background-size: cover;
+    background-position: center;
+    overflow: hidden;
+  }
+
+  /*********************************************/
+  /* Country Images */
+  /*********************************************/
   .img-carousel {
     margin: 10px 0px 0px 0px !important;
   }
@@ -233,6 +201,13 @@ input[type=password]+label:after, input[type=email]+label:after {
   .images-header {
     margin-bottom: 4px;
     margin-right: 0px;
+  }
+
+  /*********************************************/
+  /* Country Maps POIs */
+  /*********************************************/
+  .map-container {
+    height: 350px;
   }
 
   .poi-container {

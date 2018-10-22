@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { userLogin } from '../actions/auth.actions'
 import { Row, Input, Button, Preloader } from 'react-materialize'
 import { withRouter } from 'react-router-dom'
+import '../styling/LoginSignup.css'
 
 class Login extends Component {
   constructor (props) {
