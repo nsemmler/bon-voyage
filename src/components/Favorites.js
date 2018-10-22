@@ -21,7 +21,7 @@ class Favorites extends Component {
 
   async componentWillMount() {
     const token = localStorage.getItem('token')
-    const userId = parseInt(localStorage.getItem('userId'))
+    const userId = parseInt(localStorage.getItem('userId'), 10)
 
     if (!this.props.isLoading) await this.props.fetchUserFavorites(userId, token)
     Modal.setAppElement('body')
@@ -29,7 +29,7 @@ class Favorites extends Component {
 
   updateUserFavorites = async (country={}, countryIndex=0) => {
     const token = localStorage.getItem('token')
-    const userId = parseInt(localStorage.getItem('userId'))
+    const userId = parseInt(localStorage.getItem('userId'), 10)
 
     if (this.props.favorites.length) {
       const favoritesIds = this.props.favorites.map(country => country.id)

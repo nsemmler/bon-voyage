@@ -1,8 +1,5 @@
 import React, { Component } from 'react'
 import MaterialIcon from 'material-icons-react'
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
-import { withRouter } from 'react-router-dom'
 import '../styling/CountryInfo.css'
 
 class GeneralInfo extends Component {

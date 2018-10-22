@@ -18,14 +18,14 @@ const BASE_URL = "https://bon-voyage-api.herokuapp.com"
 export const fetchUserFavorites = (userId, token) => {
   return async (dispatch) => {
     var config = { headers: { 'Authorization': token, 'Content-Type': 'application/json' }}
-    let response = await axios.get(`${BASE_URL}/favorites?user_id=${parseInt(userId)}`, config)
+    let response = await axios.get(`${BASE_URL}/favorites?user_id=${parseInt(userId, 10)}`, config)
     dispatch({ type: GET_USER_FAVORITES, payload: response.data })
   }
 }
 
 export const addToFavorites = (userId, countryId, token) => {
   return async (dispatch) => {
-    var body = { country_id: parseInt(countryId), user_id: parseInt(userId) }
+    var body = { country_id: parseInt(countryId, 10), user_id: parseInt(userId, 10) }
     var config = { headers: { 'Authorization': token, 'Content-Type': 'application/json' }}
     let response = await axios.post(`${BASE_URL}/favorites`, body, config)
     dispatch({ type: ADD_COUNTRY_TO_FAVORITES, action: response.data })
@@ -34,7 +34,7 @@ export const addToFavorites = (userId, countryId, token) => {
 
 export const removeFromFavorites = (userId, countryId, token) => {
   return async (dispatch) => {
-    var config = { headers: { 'Authorization': token, 'Content-Type': 'application/json' }, data: { country_id: parseInt(countryId), user_id: parseInt(userId) } }
+    var config = { headers: { 'Authorization': token, 'Content-Type': 'application/json' }, data: { country_id: parseInt(countryId, 10), user_id: parseInt(userId, 10) } }
     let response = await axios.delete(`${BASE_URL}/favorites`, config)
     dispatch({ type: REMOVE_COUNTRY_FROM_FAVORITES, action: response.data })
   }
