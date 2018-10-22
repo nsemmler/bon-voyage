@@ -122,3 +122,132 @@ input:focus {
 input[type=password]+label:after, input[type=email]+label:after {
   width: 400px;
 }
+
+
+
+/******************************************************************************/
+/* Mobile View */
+/******************************************************************************/
+@media screen and (max-width: 700px) {
+  #logo {
+    font-size: 24px;
+  }
+
+  .navlink {
+    padding: 10px 8px 10px 8px;
+  }
+
+  .Favorites, .Quiz, .Recommendations {
+    width: 90%;
+    padding: 20px 0px;
+    margin-left: 5%;
+  }
+
+  .ReactModal__Content {
+    top: 50px !important;
+    bottom: 50px !important;
+    right: 0px !important;
+    left: 0px !important;
+  }
+
+  .recommendations, .favorites {
+    position: relative;
+  }
+
+  .recommendations-header-container {
+    width: 100% !important;
+  }
+
+  .recommendedCountry-div {
+    width: 95%;
+    min-width: 300px;
+    min-height: 220px;
+  }
+
+  .quiz-container {
+    width: 100%;
+    padding: 2%;
+  }
+
+  .footer {
+    grid-template-columns: 1% 60% 39%;
+  }
+
+  .footer-links {
+    justify-content: flex-end;
+  }
+
+  .tabs {
+    overflow-x: hidden;
+    overflow-y: hidden;
+  }
+
+  .flag-div {
+    background-size: cover;
+    background-position: center;
+    overflow: hidden;
+  }
+
+  .CountryInfo-container {
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: 50% 50%;
+    grid-template-areas:
+      "generalandimages"
+      "map";
+  }
+
+  .info-and-images-container {
+    grid-area: "generalandimages";
+    display: grid;
+    grid-template-rows: 30% 70%;
+    grid-template-columns: 100%;
+    grid-template-areas:
+      "general"
+      "images"
+  }
+
+  .general-info-container {
+    flex-direction: column;
+    margin-top: 10px;
+  }
+
+  .map-container {
+    height: 350px;
+  }
+
+  .img-carousel {
+    margin: 10px 0px 0px 0px !important;
+  }
+
+  .carousel-status {
+    text-shadow: 1px 1px 1px rgba(0,0,0,.9);
+    color: #fff;
+  }
+
+  .carousel-div {
+    background-color: white;
+    color: white;
+  }
+
+  .images-header {
+    margin-bottom: 4px;
+    margin-right: 0px;
+  }
+
+  .poi-container {
+    grid-template-columns: 150px 200px 25px;
+  }
+
+  .poi-card {
+    width: 254px;
+  }
+
+  .poi-card .card-image {
+    max-height: 200px;
+  }
+
+  .poi-card .card-title {
+    font-size: 20px;
+  }
+}
