@@ -1,4 +1,4 @@
-# [Bon Voyage](https://bonvoyage.surge.sh)
+# [Bon Voyage](https://voyage-capstone.herokuapp.com)
 
 <img src ="./public/screenshot-1.png">
 <img src ="./public/screenshot-2.png" width="450px">
