@@ -1,6 +1,7 @@
 # [Bon Voyage](https://bonvoyage.surge.sh)
 
-<img src ="./public/bon-voyage-screenshot.png">
+<img src ="./public/screenshot-1.png">
+<img src ="./public/screenshot-2.png">
 
 ### About
 Most travel sites provide users with the tools to help them plan and book their next
