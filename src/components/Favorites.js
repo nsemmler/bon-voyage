@@ -8,6 +8,8 @@ import ScrollToTop from 'react-scroll-up'
 import { fetchUserFavorites, removeFromFavorites, addToFavorites } from '../actions/form.actions'
 import '../styling/Favorites.css'
 
+const media_query = window.matchMedia( "(max-width: 700px)" )
+
 class Favorites extends Component {
   constructor(props) {
     super(props)
@@ -69,16 +71,13 @@ class Favorites extends Component {
           </div>
         </div>
         <br/>
+          <Modal isOpen={ this.state.showCountryInfo } contentLabel="Country Information" onRequestClose={ () => this.displayCountryInformationModal({}) } shouldCloseOnOverlayClick={ true }>
+            <div className="modal-container">
+              { (Object.keys(this.state.selectedCountry).length !== 0) && <CountryInfo country={ this.state.selectedCountry } countryIndex={ this.state.selectedCountryId } pointsOfInterest={ this.props.pois } updateUserFavorites={ this.updateUserFavorites } favorites={ this.props.favorites } /> }
+            </div>
+          </Modal>
         <div className="favorites-container" id="favorites">
           <div className="favorites">
-            <Modal isOpen={ this.state.showCountryInfo } contentLabel="Country Information" onRequestClose={ () => this.displayCountryInformationModal({}) } shouldCloseOnOverlayClick={ true }>
-              <div className="modal-container">
-                { (Object.keys(this.state.selectedCountry).length !== 0) && <CountryInfo country={ this.state.selectedCountry } countryIndex={ this.state.selectedCountryId } pointsOfInterest={ this.props.pois } updateUserFavorites={ this.updateUserFavorites } favorites={ this.props.favorites } /> }
-              </div>
-            </Modal>
-            <ScrollToTop className="scrollToTop" showUnder={ 160 } style={{ bottom: 100, right: 50 }}>
-              <span><i class="far fa-3x fa-arrow-alt-circle-up"></i></span>
-            </ScrollToTop>
             { (this.props.favorites.length) ?
                 this.props.favorites.map((country, countryIndex) => {
                   if (country.name.toLowerCase().startsWith(this.state.countryName.toLowerCase()) || country.name.toLowerCase().includes(this.state.countryName.toLowerCase())) {
@@ -96,6 +95,11 @@ class Favorites extends Component {
                 </div>
             }
           </div>
+          <ScrollToTop className="scrollToTop" showUnder={ 160 } style={
+            (media_query.matches) ? { bottom: 75, right: 50, zIndex: 0, display: "flex", position: "static", justifyContent: "flex-end", margin: "10px 10px 0px 0px" } : { bottom: 75, right: 50, zIndex: 0, position: "fixed" }
+          }>
+            <span><i className="far fa-3x fa-arrow-alt-circle-up"></i></span>
+          </ScrollToTop>
         </div>
       </div>
     )

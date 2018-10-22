@@ -8,12 +8,14 @@ const { compose, withProps, withStateHandlers } = require('recompose')
 
 const googleMapsURL = `https://maps.googleapis.com/maps/api/js?key=${ process.env.REACT_APP_GOOGLE_MAPS_KEY }`
 
+const media_query = window.matchMedia( "(max-width: 700px)" )
+
 const CountryMap = compose(
   withProps({
     googleMapURL: googleMapsURL,
-    loadingElement: <div style={{ height: `100%` }} />,
-    containerElement: <div style={{ height: `650px` }} />,
-    mapElement: <div style={{ height: `100%` }} />,
+    loadingElement: <div style={(media_query.matches) ? { height: `100%` } : { height: `100%` }} />,
+    containerElement: <div style={(media_query.matches) ? { height: `500px` } : { height: `650px` }} />,
+    mapElement: <div style={(media_query.matches) ? { height: `100%` } : { height: `100%` }} />,
   }),
   withStateHandlers(() => ({
     isOpen: {}

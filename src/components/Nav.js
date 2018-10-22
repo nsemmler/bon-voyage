@@ -7,6 +7,7 @@ import { withRouter } from 'react-router-dom'
 import '../styling/Nav.css'
 
 export const history = createHashHistory()
+const media_query = window.matchMedia( "(min-width: 420px)" )
 
 class Nav extends Component {
   constructor (props) {
@@ -31,7 +32,7 @@ class Nav extends Component {
             (localStorage.getItem('token')) ?
               <div className="nav-items">
                 <div className="logo-container">
-                  <a id="logo" href="/">Bon Voyage</a>
+                  <a id="logo" href="/">{ (media_query.matches) ? "Bon Voyage" : "" }</a>
                   <div className="logo-div" />
                 </div>
                 <div className="nav-links">

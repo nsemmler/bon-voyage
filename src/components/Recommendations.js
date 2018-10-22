@@ -9,6 +9,8 @@ import ScrollToTop from 'react-scroll-up'
 import { selectAnswerChoice, submitUserQuiz, updateQuizAnswers, retakeQuiz, fetchUserFavorites, removeFromFavorites, addToFavorites } from '../actions/form.actions'
 import '../styling/Recommendations.css'
 
+const media_query = window.matchMedia( "(max-width: 700px)" )
+
 class Recommendations extends Component {
   constructor(props) {
     super(props)
@@ -109,15 +111,12 @@ class Recommendations extends Component {
           </div>
         </div>
         <br/>
+        <Modal id="modal" isOpen={ this.state.showCountryInfo } contentLabel="Country Information" onRequestClose={ () => this.displayCountryInformationModal({}) } shouldCloseOnOverlayClick={ true }>
+          <div className="modal-container">
+            { (Object.keys(this.state.selectedCountry).length !== 0) && <CountryInfo country={ this.state.selectedCountry } countryIndex={ this.state.selectedCountryId } pointsOfInterest={ this.props.pois } updateUserFavorites={ this.updateUserFavorites } favorites={ this.props.favorites } /> }
+          </div>
+        </Modal>
         <div className="recommendations">
-          <Modal id="modal" isOpen={ this.state.showCountryInfo } contentLabel="Country Information" onRequestClose={ () => this.displayCountryInformationModal({}) } shouldCloseOnOverlayClick={ true }>
-            <div className="modal-container">
-              { (Object.keys(this.state.selectedCountry).length !== 0) && <CountryInfo country={ this.state.selectedCountry } countryIndex={ this.state.selectedCountryId } pointsOfInterest={ this.props.pois } updateUserFavorites={ this.updateUserFavorites } favorites={ this.props.favorites } /> }
-            </div>
-          </Modal>
-          <ScrollToTop className="scrollToTop" showUnder={ 160 } style={{ bottom: 100, right: 50 }}>
-            <span><i class="far fa-3x fa-arrow-alt-circle-up"></i></span>
-          </ScrollToTop>
           {
             (this.props.recommendations.length) ?
               uniqueSubregions.map(subregion => {
@@ -129,6 +128,11 @@ class Recommendations extends Component {
               </div>
           }
         </div>
+        <ScrollToTop className="scrollToTop" showUnder={ 160 } style={
+          (media_query.matches) ? { bottom: 75, right: 50, zIndex: 0, display: "flex", position: "static", justifyContent: "flex-end", margin: "10px 10px 0px 0px" } : { bottom: 75, right: 50, zIndex: 0, position: "fixed" }
+        }>
+          <span><i className="far fa-3x fa-arrow-alt-circle-up"></i></span>
+        </ScrollToTop>
       </div>
     )
   }
