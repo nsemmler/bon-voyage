@@ -38,9 +38,12 @@ class Quiz extends Component {
     e.preventDefault()
 
     if (this.state.questionIndex > 0) {
+      var questionIndex = this.state.questionIndex
+      var questionNum = this.state.questionNum
+
       this.setState({
-        questionIndex: --this.state.questionIndex,
-        questionNum: --this.state.questionNum
+        questionIndex: questionIndex - 1,
+        questionNum: questionNum - 1
       })
     }
   }
@@ -49,9 +52,12 @@ class Quiz extends Component {
     e.preventDefault()
 
     if (this.state.questionNum < this.state.numQuestions) {
+      var questionIndex = this.state.questionIndex
+      var questionNum = this.state.questionNum
+
       this.setState({
-        questionIndex: ++this.state.questionIndex,
-        questionNum: ++this.state.questionNum
+        questionIndex: questionIndex + 1,
+        questionNum: questionNum + 1
       })
     }
   }
