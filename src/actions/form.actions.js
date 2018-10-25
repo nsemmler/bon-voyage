@@ -13,7 +13,8 @@ export const CLEAR_USER_FAVORITES = "CLEAR_USER_FAVORITES"
 
 window.axios = axios
 
-const BASE_URL = "https://bon-voyage-api.herokuapp.com"
+// const BASE_URL = "https://bon-voyage-api.herokuapp.com"
+const BASE_URL = "http://localhost:3000/"
 
 export const fetchUserFavorites = (userId, token) => {
   return async (dispatch) => {
@@ -64,7 +65,7 @@ export const retakeQuiz = () => {
   }
 }
 
-export const submitUserQuiz = (quiz) => {
+export const submitUserQuiz = (quiz, history) => {
   var quizPayload = {}
 
   quiz.map((question, i) => {
@@ -121,7 +122,10 @@ export const submitUserQuiz = (quiz) => {
       }}
 
       let response = await axios.post(`${BASE_URL}/countries/quiz`, quizPayload, config)
-      dispatch({ type: SUBMIT_FORM, payload: response.data })
+      setTimeout(function() {
+        dispatch({ type: SUBMIT_FORM, payload: response.data })
+        history.push("/recommendations")
+      }, 2000)
     } catch (err) {
       dispatch({ type: FAILED_SUBMISSION, payload: err })
     }

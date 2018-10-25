@@ -11,16 +11,20 @@ export const USER_LOGOUT = "USER_LOGOUT"
 
 window.axios = axios
 
-const BASE_URL = "https://bon-voyage-api.herokuapp.com"
+// const BASE_URL = "https://bon-voyage-api.herokuapp.com"
+const BASE_URL = "http://localhost:3000/"
 
-export const userLogin = ({ email, password }) => {
+export const userLogin = ({ email, password }, history) => {
   return async (dispatch) => {
     try {
       dispatch({ type: USER_LOGIN_PENDING })
       let response = await axios.post(`${BASE_URL}/login`, { 'user': { 'email': email, 'password': password } })
       localStorage.setItem('token', response.headers.authorization)
       localStorage.setItem('userId', response.data.id)
-      dispatch({ type: USER_LOGIN_SUCCESS, payload: response })
+      setTimeout(function() {
+        dispatch({ type: USER_LOGIN_SUCCESS, payload: response })
+        history.push("/")
+      }, 1000)
     } catch (err) {
       dispatch({ type: USER_LOGIN_FAILED, payload: err })
     }
