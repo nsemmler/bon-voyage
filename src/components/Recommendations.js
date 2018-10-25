@@ -55,11 +55,20 @@ class Recommendations extends Component {
     await this.props.fetchUserFavorites(userId, token)
   }
 
-  displayCountryInformationModal = (country={}, countryIndex=0) => {
+  displayCountryInformationModal = (country={}) => {
+    var country_id = 0
+    this.props.pois.map((pois_arr, pois_index) => {
+      if (pois_arr.length === 10) {
+        if (pois_arr[0].country_id === country.id) {
+          country_id = pois_index
+        }
+      }
+    })
+
     this.setState({
       showCountryInfo: !this.state.showCountryInfo,
       selectedCountry: country,
-      selectedCountryId: countryIndex
+      selectedCountryId: country_id
     })
   }
 
@@ -78,7 +87,7 @@ class Recommendations extends Component {
             if (country.name.toLowerCase().startsWith(this.state.countryName.toLowerCase()) || country.name.toLowerCase().includes(this.state.countryName.toLowerCase())) {
               const imageURL = JSON.parse(country.images)[0]
 
-              return <div className="recommendedCountry-div" onClick={ () => this.displayCountryInformationModal(country, countryIndex) } style={{ backgroundImage: `url(${imageURL})` }}>
+              return <div className="recommendedCountry-div" onClick={ () => this.displayCountryInformationModal(country) } style={{ backgroundImage: `url(${imageURL})` }}>
                 { favoritesIds.includes(country.id) && <div className="recommended-fav-icon"><MaterialIcon icon="favorite" size="small" color="#d10808"/></div> }
                 <p className="recommendation-name">{ `${country.name}` }</p>
               </div>
