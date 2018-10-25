@@ -1,0 +1,36 @@
+.loading {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 100px auto;
+  width: 200px;
+  -webkit-transform: scaleX(-1);
+  transform: scaleX(-1);
+}
+
+#loading-logo {
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  animation: rotate 1.75s infinite linear;
+}
+
+.loading-earth {
+  width: 200px;
+  height: 200px;
+}
+
+@keyframes rotate {
+	0% {
+    left: 50px;
+    transform:  rotate(360deg)
+                translate(160px)
+                rotate(-360deg);
+	}
+	100% {
+    left: 50px;
+    transform:  rotate(0deg)
+                translate(160px)
+                rotate(0deg);
+	}
+}
