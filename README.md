@@ -1,9 +1,7 @@
 # [Bon Voyage](https://voyage-capstone.herokuapp.com)
 
 <img src ="./public/screenshot-1.png">
-<img src ="./public/screenshot-3.png" width="300px">
-<img src ="./public/screenshot-4.png" width="300px">
-<img src ="./public/screenshot-2.png" width="300px">
+![Screenshot 2](./public/screenshot-3.png) ![Screenshot 3](./public/screenshot-4.png) ![Screenshot 4](./public/screenshot-2.png)
 
 ### About
 Most travel sites provide users with the tools to help them plan and book their next
