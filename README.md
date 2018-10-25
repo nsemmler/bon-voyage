@@ -3,9 +3,9 @@
 <img src ="./public/screenshot-1.png">
 
 <p float="left">
-  <img src ="./public/screenshot-3.png" width="250px">
-  <img src ="./public/screenshot-4.png" width="250px">
-  <img src ="./public/screenshot-2.png" width="250px">
+  <img src ="./public/screenshot-4.png" width="275px">
+  <img src ="./public/screenshot-3.png" width="275px">
+  <img src ="./public/screenshot-2.png" width="275px">
 </p>
 
 ### About
