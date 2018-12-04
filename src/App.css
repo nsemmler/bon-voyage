@@ -61,112 +61,9 @@ input:focus {
 }
 
 /******************************************************************************/
-/* Mobile View */
+/* Tab View for Country Info */
 /******************************************************************************/
-@media screen and (max-width: 700px) {
-  /*********************************************/
-  /* Nav */
-  /*********************************************/
-  #logo {
-    font-size: 24px;
-  }
-
-  .navlink {
-    padding: 10px 8px 10px 8px;
-  }
-
-  /*********************************************/
-  /* Loading Screen */
-  /*********************************************/
-  .loading {
-    margin: 100px auto;
-    width: auto;
-    -webkit-transform: scaleX(-1);
-    transform: scaleX(-1);
-  }
-
-  .loading-img {
-    display: flex;
-    justify-content: center;
-  }
-
-  #loading-logo {
-    width: 75px;
-    height: 75px;
-    position: absolute;
-    animation: rotate 1.75s infinite linear;
-  }
-
-  .loading-earth {
-    width: 175px;
-    height: 175px;
-  }
-
-  @keyframes rotate {
-  	0% {
-      left: 42%;
-      transform:  rotate(360deg)
-                  translate(140px)
-                  rotate(-360deg);
-  	}
-  	100% {
-      left: 42%;
-      transform:  rotate(0deg)
-                  translate(140px)
-                  rotate(0deg);
-  	}
-  }
-
-  /*********************************************/
-  /* Favorites, Quiz, Recommendations */
-  /*********************************************/
-  .Favorites, .Quiz, .Recommendations {
-    width: 90%;
-    padding: 20px 0px;
-    margin-left: 5%;
-  }
-
-  .recommendations, .favorites {
-    position: relative;
-  }
-
-  .recommendations-header-container {
-    width: 100% !important;
-    margin-left: 0px;
-  }
-
-  .recommendedCountry-div {
-    width: 95%;
-    min-width: 300px;
-    min-height: 220px;
-  }
-
-  .quiz-container {
-    width: 100%;
-    padding: 2%;
-  }
-
-  /*********************************************/
-  /* Footer */
-  /*********************************************/
-  .footer {
-    grid-template-columns: 1% 60% 39%;
-  }
-
-  .footer-links {
-    justify-content: flex-end;
-  }
-
-  /*********************************************/
-  /* Login / Signup */
-  /*********************************************/
-
-  .login-form, .signup-form {
-    width: 95%;
-    margin-top: 90px;
-    padding: 15px;
-  }
-
+@media screen and (max-width: 1100px) {
   /*********************************************/
   /* Country Info */
   /*********************************************/
@@ -271,6 +168,108 @@ input:focus {
 
 
 
+
+/******************************************************************************/
+/* Mobile View */
+/******************************************************************************/
+@media screen and (max-width: 700px) {
+  /*********************************************/
+  /* Nav */
+  /*********************************************/
+  #logo {
+    font-size: 24px;
+  }
+
+  .navlink {
+    padding: 10px 8px 10px 8px;
+  }
+
+  /*********************************************/
+  /* Loading Screen */
+  /*********************************************/
+  .loading {
+    margin: 100px auto;
+    width: auto;
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+  }
+
+  .loading-img {
+    display: flex;
+    justify-content: center;
+  }
+
+  #loading-logo {
+    width: 75px;
+    height: 75px;
+    position: absolute;
+    animation: rotate 1.75s infinite linear;
+  }
+
+  .loading-earth {
+    width: 175px;
+    height: 175px;
+  }
+
+  @keyframes rotate {
+  	0% {
+      left: 42%;
+      transform:  rotate(360deg)
+                  translate(140px)
+                  rotate(-360deg);
+  	}
+  	100% {
+      left: 42%;
+      transform:  rotate(0deg)
+                  translate(140px)
+                  rotate(0deg);
+  	}
+  }
+
+  /*********************************************/
+  /* Favorites, Quiz, Recommendations */
+  /*********************************************/
+  .Favorites, .Quiz, .Recommendations {
+    width: 90%;
+    padding: 20px 0px;
+    margin-left: 5%;
+  }
+
+  .recommendations, .favorites {
+    position: relative;
+  }
+
+  .recommendations-header-container {
+    width: 100% !important;
+    margin-left: 0px;
+  }
+
+  .quiz-container {
+    width: 100%;
+    padding: 2%;
+  }
+
+  /*********************************************/
+  /* Footer */
+  /*********************************************/
+  .footer {
+    grid-template-columns: 1% 60% 39%;
+  }
+
+  .footer-links {
+    justify-content: flex-end;
+  }
+
+  /*********************************************/
+  /* Login / Signup */
+  /*********************************************/
+
+  .login-form, .signup-form {
+    width: 95%;
+    margin-top: 90px;
+    padding: 15px;
+  }
+}
 
 
 

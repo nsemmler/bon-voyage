@@ -6,7 +6,7 @@ import CountryImages from './CountryImages'
 import { Tabs, Tab } from 'react-materialize'
 import '../styling/CountryInfo.css'
 
-const media_query = window.matchMedia( "(max-width: 700px)" )
+const media_query = window.matchMedia( "(max-width: 1100px)" )
 
 function CountryInfo (props) {
   if (media_query.matches) {
